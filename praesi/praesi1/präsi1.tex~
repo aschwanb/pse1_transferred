@@ -13,11 +13,18 @@
 \begin{document}
 \frame{\titlepage} 
 
+\begin{frame}
+  \frametitle{Logo} \pause
+  \begin{center}
+      \includegraphics[width=.4\textwidth]{megaultra_ruby}
+  \end{center}
+\end{frame}
+
 \section{Team}
 \begin{frame}
   \frametitle{Team} \pause
   \begin{minipage}{.2\textwidth}
-    \includegraphics[height=.2\textheight]{balz}
+    \includegraphics[height=.2\textheight]{raoul}
   \end{minipage}%
   \hfill
   \begin{minipage}{.8\textwidth}
@@ -31,14 +38,14 @@
     \textbf{Chief Deliverable Officer} \\ Balz Aschwanden \pause \\    
   \end{minipage}
   \begin{minipage}{.2\textwidth}
-    \includegraphics[height=.2\textheight]{balz}
+    \includegraphics[height=.2\textheight]{simon}
   \end{minipage}%
   \hfill
   \begin{minipage}{.8\textwidth}
     \textbf{Master Tracker} \\ Simon Curty \pause \\    
   \end{minipage}
   \begin{minipage}{.2\textwidth}
-    \includegraphics[height=.2\textheight]{balz}
+    \includegraphics[height=.2\textheight]{daniel}
   \end{minipage}%
   \hfill
   \begin{minipage}{.8\textwidth}
