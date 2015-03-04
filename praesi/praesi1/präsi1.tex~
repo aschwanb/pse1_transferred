@@ -45,7 +45,7 @@
     \textbf{Master Tracker} \\ Simon Curty \pause \\    
   \end{minipage}
   \begin{minipage}{.2\textwidth}
-    \includegraphics[height=.2\textheight]{daniel}
+    \includegraphics[height=.15\textheight]{daniel}
   \end{minipage}%
   \hfill
   \begin{minipage}{.8\textwidth}
@@ -96,9 +96,9 @@
   \end{itemize}
 \end{frame}
 
-\section{Wissensbasis}
+\section{Wissensbasis/Quelle}
 \begin{frame}
-  \frametitle{Wissensbasis} \pause
+  \frametitle{Wissensbasis/Quelle} \pause
   \begin{minipage}{.4\textwidth}
     \includegraphics[height=.4\textheight]{Twitter_logo_blue} \pause
   \end{minipage}%
