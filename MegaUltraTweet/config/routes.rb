@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'index/start'
+  root 'index#start'
   get 'index/hashtag'
   get 'index/twitterHandle'
   get 'index/twitterUser'
   get 'index/about'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
