@@ -1,0 +1,140 @@
+\documentclass[a4wide]{article}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=swiss]{csquotes}
+\newcommand{\comment}[1]{{\tt #1}}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+\input{./title.tex}
+\tableofcontents
+\clearpage
+\section{Einleitung}
+\subsection{Zweck}
+Dieses Software Requirements Specification (SRS)-Dokument ist das Referenzdokument zum \enquote{MegaUltraTweet}-Projekt. Die Zielgruppen des Dokuments sind der Kunde und die Entwickler.
+
+Es soll in einer für alle Beteiligten verständlichen Sprache einen kompletten \"Uberblick \"uber das Projekt und die momentan vereinbarten Ziele geben. Wenn nicht allgemeinverständliche Begriffe und Abk\"urzungen verwendet werden, sind diese im Folgenden unter \enquote{Definitionen} beschrieben. Zudem wird ein kurzer \"Uberblick \"uber die Akteure und den momentanen Stand des Projekts gegeben. Eine komplette Liste weiterer verwendeter Dokumente ist ebenfalls aufgef\"uhrt.
+
+Im zweiten Teil sind die funktionalen und nicht-funktionalen Anforderungen mit detaillierten Definitionen der Hauptkomponenten. Wir versuchen, diese Liste komplett, eindeutig und verifizierbar zu halten. Anforderungen sind nach Priorität geordnet.
+
+Der dritte Teil schliesslich enth\"alt eine eingehende \"Ubersicht des Systems aus Benutzersicht, mit den detaillierten Auflistungen der Use-cases. Zudem sind die Zielgruppen hier definiert und beschrieben.
+
+Die Entwickler verpflichten sich, dieses Dokument nach jedem Kundenmeeting zu aktualisieren und die Spezifikationen jederzeit bestmöglich wiederzugeben. Der Kunde verpflichtet sich, Fehler und Unklarheiten im Dokument den Entwicklern mitzuteilen, damit diese korrigiert werden können.
+
+\subsection{Akteure}
+\begin{description}
+\item[Der Kunde] ist der Auftraggeber. Er besitzt und betreibt die Webanwendung nach der Entwicklung.
+\item[Ein Benutzer] der Webanwendung ist eine Person, die die Anwendung nach der Entwicklung verwendet.
+\end{description}
+\subsection{Definitionen}
+\textit{Es sind noch keine Definitionen oder Abk\"urzungen vorhanden.}
+\subsection{Projektziel}
+Das Ziel des Projekts ist es Twitter Stream auswerten und \enquote{Tats\"achlich neue Nachrichten/Informa-tionsinhalte} herauszufiltern.
+
+\subsection{Projekt\"ubersicht}
+Das Projekt besteht aus einer clientseitigen Webseite und einer serverseitigen Anwendung mit der Logik auf Basis des \emph{Ruby on Rails}-Frameworks und \emph{MongoDB} als Datenbank.
+
+Benutzer m\"ussen sich mit ihrem Twitter-Account einloggen und k\"onnen anschliessend mittels Hashtags Nachrichten usw. suchen und ansehen.
+
+\subsubsection{Momentaner Stand}
+(Wo kann der momentane Entwicklungsstand angesehen werden?)\\
+Momentan implementierte Usecases sind: 
+\begin{itemize}
+\item Nichts...
+\end{itemize}
+
+\subsection{Referenzen}
+\textit{Noch keine externen Dokumente. Diese werden ggf. hinzugef\"ugt.}
+\section{Spezifische Anforderungen und Definitionen}
+\subsection{Definitionen der Hauptkomponenten}
+\subsubsection{Profile}
+
+\subsubsection{Ad}
+
+\subsection{Nicht-funktionale Anforderungen}
+\begin{itemize}
+\item Secure login and data
+    User should confirm registration through email link.
+    Captcha is used in registration form.
+    passwords must have a minimum length 
+    maximum number of  login attempts from the same IP. 
+\item Logging
+    All site traffic is logged in different log files, documenting each user action.
+\item Responsive design
+    The website adapts to mobile users (smartphones and tablets).
+    The website will be tested in the latest Firefox and Chrome version.
+    (On which mobile devices will we test our website)
+\end{itemize}
+\section{Allgemeine Beschreibung}
+\subsection{Use cases}
+\newcommand{\usecase}[2][(Name)]{
+	\subsubsection{#1}
+	\begin{description}
+		#2
+	\end{description}
+}
+
+\usecase[Login]{
+	\item[Beschreibung] Der Benutzer braucht einen Twitter-Account, um die Software zu benutzen und um sich die Begriffswolken anzeigen zu lassen.
+	\item[Ausl\"oser] Der Benutzer klickt auf \enquote{Login}.
+	\item[Precondition] Der Benutzer ist nicht angemeldet.
+	\item[Postcondition] 
+	\begin{itemize}
+		\item Der Benutzer ist angemeldet.
+		\item Der Benutzer hat einen Twitter-Account.
+	\end{itemize}
+	\item[Hauptszenario]
+	\begin{enumerate}
+		\item Ein neuer Benutzer kommt auf MegaUltraTweet und möchte mit der Suche beginnen.
+		\item Bevor er mit der Suche beginnen kann, wird er aufgefordert, sich mit seinem Twitter-Account anzumelden.
+		\item Hat er keinen Account, wird er auf die Twitterseite umgeleitet um dort einen Account zu erstellen.
+		\item Hat er einen Account, kann er sich mit seinem Benutzernamen und Passwort anmelden.
+	\end{enumerate}
+	}
+	
+\usecase[Thema w\"ahlen]{
+	\item[Beschreibung] Der Benutzer w\"ahlt ein Thema aus einer gegebenen Liste aus. Die Liste zeigt auserdem die Anzahl Tweets zu einen Thema an. Ihm wird danach eine Begriffswolke zu diesem Thema angezeigt.
+	\item[Ausl\"oser] Der Benutzer klickt auf ein Thema der vorgegebenen Liste.
+	\item[Precondition] Der Benutzer ist angemeldet.
+	\item[Postcondition] Dem Benutzer wird eine Begriffswolke zum gewählten Thema angezeigt.
+	\item[Hauptszenario]
+	\begin{enumerate}
+		\item Der Benutzer ist auf der Hauptseite von TwitterBubble. Er sieht eine Liste von Themen.
+		\item Er w\"ahlt ein Thema durch Anklicken aus.
+		\item Eine Begriffswolke zu diesem Thema wird angezeigt.
+	\end{enumerate}
+}
+
+\usecase[Begriff/Oberthema w\"ahlen]{
+	\item[Beschreibung] Der Benutzer w\"ahlt aus der Begriffswolke ein Thema aus. Ihm wird danach eine Liste von Tweets referenzierter Artikel angezeigt. Neue/Trending Begriffe werden hervorgehoben.
+	\item[Ausl\"oser] Der Benutzer klickt auf einen Begriff aus der Begriffswolke.
+	\item[Precondition] Der Benutzer hat ein Thema gew\"ahlt.
+	\item[Postcondition] Dem Benutzer wird eine Liste mit von Tweets referenzierter Artikel angezeigt.
+	\item[Hauptszenario] 
+	\begin{enumerate}
+		\item Der Benutzer ist auf einer Begriffswolke. 
+		\item Er w\"ahlt einen Begriff aus.
+		\item Ihm wird eine Liste Tweet-referenzierter Artikel angezeigt.
+	\end{enumerate}
+}
+
+\subsection{Zielgruppen}
+All users are logged in and have a minimal user profile (name, email address,...)
+
+The clients of our website are people looking for a (shared) apartment in Switzerland.
+The main user group will be between aged 18 - 29 years old. 
+We expect most but not all apartments to be in and around univeristy cities.
+These users can place ads for (shared) apartments or search the ads. 
+We expect these group of users to be the largest group of actors.
+
+Another actor group is the administrator group. This is a small group of 1 to 5 people, who can view all information about users and ads. Members of this group are permitted by our customer. 
+
+
+\end{document}
