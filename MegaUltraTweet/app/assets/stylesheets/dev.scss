@@ -1,0 +1,41 @@
+.dev {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+}
+
+.dev nav {
+  visibility: hidden;
+}
+
+.dev ul {
+  list-style: none;
+}
+
+.dev a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dev a:visited {
+  color: #ffffff;
+}
+
+.dev a:hover {
+  color: #E37F71;
+}
+
+.dev li {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.dev:hover {
+  background: black;
+  color: #ffffff;
+}
+
+.dev:hover nav {
+  visibility: visible;
+}
