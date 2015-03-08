@@ -1,27 +1,39 @@
-<h1>Index#finde</h1>
-<% if !@query.blank? %>
-    <h1>You are searching for tweets containing <%= @query %></h1>
+<div class="wrapper">
+  <div class="center list">
+    <% if !@query.blank? %>
 
-    <% @tweets.each do |tweet| %>
-        <li><%= tweet.text %></li>
-    <% end %>
+        <h1>You are searching for tweets containing <%= @query %></h1>
+        <ul>
+        <% @tweets.each do |tweet| %>
+            <li><%= tweet.text %></li>
+        <% end %>
+        </ul>
 
-    <h1>Hashtags in these tweets</h1>
-    <% @hashtags.each do |element| %>
-        <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
-    <% end %>
+        <h1>Hashtags in these tweets</h1>
+        <ul>
+        <% @hashtags.each do |element| %>
+            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <% end %>
+        </ul>
 
-    <h1>TwitterHandles in these tweets</h1>
-    <% @twitterHandles.each do |element| %>
-        <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
-    <% end %>
+        <h1>TwitterHandles in these tweets</h1>
+        <ul>
+        <% @twitterHandles.each do |element| %>
+            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <% end %>
+        </ul>
 
-    <h1>Webpages in these tweets</h1>
-    <% @webpages.each do |element| %>
-        <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <h1>Webpages in these tweets</h1>
+        <ul>
+        <% @webpages.each do |element| %>
+            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <% end %>
+        </ul>
+    <% else %>
+        <h1>Invalide search</h1>
     <% end %>
-<% else %>
-    <h1>Invalide search</h1>
-<% end %>
+  </div>
+</div>
+
 
 
