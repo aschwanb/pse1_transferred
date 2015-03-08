@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'index/twitterHandle'
   get 'index/twitterUser'
   get 'index/about'
+  get 'index/themeList'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
