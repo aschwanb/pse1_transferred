@@ -6,6 +6,17 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+<div class="dev">
+  <div>DEV MENU</div>
+  <nav>
+    <ul>
+      <li><%= link_to("Landing", root_path) %></li>
+      <li><%= link_to("About", index_about_path) %></li>
+      <li><%= link_to("Themen", index_themeList_path) %></li>
+      <li><%= link_to("placeholder", root_path) %></li>
+    </ul>
+  </nav>
+</div>
 <body>
 
 <%= yield %>
