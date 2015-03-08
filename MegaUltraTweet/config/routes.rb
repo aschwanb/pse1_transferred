@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'index#start'
-  get 'index/hashtag'
+  get 'index/finde'
   get 'index/twitterHandle'
   get 'index/twitterUser'
   get 'index/about'
