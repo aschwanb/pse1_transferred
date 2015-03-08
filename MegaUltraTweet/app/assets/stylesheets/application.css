@@ -30,6 +30,16 @@ h1 {
     padding: 1em 0 1em 0;
 }
 
+a, a:visited {
+    outline: none;
+    text-decoration: none;
+    color: #E37F71;
+}
+
+a:hover, a:active {
+    color: black;
+}
+
 .wrapper {
     padding: 1em;
 }
