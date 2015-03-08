@@ -6,8 +6,8 @@ class IndexControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get hashtag" do
-    get :hashtag
+  test "should get finde" do
+    get :finde
     assert_response :success
   end
 
