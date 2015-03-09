@@ -26,7 +26,7 @@
         <h1>Webpages in these tweets</h1>
         <ul>
         <% @webpages.each do |element| %>
-            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+            <li><a href="<%= element.to_s %>"><%= element.to_s %></a>
         <% end %>
         </ul>
     <% else %>
