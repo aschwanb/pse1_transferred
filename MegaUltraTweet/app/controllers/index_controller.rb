@@ -48,8 +48,9 @@ class IndexController < ApplicationController
       @hashtags = @hashtags.uniq.sort_by{|word| word.downcase}
       @twitterHandles = @twitterHandles.uniq.sort_by{|word| word.downcase}
       @webpages = @webpages.uniq.sort_by{|word| word.downcase}
+      # Eliminate urls that are to short
+      @webpages.each { |url| @webpages.delete(url) if url.length < 10 }
     end
-
   end
 
   def twitterHandle
