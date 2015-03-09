@@ -11,16 +11,6 @@ class IndexControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get twitterHandle" do
-    get :twitterHandle
-    assert_response :success
-  end
-
-  test "should get twitterUser" do
-    get :twitterUser
-    assert_response :success
-  end
-
   test "should get about" do
     get :about
     assert_response :success
