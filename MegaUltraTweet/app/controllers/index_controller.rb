@@ -36,7 +36,7 @@ class IndexController < ApplicationController
       @webpages = []
       @twitterUser = []
       # Ask twitter
-      @tweets = client.search(@query, :result_type => "recent").take(3).collect
+      @tweets = client.search(@query, :result_type => "recent").take(10).collect
       @tweets.each do |tweet|
         # Extract hashtag from tweet
         @hashtags = @hashtags + tweet.text.scan(/#\w+/).flatten
@@ -44,6 +44,10 @@ class IndexController < ApplicationController
         @webpages = @webpages + URI.extract("#{tweet.text}", /http|https/)
         #@twitterUser = @twitterUser + tweet.user.screen_name
       end
+      # Eliminate dublications
+      @hashtags = @hashtags.uniq
+      @twitterHandles = @twitterHandles.uniq
+      @webpages = @webpages.uniq
     end
 
   end
