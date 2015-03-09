@@ -44,10 +44,10 @@ class IndexController < ApplicationController
         @webpages = @webpages + URI.extract("#{tweet.text}", /http|https/)
         #@twitterUser = @twitterUser + tweet.user.screen_name
       end
-      # Eliminate dublications
-      @hashtags = @hashtags.uniq
-      @twitterHandles = @twitterHandles.uniq
-      @webpages = @webpages.uniq
+      # Eliminate dublications and sort
+      @hashtags = @hashtags.uniq.sort_by{|word| word.downcase}
+      @twitterHandles = @twitterHandles.uniq.sort_by{|word| word.downcase}
+      @webpages = @webpages.uniq.sort_by{|word| word.downcase}
     end
 
   end
