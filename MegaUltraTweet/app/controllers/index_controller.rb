@@ -53,12 +53,6 @@ class IndexController < ApplicationController
     end
   end
 
-  def twitterHandle
-  end
-
-  def twitterUser
-  end
-
   def about
   end
 end
