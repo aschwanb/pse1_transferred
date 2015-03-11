@@ -3,6 +3,7 @@
     <% if !@query.blank? %>
 
         <h1>You are searching for tweets containing <%= @query %></h1>
+        <h1><%= @tweets.count %> tweets were fetched</h1>
         <ul>
         <% @tweets.each do |tweet| %>
             <li><%= tweet.text %></li>
@@ -11,22 +12,22 @@
 
         <h1>Hashtags in these tweets</h1>
         <ul>
-        <% @hashtags.each do |element| %>
-            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <% @countsHashtags.each do |key, element| %>
+            <li><%= link_to key.to_s, action: "finde", controller: "index", query: key.to_s %> (<%= element.to_s %>)</li>
         <% end %>
         </ul>
 
         <h1>TwitterHandles in these tweets</h1>
         <ul>
-        <% @twitterHandles.each do |element| %>
-            <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+        <% @countsTwitterHandles.each do |key, element| %>
+              <li><%= link_to key.to_s, action: "finde", controller: "index", query: key.to_s %> (<%= element.to_s %>)</li>
         <% end %>
         </ul>
 
         <h1>Webpages in these tweets</h1>
         <ul>
-        <% @webpages.each do |element| %>
-            <li><a href="<%= element.to_s %>"><%= element.to_s %></a>
+        <% @countsWebpages.each do |key, element| %>
+            <li><a href="<%= key.to_s %>"><%= key.to_s %></a>
         <% end %>
         </ul>
     <% else %>

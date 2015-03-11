@@ -44,12 +44,15 @@ class IndexController < ApplicationController
         @webpages = @webpages + URI.extract("#{tweet.text}", /http|https/)
         #@twitterUser = @twitterUser + tweet.user.screen_name
       end
-      # Eliminate dublications and sort
-      @hashtags = @hashtags.uniq.sort_by{|word| word.downcase}
-      @twitterHandles = @twitterHandles.uniq.sort_by{|word| word.downcase}
-      @webpages = @webpages.uniq.sort_by{|word| word.downcase}
       # Eliminate urls that are to short
       @webpages.each { |url| @webpages.delete(url) if url.length < 10 }
+      # Count results and return hashes
+      @countsHashtags = @hashtags.each_with_object(Hash.new(0)){ |tag,counts| counts[tag] += 1 }
+      @countsHashtags = Hash[@countsHashtags.sort_by{ |tags, counts| counts}.reverse]
+      @countsTwitterHandles = @twitterHandles.each_with_object(Hash.new(0)){ |tag,counts| counts[tag] += 1 }
+      @countsTwitterHandles = Hash[@countsTwitterHandles.sort_by{ |tags, counts| counts}.reverse]
+      @countsWebpages = @webpages.each_with_object(Hash.new(0)){ |tag,counts| counts[tag] += 1 }
+      @countsWebpages = Hash[@countsWebpages.sort_by{ |tags, counts| counts}.reverse]
     end
   end
 
