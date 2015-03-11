@@ -20,13 +20,13 @@
 \subsection{Zweck}
 Dieses Software Requirements Specification (SRS)-Dokument ist das Referenzdokument zum \enquote{MegaUltraTweet}-Projekt. Die Zielgruppen des Dokuments sind der Kunde und die Entwickler.
 
-Es soll in einer für alle Beteiligten verständlichen Sprache einen kompletten \"Uberblick \"uber das Projekt und die momentan vereinbarten Ziele geben. Wenn nicht allgemeinverständliche Begriffe und Abk\"urzungen verwendet werden, sind diese im Folgenden unter \enquote{Definitionen} beschrieben. Zudem wird ein kurzer \"Uberblick \"uber die Akteure und den momentanen Stand des Projekts gegeben. Eine komplette Liste weiterer verwendeter Dokumente ist ebenfalls aufgef\"uhrt.
+Es soll in einer f\"ur alle Beteiligten verst\"andlichen Sprache einen kompletten \"Uberblick \"uber das Projekt und die momentan vereinbarten Ziele geben. Wenn nicht allgemeinverständliche Begriffe und Abk\"urzungen verwendet werden, sind diese im Folgenden unter \enquote{Definitionen} beschrieben. Zudem wird ein kurzer \"Uberblick \"uber die Akteure und den momentanen Stand des Projekts gegeben. Eine komplette Liste weiterer verwendeter Dokumente ist ebenfalls aufgef\"uhrt.
 
-Im zweiten Teil sind die funktionalen und nicht-funktionalen Anforderungen mit detaillierten Definitionen der Hauptkomponenten. Wir versuchen, diese Liste komplett, eindeutig und verifizierbar zu halten. Anforderungen sind nach Priorität geordnet.
+Im zweiten Teil sind die funktionalen und nicht-funktionalen Anforderungen mit detaillierten Definitionen der Hauptkomponenten. Wir versuchen, diese Liste komplett, eindeutig und verifizierbar zu halten. Anforderungen sind nach Priorit\"at geordnet.
 
 Der dritte Teil schliesslich enth\"alt eine eingehende \"Ubersicht des Systems aus Benutzersicht, mit den detaillierten Auflistungen der Use-cases. Zudem sind die Zielgruppen hier definiert und beschrieben.
 
-Die Entwickler verpflichten sich, dieses Dokument nach jedem Kundenmeeting zu aktualisieren und die Spezifikationen jederzeit bestmöglich wiederzugeben. Der Kunde verpflichtet sich, Fehler und Unklarheiten im Dokument den Entwicklern mitzuteilen, damit diese korrigiert werden können.
+Die Entwickler verpflichten sich, dieses Dokument nach jedem Kundenmeeting zu aktualisieren und die Spezifikationen jederzeit bestm\"oglich wiederzugeben. Der Kunde verpflichtet sich, Fehler und Unklarheiten im Dokument den Entwicklern mitzuteilen, damit diese korrigiert werden k\"onnen.
 
 \subsection{Akteure}
 \begin{description}
@@ -53,27 +53,18 @@ Momentan implementierte Usecases sind:
 \subsection{Referenzen}
 \textit{Noch keine externen Dokumente. Diese werden ggf. hinzugef\"ugt.}
 \section{Spezifische Anforderungen und Definitionen}
-\subsection{Definitionen der Hauptkomponenten}
-\subsubsection{Profile}
+%\subsection{Definitionen der Hauptkomponenten}
+%\subsubsection{Profile}
 
-\subsubsection{Ad}
+%\subsubsection{Ad}
 
 \subsection{Nicht-funktionale Anforderungen}
 \begin{itemize}
-\item Secure login and data
-    User should confirm registration through email link.
-    Captcha is used in registration form.
-    passwords must have a minimum length 
-    maximum number of  login attempts from the same IP. 
-\item Logging
-    All site traffic is logged in different log files, documenting each user action.
-\item Responsive design
-    The website adapts to mobile users (smartphones and tablets).
-    The website will be tested in the latest Firefox and Chrome version.
-    (On which mobile devices will we test our website)
+\item Mobile first: Responsive design
 \end{itemize}
 \section{Allgemeine Beschreibung}
 \subsection{Use cases}
+
 \newcommand{\usecase}[2][(Name)]{
 	\subsubsection{#1}
 	\begin{description}
@@ -125,16 +116,8 @@ Momentan implementierte Usecases sind:
 	\end{enumerate}
 }
 
-\subsection{Zielgruppen}
-All users are logged in and have a minimal user profile (name, email address,...)
+%\subsection{Zielgruppen}
 
-The clients of our website are people looking for a (shared) apartment in Switzerland.
-The main user group will be between aged 18 - 29 years old. 
-We expect most but not all apartments to be in and around univeristy cities.
-These users can place ads for (shared) apartments or search the ads. 
-We expect these group of users to be the largest group of actors.
-
-Another actor group is the administrator group. This is a small group of 1 to 5 people, who can view all information about users and ads. Members of this group are permitted by our customer. 
 
 
 \end{document}
