@@ -1,5 +1,3 @@
-require 'twitter'
-
 class TwitterClient
   # TODO: Extract Twitter Users
 
