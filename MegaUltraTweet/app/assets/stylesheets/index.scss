@@ -37,7 +37,7 @@
   //  background-color: #4daf7c;
 }
 
-//.username::after {
+.username::after {
 //  content: "";
 //  width: 0px;
 //  height: 0px;
@@ -48,14 +48,14 @@
 //  top: 6.25em;
 //  left: 50%;
 //  margin-left: -0.496em;
-//}
+}
 
 .password {
   //  background-color: #404241;
 
 }
 
-//.password::after {
+.password::after {
 //  content: "";
 //  width: 0px;
 //  height: 0px;
@@ -66,7 +66,7 @@
 //  top: 12.5em;
 //  left: 50%;
 //  margin-left: -0.496em;
-//}
+}
 
 .login {
   //  background-color: #e9c85d;
@@ -134,5 +134,46 @@ input {
 }
 
 .list li:last-child {
+//  border-bottom: 5px solid black;
+}
+.static-list li:last-child {
   border-bottom: 5px solid black;
+}
+.link-list a:last-child li {
+  border-bottom: 5px solid black;
+}
+.link-list li:hover {
+  color: #ffffff;
+  background: black;
+}
+
+#container {
+  width: 90%;
+  padding-bottom: 1em;
+}
+
+#container .item{
+//  border: 5px solid red;
+  margin-bottom: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+//  width: 300px;
+
+}
+
+#tweet-container {
+//  width: 100%;
+}
+
+.wide {
+  width: 50%;
+}
+
+.small {
+  width: 300px;
+}
+
+#highlight {
+  color: #D31901;
+//  color: #E37F71;
 }
