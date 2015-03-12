@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'twitter'
-require 'uri'
-
 class IndexController < ApplicationController
 
   def start
