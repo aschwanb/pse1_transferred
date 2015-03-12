@@ -8,15 +8,7 @@ class IndexController < ApplicationController
   end
 
   def search
-    @topics = %w[
-        #Technology
-        #Technologie
-        @technikneuheit
-        @Technik_Tweets
-        @ids_technik
-        @BBCTech
-        @techreview
-    ]
+    @topics = TopicsStart.new.getTopics
   end
 
   def finde
