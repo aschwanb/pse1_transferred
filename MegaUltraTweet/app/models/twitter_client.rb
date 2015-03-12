@@ -24,36 +24,44 @@ class TwitterClient
   end
 
   def getHashtags
-    tmp = []
-    @tweets.each do |tweet|
-      tmp = tmp + tweet.text.scan(/#\w+/).flatten
-    end
-    return sort(tmp)
+    return sort(extractFromTweet("Hashtags"))
   end
 
   def getTwitterHandles
-    tmp = []
-    @tweets.each do |tweet|
-      tmp = tmp + tweet.text.scan(/#@\w+/).flatten
-    end
-    return sort(tmp)
+    return sort(extractFromTweet("TwitterHandles"))
   end
 
   def getURLs
-    tmp = []
-    @tweets.each do |tweet|
-      tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-    end
-    # Eliminate urls that are to short
-    tmp.each { |url| tmp.delete(url) if url.length < 10 }
-    return sort(tmp)
+    return sort(extractFromTweet("URLs"))
   end
-
 
   def sort(input)
     output = input.each_with_object(Hash.new(0)){ |tag,counts| counts[tag] += 1 }
     output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
     return output
+  end
+
+  # TODO: Performance-wise, this is worse then hell
+  def extractFromTweet(extractMe)
+    tmp = []
+    @tweets.each do |tweet|
+      case extractMe
+        when "Hashtags"
+          tmp = tmp + tweet.text.scan(/#\w+/).flatten
+        when "TwitterHandles"
+          tmp = tmp + tweet.text.scan(/#@\w+/).flatten
+        when "URLs"
+          tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
+        else
+          puts "Invalide parameter"
+      end
+    end
+
+    if extractMe == "URLs"
+      # Eliminate urls that are to short
+      tmp.each { |url| tmp.delete(url) if url.length < 10 }
+    end
+    return tmp
   end
 
 end
