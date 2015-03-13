@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'index/twitterHandle'
   get 'index/twitterUser'
   get 'index/about'
-  get 'index/themeList'
   get 'index/search'
 
 
