@@ -47,10 +47,10 @@ class TwitterClient
         when "Hashtags"
           tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
         when "TwitterHandles"
-          tmp = tmp + tweet.text.scan(/#@\w+/).flatten
+          tmp = tmp + tweet.text.downcase.scan(/@\w+/).flatten
         when "URLs"
           tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-          unless tmp.nil? and tmp.last.match(/[[:alnum:]]/) #regex: last char is alphabetic or numeric
+          if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
             tmp.pop
           end
         else
