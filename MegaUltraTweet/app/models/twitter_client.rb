@@ -50,6 +50,9 @@ class TwitterClient
           tmp = tmp + tweet.text.scan(/#@\w+/).flatten
         when "URLs"
           tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
+          unless tmp.nil? and tmp.last.match(/[[:alnum:]]/) #regex: last char is alphabetic or numeric
+            tmp.pop
+          end
         else
           puts "Invalide parameter"
       end
