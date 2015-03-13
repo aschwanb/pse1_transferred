@@ -45,7 +45,7 @@ class TwitterClient
     @tweets.each do |tweet|
       case extractMe
         when "Hashtags"
-          tmp = tmp + tweet.text.scan(/#\w+/).flatten
+          tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
         when "TwitterHandles"
           tmp = tmp + tweet.text.scan(/#@\w+/).flatten
         when "URLs"
