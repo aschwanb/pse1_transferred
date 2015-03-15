@@ -10,7 +10,8 @@ class IndexController < ApplicationController
   def finde
     @query = params[:query]
     if !@query.blank?
-      twitterClient = TwitterClient.new(10, @query)
+      twitterClient = TwitterClient.new
+      twitterClient.search(@query, 10)
       @tweets = twitterClient.getTweets
       @countsHashtags = twitterClient.getHashtags
       @countsTwitterHandles = twitterClient.getTwitterHandles
