@@ -3,10 +3,10 @@ class TwitterClient
 
   def initialize(querySize, query)
     @client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "tTrNPGMT8S1d3qK3LMlnZV1XP"
-      config.consumer_secret     = "olUHmGtYlh6dx3ztWqa6ExLLek7Vb76vGEi5p5BMd2LiFWWHPD"
-      config.access_token        = "3062227378-HaWeilWyykpsDQvwZmaGUUSHDmlOFlHxpHpC9RY"
-      config.access_token_secret = "etP0a6eCI0q1FwfMJYUO0VsTWyrhbYKRvuvUS8YKH2kC3"
+      config.consumer_key        = Rails.application.secrets.twitter_client_consumer_key
+      config.consumer_secret     = Rails.application.secrets.twitter_client_consumer_secret
+      config.access_token        = Rails.application.secrets.twitter_client_access_token
+      config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
     end
     @querySize = querySize
     @query = query
