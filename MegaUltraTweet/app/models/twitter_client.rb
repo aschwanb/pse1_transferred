@@ -21,19 +21,19 @@ class TwitterClient
     tweets.each { |t| @tweets.push(t) }
   end
 
-  def getTweets
+  def getTweetsAsArray
     return @tweets
   end
 
-  def getHashtags
+  def getHashtagsAsHash
     return sort(extractFromTweet("Hashtags"))
   end
 
-  def getTwitterHandles
+  def getTwitterHandlesAsHash
     return sort(extractFromTweet("TwitterHandles"))
   end
 
-  def getURLs
+  def getURLsAsHash
     return sort(extractFromTweet("URLs"))
   end
 
