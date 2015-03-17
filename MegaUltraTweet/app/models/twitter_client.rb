@@ -10,33 +10,30 @@ class TwitterClient
       config.access_token        = Rails.application.secrets.twitter_client_access_token
       config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
     end
+    @tweets = []
   end
 
   def search(query, querySize)
-    addTweets(@client.search(query, :result_type => "recent").take(querySize).collect)
+    addTweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
   end
 
   def addTweets(tweets)
-    if @tweets.nil? and tweets.any?
-      @tweets = tweets
-    elsif tweets.any?
-      @tweets = @tweets.add_list_members(tweets)
-    end
+    tweets.each { |t| @tweets.push(t) }
   end
 
-  def getTweets
+  def getTweetsAsArray
     return @tweets
   end
 
-  def getHashtags
+  def getHashtagsAsHash
     return sort(extractFromTweet("Hashtags"))
   end
 
-  def getTwitterHandles
+  def getTwitterHandlesAsHash
     return sort(extractFromTweet("TwitterHandles"))
   end
 
-  def getURLs
+  def getURLsAsHash
     return sort(extractFromTweet("URLs"))
   end
 

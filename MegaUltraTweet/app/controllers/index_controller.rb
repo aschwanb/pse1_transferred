@@ -12,10 +12,10 @@ class IndexController < ApplicationController
     if !@query.blank?
       twitterClient = TwitterClient.new
       twitterClient.search(@query, 10)
-      @tweets = twitterClient.getTweets
-      @countsHashtags = twitterClient.getHashtags
-      @countsTwitterHandles = twitterClient.getTwitterHandles
-      @countsWebpages = twitterClient.getURLs
+      @tweets = twitterClient.getTweetsAsArray
+      @countsHashtags = twitterClient.getHashtagsAsHash
+      @countsTwitterHandles = twitterClient.getTwitterHandlesAsHash
+      @countsWebpages = twitterClient.getURLsAsHash
     end
   end
 
