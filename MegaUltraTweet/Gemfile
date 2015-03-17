@@ -8,6 +8,10 @@ source 'https://rubygems.org'
 gem 'twitter'
 
 ####################################
+# Requirements for the webserver and Jenkins
+# gem 'ci_reporter'
+
+####################################
 # Default gems added by rails
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
