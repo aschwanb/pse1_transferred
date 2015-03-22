@@ -1,0 +1,177 @@
+\documentclass{beamer}
+\usetheme{AnnArbor}
+\usecolortheme{beaver}
+\usefonttheme{default}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstloadlanguages{Ruby}
+\lstset{%
+basicstyle=\ttfamily\scriptsize,
+commentstyle = \ttfamily\color{red},
+keywordstyle=\ttfamily\color{blue},
+stringstyle=\color{orange},
+breaklines=true,
+language=Ruby}
+
+\title{MegaUltraTweet}
+\author{Balz Aschwanden}
+\date{\today}
+
+\begin{document}
+\frame{\titlepage}
+
+\section{Tech Review}
+\begin{frame}
+  \frametitle{Themen} \pause
+  \begin{minipage}{.3\textwidth}
+    \includegraphics[height=.3\textheight]{TwitterAPI}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{.7\textwidth}
+    \textbf{Twitter API}    
+  \end{minipage}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \textbf{Wie nutze ich die Twitter API?}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Registrierung bei Twitter}
+    \begin{itemize}
+    \item Twitter Account erstellen\pause
+    \item Application bei Twitter registrieren\pause
+    \item Access Tokens generieren
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Twitter \& Ruby}
+    \begin{lstlisting}
+      # Initialize Twitter Client
+      @client = Twitter::REST::Client.new do |config|
+        config.consumer_key = Rails.application.secrets.twitter_client_consumer_key
+        config.consumer_secret = Rails.application.secrets.twitter_client_consumer_secret
+        config.access_token = Rails.application.secrets.twitter_client_access_token
+        config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
+      end
+    \end{lstlisting}    
+\end{frame}
+\begin{frame}
+  \frametitle{Use Cases}\pause
+  \begin{center}
+    \textbf{Ruby Twitter Client Use Cases}\\
+    \hyperlink{http://www.ibm.com/developerworks/library/os-dataminingrubytwitter}{IBM 2012}\pause
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Limitationen}
+  \begin{itemize}
+    \item Response format JSON
+    \item 100 Tweets / User pro Request
+    \item 450 Requests pro 15 min 
+    \item \textit{dev.twitter.com} is your friend
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  \begin{lstlisting}
+# Returns the top 10 trending topics for a specific WOEID, if trending information is available for it.
+puts client.trends
+\end{lstlisting}\pause
+\begin{lstlisting}
+# <Twitter::TrendResults:0x000000025409a0>
+\end{lstlisting}\pause
+\begin{lstlisting}
+client.trends.each { |t| puts "#{t}" }
+\end{lstlisting}\pause
+\begin{lstlisting}
+#<Twitter::Trend:0x00000001fad3f8>
+#<Twitter::Trend:0x00000001fad3a8>
+#<Twitter::Trend:0x00000001fad330>
+#<Twitter::Trend:0x00000001fad2e0>
+#<Twitter::Trend:0x00000001fad290>
+#<Twitter::Trend:0x00000001fad218>
+#<Twitter::Trend:0x00000001fad100>
+#<Twitter::Trend:0x00000001fad0d8>
+#<Twitter::Trend:0x00000001fad0b0>
+#<Twitter::Trend:0x00000001facfc0>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  \begin{itemize}
+    \item events
+    \item name
+    \item promoted\_content
+    \item query
+    \item url
+  \end{itemize}\pause
+  \begin{lstlisting}
+client.trends.each { |t| puts "#{t.name}" }   
+  \end{lstlisting}\pause
+  \begin{lstlisting}
+# ElClaciso
+# BarcelonavsRealmadrid
+# FCBReal
+# Whatssap 539x647x1476
+# La6Andalucia
+# BeyazFutbolaDiyorumki
+# Martin Silva
+# Mathieu y Suarez
+# BarcelonavsRealmadrid
+# GrantsBedtimeStoriesTour
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  \begin{lstlisting}
+    
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  \begin{lstlisting}
+    
+  \end{lstlisting}
+\end{frame}
+
+
+
+% Usecase: Suche nach Usern
+% Anatomie des Users auflisten
+% Usecase: Suche nach #Technology
+% Wer schreibt die Tweets? (Usernamen)
+% Wo werden die Tweets geschrieben? (Geolocation)
+% Wann werden die Tweets geschrieben?
+% Auflistung als Graph?
+% 
+% Limitierung der Api (Begrenzte Abfragen)
+% 
+
+
+\begin{frame}
+  \begin{center}
+      \textbf{Fragen ?}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+      \textbf{Vielen Dank für die Aufmerksamkeit} \\
+      \includegraphics[width=.4\textwidth]{megaultra_ruby}
+  \end{center}
+\end{frame}
+
+
+\end{document}
