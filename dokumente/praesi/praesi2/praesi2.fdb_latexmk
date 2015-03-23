@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1427062171 "praesi2.tex" "praesi2.pdf" "praesi2" 1427062172
+["pdflatex"] 1427096678 "praesi2.tex" "praesi2.pdf" "praesi2" 1427096679
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1396833912 1422999 120086736902aeebe94d194ffde31e04 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecss1095.tfm" 1136768653 3584 8ece407347b270c252c46fdfaef5a9ef ""
@@ -200,16 +200,16 @@
   "/usr/share/texlive/texmf-var/web2c/pdftex/pdflatex.fmt" 1424252318 722553 6af8832d660bb4f33af8ff4e3dfd7740 ""
   "TwitterAPI.png" 1427050470 559959 cdf6782ccf258249d79b5b8137884038 ""
   "megaultra_ruby.png" 1427050470 67892 9e34293ccb247528af0febba6f2d73b7 ""
-  "praesi2.aux" 1427062172 3010 983020c61cbb5545a4dab14573af282a ""
-  "praesi2.nav" 1427062172 1595 58a8ec3625927b4f8ca066624f720413 ""
-  "praesi2.out" 1427062172 46 ac500780cf0fcffe26b8266a61d3aee6 ""
-  "praesi2.tex" 1427062166 4261 9db3a1fb8f816c9dbe7c2f0da8bff270 ""
+  "praesi2.aux" 1427096679 3655 a506359773a24336de6bb000d0148840 ""
+  "praesi2.nav" 1427096679 2060 9f95b2b73cfd6a87887dcfd93b5e08ae ""
+  "praesi2.out" 1427096679 46 ac500780cf0fcffe26b8266a61d3aee6 ""
+  "praesi2.tex" 1427096674 5437 48b93d9d0ef67e17b13d2f425312a940 ""
   (generated)
+  "praesi2.nav"
   "praesi2.log"
+  "praesi2.out"
+  "praesi2.aux"
   "praesi2.toc"
   "praesi2.vrb"
-  "praesi2.out"
-  "praesi2.pdf"
-  "praesi2.aux"
-  "praesi2.nav"
   "praesi2.snm"
+  "praesi2.pdf"

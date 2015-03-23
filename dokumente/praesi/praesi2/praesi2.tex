@@ -74,8 +74,8 @@ language=Ruby}
   \frametitle{Limitationen}
   \begin{itemize}
     \item Response format JSON
-    \item 100 Tweets / User pro Request
-    \item 450 Requests pro 15 min 
+    \item Zeitfenster: 15 min
+    \item Anfragen pro Zeitfenster: 450
     \item \textit{dev.twitter.com} is your friend
   \end{itemize}
 \end{frame}
@@ -134,6 +134,32 @@ client.trends.each { |t| puts "#{t.name}" }
 
 \begin{frame}[fragile]
   \frametitle{Use Cases}
+  Tweets suchen\pause
+  \begin{lstlisting}
+tweets = client.search("#Technology OR #Technologie", :result_type => "recent").take(100).to_a
+  \end{lstlisting}\pause
+  Tweets nach Retweets sortieren und die populärsten drei ausgeben\pause
+  \begin{lstlisting}
+tweets.sort! { |a,b| a.retweet_count <=> b.retweet_count}
+tweets.reverse!
+tweets.first(3).each { |t| puts "Very popular tweet: #{t.text}" }    
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+Wer steckt hinter diesen Tweets?\pause
+  \begin{lstlisting}
+tweets.first(3).each { |t| puts "Very popular tweet with #{t.retweet_count} retweets by #{t.user.name} from #{t.user.location}" }
+  \end{lstlisting}\pause
+  \begin{lstlisting}
+tweets.first(3).each { |t| puts "User #{t.user.name} has #{t.user.followers_count} followers" }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  Wo werden diese Tweets geschrieben? (Geolocation)
   \begin{lstlisting}
     
   \end{lstlisting}
@@ -141,24 +167,35 @@ client.trends.each { |t| puts "#{t.name}" }
 
 \begin{frame}[fragile]
   \frametitle{Use Cases}
+
   \begin{lstlisting}
     
   \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
 
+  \begin{lstlisting}
+    
+  \end{lstlisting}
+\end{frame}
 
-% Usecase: Suche nach Usern
-% Anatomie des Users auflisten
-% Usecase: Suche nach #Technology
-% Wer schreibt die Tweets? (Usernamen)
-% Wo werden die Tweets geschrieben? (Geolocation)
-% Wann werden die Tweets geschrieben?
-% Auflistung als Graph?
-% 
-% Limitierung der Api (Begrenzte Abfragen)
-% 
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  Wo werden diese Tweets geschrieben? (Geolocation mit Pie Chart)
+  \begin{lstlisting}
+    
+  \end{lstlisting}
+\end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  Was für andere Begriffe werden gleichzeitig mit \#Technology eingesetzt. (Graph?)
+  \begin{lstlisting}
+    
+  \end{lstlisting}
+\end{frame}
 
 \begin{frame}
   \begin{center}
