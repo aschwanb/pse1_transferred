@@ -66,6 +66,7 @@ language=Ruby}
 \begin{frame}[fragile]
   \frametitle{Twitter \& Ruby}
     \begin{lstlisting}
+      require 'twitter'
       # Initialize Twitter Client
       @client = Twitter::REST::Client.new do |config|
         config.consumer_key = Rails.application.secrets.twitter_client_consumer_key
