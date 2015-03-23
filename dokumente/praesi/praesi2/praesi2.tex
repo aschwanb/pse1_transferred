@@ -26,14 +26,11 @@ language=Ruby}
 
 \section{Tech Review}
 \begin{frame}
-  \frametitle{Themen} \pause
-  \begin{minipage}{.3\textwidth}
-    \includegraphics[height=.3\textheight]{TwitterAPI}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}{.7\textwidth}
-    \textbf{Twitter API}    
-  \end{minipage}
+  \frametitle{Twitter API}
+  \begin{center}
+      \includegraphics[height=.8\textheight]{TwitterAPI}
+  \end{center}
+
 \end{frame}
 
 \begin{frame}
@@ -42,12 +39,28 @@ language=Ruby}
   \end{center}
 \end{frame}
 \begin{frame}
-  \frametitle{Registrierung bei Twitter}
-    \begin{itemize}
-    \item Twitter Account erstellen\pause
-    \item Application bei Twitter registrieren\pause
-    \item Access Tokens generieren
-  \end{itemize}
+  \frametitle{Admin Twitter}
+  \begin{minipage}{.2\textwidth}
+    \includegraphics[height=.2\textheight]{TwitterAPI}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{.8\textwidth}
+    Twitter Account erstellen \pause \\    
+  \end{minipage}
+  \begin{minipage}{.2\textwidth}
+    \includegraphics[height=.2\textheight]{megaultra_ruby_notext}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{.8\textwidth}
+    Application bei Twitter registrieren \pause \\    
+  \end{minipage}
+  \begin{minipage}{.2\textwidth}
+    \includegraphics[height=.2\textheight]{token}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{.8\textwidth}
+    Access Tokens generieren    
+  \end{minipage}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -62,22 +75,23 @@ language=Ruby}
       end
     \end{lstlisting}    
 \end{frame}
-\begin{frame}
-  \frametitle{Use Cases}\pause
-  \begin{center}
-    \textbf{Ruby Twitter Client Use Cases}\\
-    \hyperlink{http://www.ibm.com/developerworks/library/os-dataminingrubytwitter}{IBM 2012}\pause
-  \end{center}
-\end{frame}
 
 \begin{frame}
   \frametitle{Limitationen}
   \begin{itemize}
-    \item Response format JSON
-    \item Zeitfenster: 15 min
-    \item Anfragen pro Zeitfenster: 450
+    \item Response format JSON \pause
+    \item Zeitfenster: 15 min\pause
+    \item Anfragen pro Zeitfenster: 450\pause
     \item \textit{dev.twitter.com} is your friend
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Use Cases}
+  \begin{center}
+    \textbf{Ruby Twitter Client Use Cases}\\
+    \hyperlink{http://www.ibm.com/developerworks/library/os-dataminingrubytwitter}{IBM 2012}
+  \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -103,7 +117,8 @@ client.trends.each { |t| puts "#{t}" }
 #<Twitter::Trend:0x00000001fad0d8>
 #<Twitter::Trend:0x00000001fad0b0>
 #<Twitter::Trend:0x00000001facfc0>
-\end{lstlisting}
+\end{lstlisting}\pause
+\textit{dev.twitter.com} is your friend
 \end{frame}
 
 \begin{frame}[fragile]
@@ -151,49 +166,72 @@ tweets.first(3).each { |t| puts "Very popular tweet: #{t.text}" }
 Wer steckt hinter diesen Tweets?\pause
   \begin{lstlisting}
 tweets.first(3).each { |t| puts "Very popular tweet with #{t.retweet_count} retweets by #{t.user.name} from #{t.user.location}" }
-  \end{lstlisting}\pause
+# Very popular tweet with 23 retweets by Josefine Mahon from Lawrenceville, AL, US
+# Very popular tweet with 3 retweets by Technews from Aperture Laboratories
+# Very popular tweet with 3 retweets by Ankur from Ahmedabad 
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+Wie bekannt sind diese Twitter Nutzer?\pause
   \begin{lstlisting}
 tweets.first(3).each { |t| puts "User #{t.user.name} has #{t.user.followers_count} followers" }
+# User Josefine Mahon has 63 followers
+# User Technews has 395 followers
+# User Ankur has 926 followers
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Use Cases}
-  Wo werden diese Tweets geschrieben? (Geolocation)
+  Wo werden diese Tweets geschrieben?\pause
   \begin{lstlisting}
-    
+tweets = client.search("#Technology OR #Technologie", :result_type => "recent").take(100).to_a
+tweetLocation = Hash.new
+tweets.each do |t|
+  if !tweetLocation[t.user.location.to_s].nil?
+    tweetLocation[t.user.location.to_s] = tweetLocation[t.user.location.to_s] + 1
+  else
+    tweetLocation[t.user.location.to_s] = 1
+  end
+end
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Use Cases}
+  \begin{lstlisting}
+tweetLocation = tweetLocation.sort_by { |key, value| value }
+tweetLocation.reverse!
+tweetLocation.first(5).each { |key, value| puts "#{key} => #{value}"}
+  \end{lstlisting}\pause
+  \begin{lstlisting}
+#  => 26
+# North Pole => 11
+# New York => 3
+# UK => 2
+# Philippines => 2    
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Use Cases}
-
+  Was für Hashtags werden gleichzeitig mit \#technology eingesetzt?\pause
   \begin{lstlisting}
-    
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Use Cases}
-
+twitterClient = TwitterClient.new
+twitterClient.search("#technology", 500)
+tags = twitterClient.getHashtagsAsHash
+tags.delete("#technology")
+tags.first(5).each { |key, value| puts "#{key} => #{value}" }    
+  \end{lstlisting}\pause
   \begin{lstlisting}
-    
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Use Cases}
-  Wo werden diese Tweets geschrieben? (Geolocation mit Pie Chart)
-  \begin{lstlisting}
-    
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Use Cases}
-  Was für andere Begriffe werden gleichzeitig mit \#Technology eingesetzt. (Graph?)
-  \begin{lstlisting}
-    
+#tech => 44
+#partner => 21
+#mobilephones => 20
+#startups => 18
+#smartphones => 15    
   \end{lstlisting}
 \end{frame}
 
