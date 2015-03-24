@@ -5,7 +5,11 @@ source 'https://rubygems.org'
 
 ####################################
 # Requirements specifically for this project
+####################################
+# To access twitter
 gem 'twitter'
+# To schedule chron jobs
+gem 'whenever', '0.9.4'
 
 ####################################
 # Requirements for the webserver and Jenkins
@@ -13,6 +17,7 @@ gem 'twitter'
 
 ####################################
 # Default gems added by rails
+####################################
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
