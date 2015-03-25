@@ -1,7 +1,10 @@
 require_relative '../../app/models/topics_start'
 require_relative '../../app/models/twitter_client'
+require_relative '../../app/models/tweet'
+require_relative '../../app/models/tweet_parser'
+
 # USAGE: Give an array of starting points, the number of objects per query and the desired depth
-# The scraper should then run as chron-job, fetch tweets and write them to the database.
+# The scraper should then run as cron-job, fetch tweets and write them to the database.
 class TwitterScraper
 
   def initialize
@@ -33,11 +36,10 @@ class TwitterScraper
     # TODO
   end
 
+  # Run for every tweet to save in db
+  def saveTweet
 
+  end
 
 end
 
-# topics = TopicsStart.new.getTopics
-# twitterScraper = TwitterScraper.new
-# twitterScraper.scrape(%w[#Technology #iWatch #Trending], 2, 5, 3)
-# tweets = twitterS

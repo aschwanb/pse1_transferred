@@ -1,4 +1,5 @@
 require 'twitter'
+require_relative 'tweet_parser'
 
 class TwitterClient
   # TODO: Extract Twitter Users
@@ -11,6 +12,7 @@ class TwitterClient
       config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
     end
     @tweets = []
+    @parser = TweetParser.new
   end
 
   def search(query, querySize)
@@ -26,15 +28,15 @@ class TwitterClient
   end
 
   def getHashtagsAsHash
-    return sort(extractFromTweet("Hashtags"))
+    return sort(@parser.parse("Hashtags"))
   end
 
   def getTwitterHandlesAsHash
-    return sort(extractFromTweet("TwitterHandles"))
+    return sort(@parser.parse("TwitterHandles"))
   end
 
   def getURLsAsHash
-    return sort(extractFromTweet("URLs"))
+    return sort(@parser.parse("URLs"))
   end
 
   def sort(input)
@@ -43,30 +45,8 @@ class TwitterClient
     return output
   end
 
-  # TODO: Performance-wise, this is worse then hell
-  def extractFromTweet(extractMe)
-    tmp = []
-    @tweets.each do |tweet|
-      case extractMe
-        when "Hashtags"
-          tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
-        when "TwitterHandles"
-          tmp = tmp + tweet.text.downcase.scan(/@\w+/).flatten
-        when "URLs"
-          tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-          if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
-            tmp.pop
-          end
-        else
-          puts "Invalide parameter"
-      end
-    end
-
-    if extractMe == "URLs"
-      # Eliminate urls that are to short
-      tmp.each { |url| tmp.delete(url) if url.length < 10 }
-    end
-    return tmp
+  def resetTweets
+    @tweets = []
   end
 
 end

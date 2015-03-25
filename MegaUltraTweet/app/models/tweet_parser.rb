@@ -1,5 +1,8 @@
 class TweetParser
 
+  def initialize
+  end
+
   # TODO: Performance-wise, this is worse then hell
   def parse(extractMe)
     tmp = []

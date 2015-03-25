@@ -10,5 +10,5 @@ set :output, "%s/tmp/cron.log" % [ root ]
 every 15.minutes do
   command '/usr/bin/date'
   command '/usr/bin/echo "Running cron job for TwitterScraper"'
-  runner "require '%s/lib/tasks/twitter_scraper.rb'; twitterScraper = TwitterScraper.new; twitterScraper.scrape( [\"#Technology\", \"#iWatch\", \"#Trending\"], 2, 5, 3)" % [ root ]
+  runner "require '%s/lib/tasks/twitter_scraper.rb'; twitterScraper = TwitterScraper.new; twitterScraper.scrape( [\"#Technology\", \"#iWatch\", \"#Trending\"], 2, 1, 3)" % [ root ]
 end
