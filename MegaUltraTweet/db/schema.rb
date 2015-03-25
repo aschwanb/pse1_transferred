@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150325190842) do
   end
 
   create_table "hashtags", force: :cascade do |t|
-    t.string   "test",       limit: 255
+    t.string   "text",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
