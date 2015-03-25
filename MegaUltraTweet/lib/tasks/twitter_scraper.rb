@@ -40,3 +40,4 @@ end
 # topics = TopicsStart.new.getTopics
 # twitterScraper = TwitterScraper.new
 # twitterScraper.scrape(%w[#Technology #iWatch #Trending], 2, 5, 3)
+# tweets = twitterS
