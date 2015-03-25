@@ -6,6 +6,10 @@ class TwitterClient
 
   def initialize
     @client = Twitter::REST::Client.new do |config|
+      #config.consumer_key        = Rails.application.secrets.twitter_client_consumer_key
+      #config.consumer_secret     = Rails.application.secrets.twitter_client_consumer_secret
+      #config.access_token        = Rails.application.secrets.twitter_client_access_token
+      #config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
       config.consumer_key        = Rails.application.secrets.twitter_client_consumer_key
       config.consumer_secret     = Rails.application.secrets.twitter_client_consumer_secret
       config.access_token        = Rails.application.secrets.twitter_client_access_token
@@ -28,15 +32,15 @@ class TwitterClient
   end
 
   def getHashtagsAsHash
-    return sort(@parser.parse("Hashtags"))
+    return sort(@parser.parse(@tweets, "Hashtags"))
   end
 
   def getTwitterHandlesAsHash
-    return sort(@parser.parse("TwitterHandles"))
+    return sort(@parser.parse(@tweets, "TwitterHandles"))
   end
 
   def getURLsAsHash
-    return sort(@parser.parse("URLs"))
+    return sort(@parser.parse(@tweets, "URLs"))
   end
 
   def sort(input)

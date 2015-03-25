@@ -8,17 +8,21 @@ require_relative '../../app/models/tweet_parser'
 class TwitterScraper
 
   def initialize
+    @client = TwitterClient.new
+    @parser = TweetParser.new
   end
 
   def scrape(query, querySize, depth, detail)
     puts "Depth is at #{depth}"
-    twitterClient = TwitterClient.new
     tmpQuery = query.clone
     while tmpQuery.any? do
       localQuery = tmpQuery.pop
       puts "Scraping for #{localQuery}"
-      twitterClient.search(localQuery, querySize)
+      @client.search(localQuery, querySize)
     end
+    # Save all the tweets
+    @client.getTweetsAsArray.each { |t| self.saveTweet(t) }
+
     # All tweets are saved in twitterClient.getTweets
     # Get all new hashtags without the ones present in the last query
     newQuery = twitterClient.getHashtagsAsHash
@@ -37,7 +41,22 @@ class TwitterScraper
   end
 
   # Run for every tweet to save in db
-  def saveTweet
+  def saveTweet(tweet)
+    author = Author.new(name: tweet.user.name)
+    # TODO: Check if author is allready present in db
+    puts "Initializing Tweet object"
+    t = Tweet.new(
+                 text: tweet.text,
+                 retweets: tweet.retweet_count,
+                 author: author
+    )
+    puts "Parsing Hashtags"
+    p tweet.text
+    tmp = @parser.parse(tweet, "Hashtags")
+    p tmp
+    if !tmp.empty?
+      tmp.each { |h| tag = Hashtag.new(text: h); t.hashtags<<tag }
+    end
 
   end
 

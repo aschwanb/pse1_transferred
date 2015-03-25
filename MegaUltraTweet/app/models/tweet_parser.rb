@@ -4,15 +4,16 @@ class TweetParser
   end
 
   # TODO: Performance-wise, this is worse then hell
-  def parse(extractMe)
+  def parse(tweets, type)
+    puts "Hello From parser"
     tmp = []
-    @tweets.each do |tweet|
-      case extractMe
-        when "Hashtags"
+    tweets.each do |tweet|
+      case type
+        when type == "Hashtags"
           tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
-        when "TwitterHandles"
+        when type == "TwitterHandles"
           tmp = tmp + tweet.text.downcase.scan(/@\w+/).flatten
-        when "URLs"
+        when type == "URLs"
           tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
           if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
             tmp.pop
@@ -22,7 +23,7 @@ class TweetParser
       end
     end
 
-    if extractMe == "URLs"
+    if type == "URLs"
       # Eliminate urls that are to short
       tmp.each { |url| tmp.delete(url) if url.length < 10 }
     end
