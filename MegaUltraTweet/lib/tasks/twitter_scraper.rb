@@ -27,7 +27,8 @@ class TwitterScraper
     puts "Done saving tweets"
     # All tweets are saved in twitterClient.getTweets
     # Get all new hashtags without the ones present in the last query
-    newQuery = twitterClient.getHashtagsAsHash
+    puts "Start next query"
+    newQuery = @client.getHashtagsAsHash
     query.each { |t| newQuery.delete(t.downcase) }
     puts newQuery
     # Determine how many of them to take
@@ -44,36 +45,22 @@ class TwitterScraper
 
   # Run for every tweet to save in db
   def saveTweet(tweet)
-    # Check if author is allready present in db
     if Author.where(name: tweet.user.name).blank?
       author = @parser.getAuthor(tweet)
       author.save
     else
-      author = Author.where(name: tweet.user.name)
+      author = Author.find_by_name(tweet.user.name)
     end
-    puts "Initializing Tweet object"
-    t = Tweet.new(
-                 text: tweet.text,
-                 retweets: tweet.retweet_count
-    )
-    puts "Basic object set up"
-    t.author<<author
-    puts "Parsing Hashtags for tweet:"
-    p tweet.text
+    t = author.tweets.create( text: tweet.text, retweets: tweet.retweet_count)
     tmp = @parser.parseHashtags(tweet)
-    puts "Parsing resulted in the following tags: "
-    p tmp
-    puts "Add tags to tweet"
     tmp.each do |tag|
       if Hashtag.where(text: tag).blank?
         hashtag = Hashtag.create(text: tag)
-        hashtag.save
       else
-        hashtag = Hashtag.where(text: tag)
+        hashtag = Hashtag.find_by_text(tag)
       end
       t.hashtags<<hashtag
     end
-    puts "Start saving"
     t.save
   end
 
