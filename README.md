@@ -16,7 +16,7 @@ cd ../MegaUltraTweet
 ```
 Alle Cron Jobs starten
 ```
-whenever --update-crontab
+whenever --update-crontab MegaUltraTweet
 ```
 Datenbank neu aufsetzen:
 ```
