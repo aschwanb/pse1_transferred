@@ -22,12 +22,9 @@ class TwitterScraper
       puts "Done scraping"
     end
     # Save all the tweets
-    puts "Saving tweets"
-    @client.getTweetsAsArray.each { |t| self.saveTweet(t) }
-    puts "Done saving tweets"
-    # All tweets are saved in twitterClient.getTweets
+     @client.getTweetsAsArray.each { |t| self.saveTweet(t) }
     # Get all new hashtags without the ones present in the last query
-    puts "Start next query"
+    puts "Start next query ..."
     newQuery = @client.getHashtagsAsHash
     query.each { |t| newQuery.delete(t.downcase) }
     puts newQuery
