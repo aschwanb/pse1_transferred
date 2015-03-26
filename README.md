@@ -11,9 +11,15 @@ sind ("trending") oder aus der Reihe fallen.
 # Setup
 Nach dem Clonen des Repositories:
 In das Verzeichnis wechseln
-> cd ../MegaUltraTweet
+```
+cd ../MegaUltraTweet
+```
 Alle Cron Jobs starten
-> whenever --update-crontab
+```
+whenever --update-crontab
+```
 Datenbank neu aufsetzen:
-> rake db:create
-> rake db:schema:load
+```
+rake db:create
+rake db:schema:load
+```
