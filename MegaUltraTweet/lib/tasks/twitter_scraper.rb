@@ -17,12 +17,14 @@ class TwitterScraper
     tmpQuery = query.clone
     while tmpQuery.any? do
       localQuery = tmpQuery.pop
-      puts "Scraping for #{localQuery}"
+      puts "Scraping for #{localQuery} ..."
       @client.search(localQuery, querySize)
+      puts "Done scraping"
     end
     # Save all the tweets
+    puts "Saving tweets"
     @client.getTweetsAsArray.each { |t| self.saveTweet(t) }
-
+    puts "Done saving tweets"
     # All tweets are saved in twitterClient.getTweets
     # Get all new hashtags without the ones present in the last query
     newQuery = twitterClient.getHashtagsAsHash
@@ -42,22 +44,37 @@ class TwitterScraper
 
   # Run for every tweet to save in db
   def saveTweet(tweet)
-    author = Author.new(name: tweet.user.name)
-    # TODO: Check if author is allready present in db
+    # Check if author is allready present in db
+    if Author.where(name: tweet.user.name).blank?
+      author = @parser.getAuthor(tweet)
+      author.save
+    else
+      author = Author.where(name: tweet.user.name)
+    end
     puts "Initializing Tweet object"
     t = Tweet.new(
                  text: tweet.text,
-                 retweets: tweet.retweet_count,
-                 author: author
+                 retweets: tweet.retweet_count
     )
-    puts "Parsing Hashtags"
+    puts "Basic object set up"
+    t.author<<author
+    puts "Parsing Hashtags for tweet:"
     p tweet.text
-    tmp = @parser.parse(tweet, "Hashtags")
+    tmp = @parser.parseHashtags(tweet)
+    puts "Parsing resulted in the following tags: "
     p tmp
-    if !tmp.empty?
-      tmp.each { |h| tag = Hashtag.new(text: h); t.hashtags<<tag }
+    puts "Add tags to tweet"
+    tmp.each do |tag|
+      if Hashtag.where(text: tag).blank?
+        hashtag = Hashtag.create(text: tag)
+        hashtag.save
+      else
+        hashtag = Hashtag.where(text: tag)
+      end
+      t.hashtags<<hashtag
     end
-
+    puts "Start saving"
+    t.save
   end
 
 end
