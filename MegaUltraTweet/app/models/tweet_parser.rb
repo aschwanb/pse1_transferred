@@ -3,7 +3,8 @@ class TweetParser
   def initialize
   end
 
-  # TODO: Performance-wise, this is worse then hell
+  # TODO: Refactor this!
+  # Performance-wise, it is worse then hell
   def parse(tweets, type)
     tmp = []
     tweets.each do |tweet|

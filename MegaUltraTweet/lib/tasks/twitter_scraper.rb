@@ -10,6 +10,8 @@ class TwitterScraper
   def initialize
     @client = TwitterClient.new
     @parser = TweetParser.new
+    @providedSearches = 450
+    @usedSearches = 0
   end
 
   def scrape(query, querySize, depth, detail)
@@ -19,20 +21,31 @@ class TwitterScraper
       localQuery = tmpQuery.pop
       puts "Scraping for #{localQuery} ..."
       @client.simpleSearch(localQuery, querySize)
+      @usedSearches = @usedSearches + 1
+      if @providedSearches <= @usedSearches
+        puts "Maximum searches for this time window used. Halting for now."
+        exit
+      end
     end
-     @client.getTweetsAsArray.each { |t| saveTweet(t) }
-    # Get all new hashtags without the ones present in the last query
-    newQuery = @client.getHashtagsAsHash
-    query.each { |t| newQuery.delete(t.downcase) }
-    # Determine how many of them to take
-    newQuery = newQuery.first(detail).map(&:first).to_a
+    newQuery = self.getNewQuery(query, detail)
+    # Save tweets and reset
+    @client.getTweetsAsArray.each { |t| saveTweet(t) }
+    @client.resetTweets
     # Start a new search with one less depth
     while depth > 1
        depth = depth - 1
        puts "Start new branch with #{newQuery}"
        scrape(newQuery, querySize, depth, detail)
     end
-    # TODO Do not exceed query limit set by twitter (450)
+  end
+
+  def getNewQuery(query, detail)
+    # Get all new hashtags without the ones present in the last query
+    newQuery = @client.getHashtagsAsHash
+    query.each { |t| newQuery.delete(t.downcase) }
+    # Determine how many of them to take
+    newQuery = newQuery.first(detail).map(&:first).to_a
+    return newQuery
   end
 
   def saveTweet(tweet)
