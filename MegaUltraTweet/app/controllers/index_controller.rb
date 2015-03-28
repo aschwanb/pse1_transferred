@@ -11,7 +11,7 @@ class IndexController < ApplicationController
     @query = params[:query]
     if !@query.blank?
       twitterClient = TwitterClient.new
-      twitterClient.search(@query, 10)
+      twitterClient.simpleSearch(@query, 10)
       @tweets = twitterClient.getTweetsAsArray
       @countsHashtags = twitterClient.getHashtagsAsHash
       @countsTwitterHandles = twitterClient.getTwitterHandlesAsHash

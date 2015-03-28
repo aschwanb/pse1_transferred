@@ -18,16 +18,12 @@ class TwitterScraper
     while tmpQuery.any? do
       localQuery = tmpQuery.pop
       puts "Scraping for #{localQuery} ..."
-      @client.search(localQuery, querySize)
-      puts "Done scraping"
+      @client.simpleSearch(localQuery, querySize)
     end
-    # Save all the tweets
      @client.getTweetsAsArray.each { |t| saveTweet(t) }
     # Get all new hashtags without the ones present in the last query
-    puts "Start next query ..."
     newQuery = @client.getHashtagsAsHash
     query.each { |t| newQuery.delete(t.downcase) }
-    puts newQuery
     # Determine how many of them to take
     newQuery = newQuery.first(detail).map(&:first).to_a
     # Start a new search with one less depth
