@@ -48,7 +48,15 @@ class TweetParser
   end
 
   def getAuthor(tweet)
-    return Author.new(name: tweet.user.name)
+    if Author.where(name: tweet.user.name).blank?
+      return Author.create(name: tweet.user.name)
+    else
+      return Author.find_by_name(tweet.user.name)
+    end
+  end
+
+  def getTwitterId(tweet)
+    return tweet.id
   end
 
 end

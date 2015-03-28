@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325190842) do
+ActiveRecord::Schema.define(version: 20150328203113) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150325190842) do
     t.integer  "author_id",  limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "twitter_id", limit: 8
   end
 
   add_index "tweets", ["author_id"], name: "index_tweets_on_author_id", using: :btree

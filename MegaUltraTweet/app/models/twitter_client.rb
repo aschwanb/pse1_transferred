@@ -14,6 +14,7 @@ class TwitterClient
     @parser = TweetParser.new
   end
 
+  # TODO: Add limitation: Option to not search for older tweets.
   def search(query, querySize)
     addTweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
   end
