@@ -2,7 +2,6 @@ require 'twitter'
 require_relative 'tweet_parser'
 
 class TwitterClient
-  # TODO: Extract Twitter Users
 
   def initialize
     @client = Twitter::REST::Client.new do |config|
