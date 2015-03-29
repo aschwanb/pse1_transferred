@@ -1,4 +1,3 @@
-require_relative '../../app/models/topics_start'
 require_relative '../../app/models/twitter_client'
 require_relative '../../app/models/tweet'
 require_relative '../../app/models/tweet_parser'

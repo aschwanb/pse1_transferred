@@ -3,12 +3,14 @@
 
 # define environment
 root = File.expand_path(File.dirname(File.dirname(__FILE__)))
+# start = Startingpoint.first.getStart
 set :environment, "development"
 set :output, "%s/tmp/cron.log" % [ root ]
 
+
 # Define cron jobs
-every 15.minutes do
+every 1.minutes do
   command '/usr/bin/date'
   command '/usr/bin/echo "Running cron job for TwitterScraper"'
-  runner "require '%s/lib/tasks/twitter_scraper.rb'; twitterScraper = TwitterScraper.new; twitterScraper.scrape( [\"#Technology\", \"#iWatch\", \"#Trending\"], 2, 1, 3)" % [ root ]
+  runner "require '%s/lib/tasks/twitter_scraper.rb'; require '%s/app/models/startingpoint.rb'; startingpoint = Startingpoint.first; twitterScraper = TwitterScraper.new; twitterScraper.scrape( startingpoint.getStart, 2, 5, 3)" % [ root, root ]
 end
