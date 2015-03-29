@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329103353) do
+ActiveRecord::Schema.define(version: 20150329185827) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20150329103353) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "hashtags_startingpoints", id: false, force: :cascade do |t|
+    t.integer "hashtag_id",       limit: 4
+    t.integer "startingpoint_id", limit: 4
+  end
+
+  add_index "hashtags_startingpoints", ["hashtag_id"], name: "index_hashtags_startingpoints_on_hashtag_id", using: :btree
+  add_index "hashtags_startingpoints", ["startingpoint_id"], name: "index_hashtags_startingpoints_on_startingpoint_id", using: :btree
+
   create_table "hashtags_tweets", id: false, force: :cascade do |t|
     t.integer "hashtag_id", limit: 4
     t.integer "tweet_id",   limit: 4
@@ -34,6 +42,11 @@ ActiveRecord::Schema.define(version: 20150329103353) do
 
   add_index "hashtags_tweets", ["hashtag_id"], name: "index_hashtags_tweets_on_hashtag_id", using: :btree
   add_index "hashtags_tweets", ["tweet_id"], name: "index_hashtags_tweets_on_tweet_id", using: :btree
+
+  create_table "startingpoints", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tweets", force: :cascade do |t|
     t.string   "text",       limit: 255
