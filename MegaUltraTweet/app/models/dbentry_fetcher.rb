@@ -3,7 +3,7 @@ class DbentryFetcher
   def initialize
   end
 
-  def fetchHasthtags
+  def fetchHashtags
     return Hashtag.take(20)
   end
 
