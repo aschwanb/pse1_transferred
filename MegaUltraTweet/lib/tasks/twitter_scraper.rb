@@ -9,7 +9,7 @@ class TwitterScraper
   def initialize
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @providedSearches = 3
+    @providedSearches = 450
     @usedSearches = 0
   end
 
@@ -28,8 +28,8 @@ class TwitterScraper
          puts "Start new branch with #{newQuery}"
          scrape(newQuery, querySize, depth, detail)
        end
-    rescue
-      puts "Maximum searches for this time window used."
+    #rescue
+    #  puts "Maximum searches for this time window used."
     end
     puts "Finished scraping for now"
   end
@@ -40,8 +40,10 @@ class TwitterScraper
       puts "Scraping for #{localQuery} ..."
       @client.simpleSearch(localQuery, querySize)
       @usedSearches = @usedSearches + 1
+      puts "Used searches #{@usedSearches}"
+      puts "Provided searches #{@providedSearches}"
       if @providedSearches <= @usedSearches
-        raise "Maximum searches for this time window used."
+        raise
       end
     end
   end
@@ -56,14 +58,15 @@ class TwitterScraper
   end
 
   def saveTweet(tweet)
-    author = @parser.getAuthor(tweet)
-    if Tweet.where(twitter_id: tweet.id).blank?
-      t = author.tweets.create(
+     author = @parser.getAuthor(tweet)
+     if Tweet.where(twitter_id: tweet.id).blank?
+        t = author.tweets.create(
           text: tweet.text,
           retweets: tweet.retweet_count,
           twitter_id: tweet.id
-      )
-      t.addHashtags(@parser.parseHashtags(tweet))
+        )
+      t.setHashtags(@parser.parseHashtags(tweet))
+      t.setWebpages(@parser.parseWebpages(tweet))
     end
   end
 

@@ -38,7 +38,8 @@ class TweetParser
     return tweet.text.downcase.scan(/@\w+/).flatten
   end
 
-  def parseURLs(tweet)
+  def parseWebpages(tweet)
+    tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
     if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
       tmp.pop

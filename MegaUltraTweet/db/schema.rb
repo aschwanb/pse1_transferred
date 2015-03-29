@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329083945) do
+ActiveRecord::Schema.define(version: 20150329103353) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -46,5 +46,15 @@ ActiveRecord::Schema.define(version: 20150329083945) do
 
   add_index "tweets", ["author_id"], name: "index_tweets_on_author_id", using: :btree
 
+  create_table "webpages", force: :cascade do |t|
+    t.integer  "tweet_id",   limit: 4
+    t.string   "url",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "webpages", ["tweet_id"], name: "index_webpages_on_tweet_id", using: :btree
+
   add_foreign_key "tweets", "authors"
+  add_foreign_key "webpages", "tweets"
 end
