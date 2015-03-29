@@ -41,4 +41,7 @@ class Tweet < ActiveRecord::Base
     return self.author
   end
 
+  def getRank
+    return self.getAuthor.getFriendsCount + self.getRetweetsCount
+  end
 end
