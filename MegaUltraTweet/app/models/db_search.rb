@@ -2,10 +2,14 @@ require 'search_object'
 class DbSearch
   def parseQuery(query)
     query = query.to_s.downcase
-    hashtags = query
-    searchObj = SearchObject.new(hashtags)
+    hashtags = query.scan(/#\w+/).flatten
+    authors = query.scan(/@\w+/).flatten
+    searchTerms = hashtags + authors
+    searchObj = SearchObject.new(searchTerms)
+    dbe_hashtag = []
+    dbe_hashtag.append(Hashtag.find_by_text(hashtags[0]).text)
+    searchObj.setHashtags(dbe_hashtag)
 
-    # authors = query.scan(/@\w+/)
     # if hashtags.length == 1
     #   sobj = SearchObject.new(hashtags)
     #   hashtag_id = Hashtag.find_by_text(hashtags[0]).id

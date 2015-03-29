@@ -1,7 +1,7 @@
 <div class="wrapper">
   <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search") do %>
       <%= search_field_tag(:q, nil, class: "search-field") %>
-      <%= submit_tag("Search", class: "search-button") %>
+      <%= submit_tag("Search", :name => nil, class: "search-button") %>
   <% end %>
   <div class="center list">
     <% if !@sobj.nil? %>
@@ -10,8 +10,11 @@
         <% if searchTerm.nil? %>
             <p>nope</p>
         <% else %>
-            <p>ok</p>
+            <p><%= searchTerm.to_s %></p>
         <% end %>
+        <% db_hashtags = @sobj.getHashtags %>
+        <% db_hashtags%>
+        <p><%= db_hashtags %></p>
     <% end %>
 
 
