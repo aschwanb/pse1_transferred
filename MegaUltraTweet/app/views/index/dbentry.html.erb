@@ -7,10 +7,11 @@
       <h1>Hashtags in the DB</h1>
       <ul class="static-list">
 
-        <% hashtags = fetcher.fetchHasthtags %>
+        <% hashtags = fetcher.fetchHashtags %>
         <% hashtags.each do |entry| %>
             <li>
-              <% entry.text %></li>
+              <%= puts entry.getText %>
+            </li>
         <% end %>
 
       </ul>
@@ -20,7 +21,7 @@
       <h1>Authors in the DB</h1>
       <ul class="static-list">
 
-        <% authors = fetcher.fetchHasthtags %>
+        <% authors = fetcher.fetchHashtags %>
         <% authors.each do |entry| %>
             <li>
               <% entry.to_s %>
@@ -34,7 +35,7 @@
       <h1>Tweets in the DB</h1>
       <ul class="static-list">
 
-        <% tweets = fetcher.fetchHasthtags %>
+        <% tweets = fetcher.fetchHashtags %>
         <% tweets.each do |entry| %>
             <li>
               <% entry.to_s %></li>
