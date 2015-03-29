@@ -1,16 +1,16 @@
 class SearchObject
-  @@searched_for = []
-  @@tweets
+  @searchTerms = []
+  @tweets
 
   def initialize(query)
-    @@searched_for = query
+    @searched_for = query
   end
 
   def addTweets(tweets)
-    @@tweets = tweets
+    @tweets = tweets
   end
 
-  def getSearchedFor
-    return @@searched_for
+  def getSearchTerms
+    return @searchTerms
   end
 end
