@@ -3,39 +3,46 @@ require_relative '../../app/models/twitter_client'
 require_relative '../../app/models/tweet'
 require_relative '../../app/models/tweet_parser'
 
-# USAGE: Give an array of starting points, the number of objects per query and the desired depth
-# The scraper should then run as cron-job, fetch tweets and write them to the database.
+# TODO: Run a new search the most popular (depth) hashtags for one entry
 class TwitterScraper
 
   def initialize
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @providedSearches = 450
+    @providedSearches = 3
     @usedSearches = 0
   end
 
   def scrape(query, querySize, depth, detail)
     puts "Depth is at #{depth}"
-    tmpQuery = query.clone
-    while tmpQuery.any? do
-      localQuery = tmpQuery.pop
+    begin
+      self.runQuery(query, querySize)
+      puts query
+      newQuery = self.getNewQuery(query, detail)
+      # Save tweets and reset
+      @client.getTweetsAsArray.each { |t| saveTweet(t) }
+      @client.resetTweets
+      # Start a new search with one less depth
+       while depth > 1
+         depth = depth - 1
+         puts "Start new branch with #{newQuery}"
+         scrape(newQuery, querySize, depth, detail)
+       end
+    rescue
+      puts "Maximum searches for this time window used."
+    end
+    puts "Finished scraping for now"
+  end
+
+  def runQuery(query, querySize)
+    while query.any? do
+      localQuery = query.pop
       puts "Scraping for #{localQuery} ..."
       @client.simpleSearch(localQuery, querySize)
       @usedSearches = @usedSearches + 1
       if @providedSearches <= @usedSearches
-        puts "Maximum searches for this time window used. Halting for now."
-        exit
+        raise "Maximum searches for this time window used."
       end
-    end
-    newQuery = self.getNewQuery(query, detail)
-    # Save tweets and reset
-    @client.getTweetsAsArray.each { |t| saveTweet(t) }
-    @client.resetTweets
-    # Start a new search with one less depth
-    while depth > 1
-       depth = depth - 1
-       puts "Start new branch with #{newQuery}"
-       scrape(newQuery, querySize, depth, detail)
     end
   end
 

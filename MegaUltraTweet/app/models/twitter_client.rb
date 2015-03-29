@@ -13,7 +13,7 @@ class TwitterClient
     @tweets = []
     @parser = TweetParser.new
   end
-
+# TODO: Add combo search
   def simpleSearch(query, querySize)
     addTweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
   end
