@@ -3,7 +3,6 @@
 
 # define environment
 root = File.expand_path(File.dirname(File.dirname(__FILE__)))
-# start = Startingpoint.first.getStart
 set :environment, "development"
 set :output, "%s/tmp/cron.log" % [ root ]
 
