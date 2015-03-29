@@ -1,4 +1,4 @@
-class DBFetcher
+class DbentryFetcher
 
   def initialize
   end
