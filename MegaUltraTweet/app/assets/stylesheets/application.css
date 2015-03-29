@@ -69,3 +69,42 @@ a:hover, a:active {
 {
     display:block;
 }
+
+.search {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 1em;
+    padding: 0 4em 0 4em;
+    height: 1.25em;
+    font-size: 2em;
+}
+.search-field {
+    box-sizing: border-box;
+    float: left;
+    width: 70%;
+    height: 100%;
+    border: 5px solid #fff;
+    padding-left: 2em;
+}
+
+.search-button {
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #730E15;
+}
+.search-button:hover {
+    background: black;
+    color: #fff;
+}
+.search-button:active, .search-button:focus {
+    /*background: black;*/
+    outline: 0.5px solid #730E15;
+}
+button::-moz-focus-inner {
+    border: none;
+}

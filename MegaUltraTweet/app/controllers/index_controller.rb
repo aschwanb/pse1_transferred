@@ -21,6 +21,15 @@ class IndexController < ApplicationController
 
   def about
   end
+
+  def db_search
+    @q = params[:q]
+    if !@q.blank?
+      dbsearch = DbSearch.new
+      @sobj = dbsearch.parseQuery(@q)
+    end
+  end
+
 end
 
 

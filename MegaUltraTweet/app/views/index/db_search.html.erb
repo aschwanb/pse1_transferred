@@ -3,7 +3,13 @@
       <%= search_field_tag(:q, nil, class: "search-field") %>
       <%= submit_tag("Search", class: "search-button") %>
   <% end %>
-  <div class="center logo">
-    <%= image_tag("megaultra_ruby.png", class: "logo") %>
+  <div class="center list">
+
+     <h1>You searched for<%= @sobj.getSearchedFor.each do |term| term.to_s
+
+     end %></h1>
+
+
   </div>
+  <h1>sub</h1>
 </div>
