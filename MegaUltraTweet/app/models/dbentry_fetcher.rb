@@ -8,7 +8,7 @@ class DbentryFetcher
   end
 
   def fetchAuthors
-    return Authors.take(20)
+    return Author.take(20)
   end
 
   def fetchTweets

@@ -26,4 +26,8 @@ class Tweet < ActiveRecord::Base
     return self.webpages
   end
 
+  def getText
+    return self.text
+  end
+
 end
