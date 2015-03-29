@@ -10,7 +10,7 @@
         <% hashtags = fetcher.fetchHashtags %>
         <% hashtags.each do |entry| %>
             <li>
-              <%= puts entry.getText %>
+              <%= entry.getText %>
             </li>
         <% end %>
 
@@ -24,7 +24,7 @@
         <% authors = fetcher.fetchHashtags %>
         <% authors.each do |entry| %>
             <li>
-              <% entry.to_s %>
+              <%= entry.to_s %>
             </li>
         <% end %>
 
@@ -38,7 +38,7 @@
         <% tweets = fetcher.fetchHashtags %>
         <% tweets.each do |entry| %>
             <li>
-              <% entry.to_s %></li>
+              <%= entry.to_s %></li>
         <% end %>
 
       </ul>
