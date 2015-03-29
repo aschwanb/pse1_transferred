@@ -1,13 +1,17 @@
 class SearchObject
   @searchTerms = []
-  @tweets
-  @hashtags = []
+  @tweets = []
+  @hashtags
 
   def initialize(query)
     @searchTerms = query
   end
 
   def addTweets(tweets)
+    @tweets.append(tweets)
+  end
+
+  def setTweets(tweets)
     @tweets = tweets
   end
 

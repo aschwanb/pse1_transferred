@@ -5,16 +5,9 @@
   <% end %>
   <div class="center list">
     <% if !@sobj.nil? %>
-
-        <% searchTerm = @sobj.getSearchTerms %>
-        <% if searchTerm.nil? %>
-            <p>nope</p>
-        <% else %>
-            <p><%= searchTerm.to_s %></p>
-        <% end %>
-        <% db_hashtags = @sobj.getHashtags %>
-        <% db_hashtags%>
-        <p><%= db_hashtags %></p>
+        <div>
+          <h1>Tweets mit </h1>
+        </div>
     <% end %>
 
 
