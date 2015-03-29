@@ -4,4 +4,12 @@ class Author < ActiveRecord::Base
   def getName
     return self.name
   end
+
+  def getFriendsCount
+    return self.friends_count
+  end
+
+  def getTweets
+    return self.tweets.to_a
+  end
 end

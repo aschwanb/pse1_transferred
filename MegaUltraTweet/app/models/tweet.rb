@@ -3,7 +3,6 @@ class Tweet < ActiveRecord::Base
   has_many :webpages
   has_and_belongs_to_many :hashtags
 
-
   def setHashtags(hashtagsArray)
     hashtagsArray.each do |tag|
       if Hashtag.where(text: tag).blank?
@@ -23,11 +22,23 @@ class Tweet < ActiveRecord::Base
   end
 
   def getWebpages
-    return self.webpages
+    return self.webpages.to_a
   end
 
   def getText
     return self.text
+  end
+
+  def getHashtags
+    return self.hashtags.to_a
+  end
+
+  def getRetweetsCount
+    return self.retweets
+  end
+
+  def getAuthor
+    return self.author
   end
 
 end
