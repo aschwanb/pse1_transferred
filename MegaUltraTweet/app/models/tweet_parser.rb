@@ -49,8 +49,9 @@ class TweetParser
   end
 
   def getAuthor(tweet)
-    if Author.where(name: tweet.user.name).blank?
-      return Author.create(name: tweet.user.name)
+    # Friends Count is not currently being updated
+    if Author.where(name: tweet.user.id).blank?
+      return Author.create(name: tweet.user.name, friends_count: tweet.user.friends_count, twitter_id: tweet.user.id)
     else
       return Author.find_by_name(tweet.user.name)
     end
