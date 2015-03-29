@@ -58,7 +58,11 @@ class TwitterScraper
   def saveTweet(tweet)
     author = @parser.getAuthor(tweet)
     if Tweet.where(twitter_id: tweet.id).blank?
-      t = author.tweets.create( text: tweet.text, retweets: tweet.retweet_count, twitter_id: tweet.id)
+      t = author.tweets.create(
+          text: tweet.text,
+          retweets: tweet.retweet_count,
+          twitter_id: tweet.id
+      )
       t.addHashtags(@parser.parseHashtags(tweet))
     end
   end
