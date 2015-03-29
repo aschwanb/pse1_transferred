@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Seed default starting point and hashtags
+h1 = Hashtag.create(text: "#technology")
+h2 = Hashtag.create(text: "#technologie")
+
+s = Startingpoint.create
+
+s.hashtags<<h1
+s.hashtags<<h2
+
