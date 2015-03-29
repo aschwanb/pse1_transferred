@@ -15,6 +15,10 @@ class SearchObject
     @tweets = tweets
   end
 
+  def getTweets
+    return @tweets
+  end
+
   def addSearchTerms(terms)
     @searchTerms += terms
   end

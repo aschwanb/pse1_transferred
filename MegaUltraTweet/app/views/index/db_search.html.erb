@@ -6,7 +6,13 @@
   <div class="center list">
     <% if !@sobj.nil? %>
         <div>
-          <h1>Tweets mit </h1>
+          <h1>Tweets containing <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+        <ul class="list">
+          <% tweets = @sobj.getTweets %>
+          <% tweets.each do |tweet| %>
+            <%= tweet.getText %>
+          <% end %>
+        </ul>
         </div>
     <% end %>
 
