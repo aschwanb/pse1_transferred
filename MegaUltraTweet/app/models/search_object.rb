@@ -3,7 +3,7 @@ class SearchObject
   @tweets
 
   def initialize(query)
-    @searched_for = query
+    @searchTerms = query
   end
 
   def addTweets(tweets)
