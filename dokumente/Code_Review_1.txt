@@ -1,0 +1,37 @@
+Generelle Bemerkungen:
+------
+Aus https://github.com/bbatsov/ruby-style-guide:
+
+-Use snake_case for symbols, methods and variables. <-- Ihr habt häufig camelCase verwendet
+-Use CamelCase for classes and modules. (Keep acronyms like HTTP, RFC, XML uppercase.) <-- Hier etwas undeutlich: Klassen mit Grossbuchstaben beginnen(habt ihr gemacht) 
+------
+für .each würde ich grundsätzlich mehrzeiligen Code bevorzugen
+	self.hashtags.to_a.each do |t|
+	  out.push(t.getText)
+	end
+statt
+	self.hashtags.to_a.each { |t| out.push(t.getText) }
+
+Ist finde ich übersichtlicher
+------
+return statements am Ende einer Methode könnt (solltet) ihr weglassen.
+statt return blabla
+nur blabla.
+return nur verwenden wenn ihr vor Methodenende Werte zurückgeben wollt.
+also in der Währung:
+def some_method
+  if some_condition
+    return true
+  end
+  false
+end
+-----
+statt  "if !blabla" kann "unless blabla" verwendet werden. Übersichtlicher, solange kein else folgt.
++++++++++++++++++++++++++++++++++
+index_controller.rb
+
+def finde <-- find? Rest des Projekts ist Englisch
+
++++++++++++++++++++++++++++++++++
+
+Ansonsten finde ich euren Code gut und meistens Übersichtlich. Tests schreiben (macht ihr später, haben wir ja schon besprochen) und die generellen Bemerkungen umsetzen.
