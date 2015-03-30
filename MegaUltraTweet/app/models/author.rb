@@ -12,4 +12,10 @@ class Author < ActiveRecord::Base
   def getTweets
     return self.tweets.to_a
   end
+
+  # TODO: Add followers_count
+  # t.user.user.followers_count
+
+  # TODO: Add screen_name = Twitter Handle
+  # t.user.screen_name
 end

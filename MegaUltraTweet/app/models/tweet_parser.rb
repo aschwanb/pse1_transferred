@@ -50,11 +50,15 @@ class TweetParser
   end
 
   def getAuthor(tweet)
-    # Friends Count is not currently being updated
-    # TODO: Add twitter handle to author
-    # TODO: Author has many name(s) -> update function
+    # TODO: Author is not currently being updated
     if Author.where(name: tweet.user.id).blank?
-      return Author.create(name: tweet.user.name, friends_count: tweet.user.friends_count, twitter_id: tweet.user.id)
+      return Author.create(
+          name: tweet.user.name,
+          friends_count: tweet.user.friends_count,
+          twitter_id: tweet.user.id,
+          followers_count: tweet.user.followers_count,
+          screen_name: tweet.user.screen_name
+          )
     else
       return Author.find_by_name(tweet.user.name)
     end

@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329185827) do
+ActiveRecord::Schema.define(version: 20150330133738) do
 
   create_table "authors", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "twitter_id",    limit: 8
-    t.integer  "friends_count", limit: 4
+    t.string   "name",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "twitter_id",      limit: 8
+    t.integer  "friends_count",   limit: 4
+    t.integer  "followers_count", limit: 4
+    t.string   "screen_name",     limit: 255
   end
 
   create_table "hashtags", force: :cascade do |t|
