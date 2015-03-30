@@ -1,36 +1,45 @@
+require 'twitter'
+require_relative 'tweet_parser'
+
 class TwitterClient
-  # TODO: Extract Twitter Users
 
-  def initialize(querySize, query)
+  def initialize
     @client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = "tTrNPGMT8S1d3qK3LMlnZV1XP"
-      config.consumer_secret     = "olUHmGtYlh6dx3ztWqa6ExLLek7Vb76vGEi5p5BMd2LiFWWHPD"
-      config.access_token        = "3062227378-HaWeilWyykpsDQvwZmaGUUSHDmlOFlHxpHpC9RY"
-      config.access_token_secret = "etP0a6eCI0q1FwfMJYUO0VsTWyrhbYKRvuvUS8YKH2kC3"
+      config.consumer_key        = Rails.application.secrets.twitter_client_consumer_key
+      config.consumer_secret     = Rails.application.secrets.twitter_client_consumer_secret
+      config.access_token        = Rails.application.secrets.twitter_client_access_token
+      config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
     end
-    @querySize = querySize
-    @query = query
-    @tweets = search
+    @tweets = []
+    @parser = TweetParser.new
+  end
+# TODO: Add combo search
+  def simpleSearch(query, querySize)
+    addTweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
   end
 
-  def search
-    return @client.search(@query, :result_type => "recent").take(@querySize).collect
+  def sinceIdSearch(query, querySize, minId)
+    addTweets(@client.search("#{query} AND since_id:#{minId}", :result_type => "recent").take(querySize).to_a)
   end
 
-  def getTweets
+  def addTweets(tweets)
+    tweets.each { |t| @tweets.push(t) }
+  end
+
+  def getTweetsAsArray
     return @tweets
   end
 
-  def getHashtags
-    return sort(extractFromTweet("Hashtags"))
+  def getHashtagsAsHash
+    return sort(@parser.parse(@tweets, "Hashtags"))
   end
 
-  def getTwitterHandles
-    return sort(extractFromTweet("TwitterHandles"))
+  def getTwitterHandlesAsHash
+    return sort(@parser.parse(@tweets, "TwitterHandles"))
   end
 
-  def getURLs
-    return sort(extractFromTweet("URLs"))
+  def getURLsAsHash
+    return sort(@parser.parse(@tweets, "URLs"))
   end
 
   def sort(input)
@@ -39,30 +48,8 @@ class TwitterClient
     return output
   end
 
-  # TODO: Performance-wise, this is worse then hell
-  def extractFromTweet(extractMe)
-    tmp = []
-    @tweets.each do |tweet|
-      case extractMe
-        when "Hashtags"
-          tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
-        when "TwitterHandles"
-          tmp = tmp + tweet.text.downcase.scan(/@\w+/).flatten
-        when "URLs"
-          tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-          if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
-            tmp.pop
-          end
-        else
-          puts "Invalide parameter"
-      end
-    end
-
-    if extractMe == "URLs"
-      # Eliminate urls that are to short
-      tmp.each { |url| tmp.delete(url) if url.length < 10 }
-    end
-    return tmp
+  def resetTweets
+    @tweets = []
   end
 
 end

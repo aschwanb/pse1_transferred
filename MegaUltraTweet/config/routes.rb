@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'search/search'
+
   root 'index#start'
   get 'index/finde'
   get 'index/twitterHandle'
   get 'index/twitterUser'
   get 'index/about'
   get 'index/search'
+  get 'index/db_search'
+  get 'index/dbentry'
 
 
 

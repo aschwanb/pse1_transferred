@@ -14,8 +14,15 @@
       <li><%= link_to("About", index_about_path) %></li>
       <li><%= link_to("Search", index_search_path) %></li>
       <li><%= link_to("Finde", index_finde_path) %></li>
+      <li><%= link_to("DB Entries", index_dbentry_path) %></li>
     </ul>
   </nav>
+</div>
+<div class="wrapper">
+<%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search center") do %>
+    <%= search_field_tag(:q, nil, class: "search-field") %>
+    <%= submit_tag("Search", :name => nil, class: "search-button") %>
+<% end %>
 </div>
 <body>
 

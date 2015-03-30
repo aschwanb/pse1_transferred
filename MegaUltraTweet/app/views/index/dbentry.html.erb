@@ -1,0 +1,48 @@
+<% require_relative '../../../app/models/dbentry_fetcher'
+   fetcher = DbentryFetcher.new %>
+<div class="wrapper">
+  <div class="center list">
+
+    <div>
+      <h1>Hashtags in the DB</h1>
+      <ul class="static-list">
+
+        <% hashtags = fetcher.fetchHashtags %>
+        <% hashtags.each do |entry| %>
+            <li>
+              <%= entry.getText %>
+            </li>
+        <% end %>
+
+      </ul>
+    </div>
+
+    <div>
+      <h1>Authors in the DB</h1>
+      <ul class="static-list">
+
+        <% authors = fetcher.fetchAuthors %>
+        <% authors.each do |entry| %>
+            <li>
+              <%= entry.getName %>
+            </li>
+        <% end %>
+
+      </ul>
+    </div>
+
+    <div>
+      <h1>Tweets in the DB</h1>
+      <ul class="static-list">
+
+        <% tweets = fetcher.fetchTweets %>
+        <% tweets.each do |entry| %>
+            <li>
+              <%= entry.getText %></li>
+        <% end %>
+
+      </ul>
+    </div>
+
+  </div>
+</div>
