@@ -1,22 +1,62 @@
 <div class="wrapper">
-  <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search") do %>
-      <%= search_field_tag(:q, nil, class: "search-field") %>
-      <%= submit_tag("Search", :name => nil, class: "search-button") %>
-  <% end %>
-  <div class="center list">
+  <div id="container" class="center list">
     <% if !@sobj.nil? %>
-        <div>
-          <h1>Tweets containing <%= @sobj.getSearchTerms.at(0).to_s %></h1>
-        <ul class="list">
-          <% tweets = @sobj.getTweets %>
-          <% tweets.each do |tweet| %>
-            <%= tweet.getText %>
-          <% end %>
-        </ul>
-        </div>
+        <% if @sobj.isSuccessful? %>
+            <% tweets = @sobj.getTweets %>
+            <% authors = @sobj.getAuthorsSorted %>
+            <% hashtags = @sobj.getHashtagsSorted %>
+
+            <div class="item medium">
+              <h1>Tweets containing <span class="slabtext" id="highlight"><%= @sobj.getSearchTerms.at(0).to_s %></span>
+              </h1>
+              <ul class="static-list">
+                <% tweets.take(10).each do |tweet| %>
+                    <li><%= tweet.getText %></li>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="item small">
+              <h1>Hashtag intersections with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <ul class="link-list">
+                <% hashtags.each do |hashtag| %>
+                    <%= link_to content_tag(:li, hashtag), action: "db_search", controller: "index", q: hashtag %>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="item small">
+              <h1>Links associated with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <ul class="link-list">
+                <% tweets.each do |tweet| %>
+                    <% tweet.getWebpages.each do |webpage| %>
+                        <% if !webpage.nil? %>
+                            <%= link_to content_tag(:li, webpage.getUrl) %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="item small">
+              <h1>Authors associated with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <ul class="static-list">
+                <% authors.each do |author| %>
+                    <li><%= author %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% else %>
+            <% if !@sobj.isValid? %>
+                <h1>Invalid search</h1>
+            <% else %>
+                <h1>No historical data about <%= @sobj.getSearchTerms.at(0).to_s %> available</h1>
+
+                <h1><%= link_to "Search on Twitter instead?", action: "finde", controller: "index", query: @sobj.getSearchTerms.at(0).to_s %></h1>
+            <% end %>
+        <% end %>
     <% end %>
 
 
   </div>
-  <h1>sub</h1>
 </div>

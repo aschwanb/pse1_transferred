@@ -72,9 +72,9 @@ a:hover, a:active {
 
 .search {
     box-sizing: border-box;
-    width: 100%;
+    width: 90%;
     margin-top: 1em;
-    padding: 0 4em 0 4em;
+    padding: 0;
     height: 1.25em;
     font-size: 2em;
 }
@@ -96,6 +96,7 @@ a:hover, a:active {
     outline: none;
     background: #fff;
     color: #730E15;
+    cursor: pointer;
 }
 .search-button:hover {
     background: black;

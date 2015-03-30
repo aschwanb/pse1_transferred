@@ -8,9 +8,12 @@ class DbSearch
     searchObj = SearchObject.new(searchTerms)
     dbe_hashtag = []
     dbe_hashtag.append(Hashtag.find_by_text(hashtags[0]))
-    searchObj.setHashtags(dbe_hashtag)
-    searchObj.setTweets(dbe_hashtag.first.getTweets)
 
+    if !dbe_hashtag.first.nil?
+      searchObj.setHashtags(dbe_hashtag)
+      searchObj.setTweets(dbe_hashtag.first.getTweets)
+      searchObj.setSearchSuccessful
+    end
 
     # if hashtags.length == 1
     #   sobj = SearchObject.new(hashtags)

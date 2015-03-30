@@ -27,7 +27,10 @@ class IndexController < ApplicationController
     if !@q.blank?
       dbsearch = DbSearch.new
       @sobj = dbsearch.parseQuery(@q)
+    else
+      redirect_to(root_path)
     end
+
   end
 
 end

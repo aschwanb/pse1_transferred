@@ -4,7 +4,7 @@ class DbentryFetcher
   end
 
   def fetchHashtags
-    return Hashtag.take(5)
+    return Hashtag.take(20)
   end
 
   def fetchAuthors

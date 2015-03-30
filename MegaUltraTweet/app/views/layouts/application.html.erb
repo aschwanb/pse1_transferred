@@ -18,10 +18,12 @@
     </ul>
   </nav>
 </div>
-<!--<div class="search">-->
-  <!--<span><input type="text" class="search-field" placeholder="Search here">-->
-  <!--<button type="submit" value="Search" class="search-button">Search</button></span>-->
-<!--</div>-->
+<div class="wrapper">
+<%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search center") do %>
+    <%= search_field_tag(:q, nil, class: "search-field") %>
+    <%= submit_tag("Search", :name => nil, class: "search-button") %>
+<% end %>
+</div>
 <body>
 
 <%= yield %>
