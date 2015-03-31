@@ -1,23 +1,23 @@
 <div class="wrapper">
   <div id="container" class="center list">
     <% if !@sobj.nil? %>
-        <% if @sobj.isSuccessful? %>
-            <% tweets = @sobj.getTweets %>
-            <% authors = @sobj.getAuthorsSorted %>
-            <% hashtags = @sobj.getHashtagsSorted %>
+        <% if @sobj.is_successful? %>
+            <% tweets = @sobj.get_tweets %>
+            <% authors = @sobj.get_authors_sorted %>
+            <% hashtags = @sobj.get_hashtags_sorted %>
 
             <div class="item medium">
-              <h1>Tweets containing <span class="slabtext" id="highlight"><%= @sobj.getSearchTerms.at(0).to_s %></span>
+              <h1>Tweets containing <span class="slabtext" id="highlight"><%= @sobj.get_search_terms.at(0).to_s %></span>
               </h1>
               <ul class="static-list">
                 <% tweets.take(10).each do |tweet| %>
-                    <li><%= tweet.getText %></li>
+                    <li><%= tweet.get_text %></li>
                 <% end %>
               </ul>
             </div>
 
             <div class="item small">
-              <h1>Hashtag intersections with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <h1>Hashtag intersections with <%= @sobj.get_search_terms.at(0).to_s %></h1>
               <ul class="link-list">
                 <% hashtags.each do |hashtag| %>
                     <%= link_to content_tag(:li, hashtag), action: "db_search", controller: "index", q: hashtag %>
@@ -26,12 +26,12 @@
             </div>
 
             <div class="item small">
-              <h1>Links associated with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <h1>Links associated with <%= @sobj.get_search_terms.at(0).to_s %></h1>
               <ul class="link-list">
                 <% tweets.each do |tweet| %>
-                    <% tweet.getWebpages.each do |webpage| %>
+                    <% tweet.get_webpages.each do |webpage| %>
                         <% if !webpage.nil? %>
-                            <%= link_to content_tag(:li, webpage.getUrl), webpage.getUrl %>
+                            <%= link_to content_tag(:li, webpage.get_url), webpage.getUrl %>
                         <% end %>
                     <% end %>
                 <% end %>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="item small">
-              <h1>Authors associated with <%= @sobj.getSearchTerms.at(0).to_s %></h1>
+              <h1>Authors associated with <%= @sobj.get_search_terms.at(0).to_s %></h1>
               <ul class="static-list">
                 <% authors.each do |author| %>
                     <li><%= author %></li>
@@ -47,12 +47,12 @@
               </ul>
             </div>
         <% else %>
-            <% if !@sobj.isValid? %>
+            <% if !@sobj.is_valid? %>
                 <h1>Invalid search</h1>
             <% else %>
-                <h1>No historical data about <%= @sobj.getSearchTerms.at(0).to_s %> available</h1>
+                <h1>No historical data about <%= @sobj.get_search_terms.at(0).to_s %> available</h1>
 
-                <h1><%= link_to "Search on Twitter instead?", action: "finde", controller: "index", query: @sobj.getSearchTerms.at(0).to_s %></h1>
+                <h1><%= link_to "Search on Twitter instead?", action: "finde", controller: "index", query: @sobj.get_search_terms.at(0).to_s %></h1>
             <% end %>
         <% end %>
     <% end %>

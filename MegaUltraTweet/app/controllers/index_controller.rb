@@ -11,11 +11,11 @@ class IndexController < ApplicationController
     @query = params[:query]
     if !@query.blank?
       twitterClient = TwitterClient.new
-      twitterClient.simpleSearch(@query, 10)
-      @tweets = twitterClient.getTweetsAsArray
-      @countsHashtags = twitterClient.getHashtagsAsHash
-      @countsTwitterHandles = twitterClient.getTwitterHandlesAsHash
-      @countsWebpages = twitterClient.getURLsAsHash
+      twitterClient.search_simple(@query, 10)
+      @tweets = twitterClient.get_tweets_to_a
+      @countsHashtags = twitterClient.get_hashtags_to_h
+      @countsTwitterHandles = twitterClient.get_twitterhandles_to_h
+      @countsWebpages = twitterClient.get_urls_to_h
     end
   end
 
@@ -26,7 +26,7 @@ class IndexController < ApplicationController
     @q = params[:q]
     if !@q.blank?
       dbsearch = DbSearch.new
-      @sobj = dbsearch.parseQuery(@q)
+      @sobj = dbsearch.parse_query(@q)
     else
       redirect_to(root_path)
     end

@@ -1,6 +1,6 @@
 require 'search_object'
 class DbSearch
-  def parseQuery(query)
+  def parse_query(query)
     query = query.to_s.downcase
     hashtags = query.scan(/#\w+/).flatten
     authors = query.scan(/@\w+/).flatten
@@ -10,9 +10,9 @@ class DbSearch
     dbe_hashtag.append(Hashtag.find_by_text(hashtags[0]))
 
     if !dbe_hashtag.first.nil?
-      searchObj.setHashtags(dbe_hashtag)
-      searchObj.setTweets(dbe_hashtag.first.getTweets)
-      searchObj.setSearchSuccessful
+      searchObj.set_hashtags(dbe_hashtag)
+      searchObj.set_tweets(dbe_hashtag.first.get_tweets)
+      searchObj.set_search_successful
     end
 
     # if hashtags.length == 1

@@ -1,5 +1,5 @@
 
-# refactor this!
+# TODO: refactor this!
 class SearchObject
   @searchSuccessful
   @searchValid
@@ -16,46 +16,46 @@ class SearchObject
     @searchSuccessful = false
   end
 
-  def isValid?
+  def is_valid?
     return @searchValid
   end
 
-  def setSearchSuccessful
+  def set_search_successful
     @searchSuccessful = true
   end
 
-  def isSuccessful?
+  def is_successful?
     return @searchSuccessful
   end
 
-  def addTweets(tweets)
+  def add_tweets(tweets)
     @tweets.append(tweets)
   end
 
-  def setTweets(tweets)
+  def set_tweets(tweets)
 
     # create an sorted array with author names (string)
     authorNames = []
     hashtags = []
     hashtagText = []
     tweets.each do |tweet|
-      authorNames.append(tweet.getAuthor.getName)
-      hashtags.concat(tweet.getHashtags)
+      authorNames.append(tweet.get_author.getName)
+      hashtags.concat(tweet.get_hashtags)
     end
     count = Hash.new(0)
     authorNames.each {|element| count[element] += 1}
     authorNames = authorNames.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.setAuthorsSorted(authorNames)
+    self.set_authors_sorted(authorNames)
 
     # create an sorted array with hashtags (string)
     hashtags = hashtags.flatten
     hashtags.each do |hashtag|
-      hashtagText.append(hashtag.getText)
+      hashtagText.append(hashtag.get_text)
     end
     count = Hash.new(0)
     hashtagText.each {|element| count[element] += 1}
     hashtagText = hashtagText.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.setHashtagsSorted(hashtagText)
+    self.set_hashtags_sorted(hashtagText)
 
     count = Hash.new(0)
     tweets.each {|element| count[element] += 1}
@@ -63,49 +63,49 @@ class SearchObject
     @tweets = tweets
   end
 
-  def getTweets
+  def get_tweets
     return @tweets
   end
 
-  def addSearchTerms(terms)
+  def add_search_terms(terms)
     @searchTerms += terms
   end
 
-  def getSearchTerms
+  def get_search_terms
     return @searchTerms
   end
 
-  def setHashtags(hashtags)
+  def set_hashtags(hashtags)
     @hashtags = hashtags
   end
 
-  def getHashtags
+  def get_hashtags
     return @hashtags
   end
 
-  def setAuthors(authors)
+  def set_authors(authors)
     @authors = authors
   end
 
-  def getAuthors
+  def get_authors
     return @authors
   end
 
   # takes an unique array of strings sorted by occurrence
-  def setAuthorsSorted(authors)
+  def set_authors_sorted(authors)
     @authorsSorted = authors
   end
 
   # returns an unique array of strings containing author names sorted by occurrence
-  def getAuthorsSorted
+  def get_authors_sorted
     return @authorsSorted
   end
 
-  def setHashtagsSorted(hashtags)
+  def set_hashtags_sorted(hashtags)
     @hashtagsSorted = hashtags
   end
 
-  def getHashtagsSorted
+  def get_hashtags_sorted
     return @hashtagsSorted
   end
 

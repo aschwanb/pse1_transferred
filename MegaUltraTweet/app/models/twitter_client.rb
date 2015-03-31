@@ -14,31 +14,31 @@ class TwitterClient
     @parser = TweetParser.new
   end
 # TODO: Add combo search
-  def simpleSearch(query, querySize)
-    addTweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
+  def search_simple(query, querySize)
+    add_tweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
   end
 
-  def sinceIdSearch(query, querySize, minId)
-    addTweets(@client.search("#{query} AND since_id:#{minId}", :result_type => "recent").take(querySize).to_a)
+  def search_since_id(query, querySize, minId)
+    add_tweets(@client.search("#{query} AND since_id:#{minId}", :result_type => "recent").take(querySize).to_a)
   end
 
-  def addTweets(tweets)
+  def add_tweets(tweets)
     tweets.each { |t| @tweets.push(t) }
   end
 
-  def getTweetsAsArray
+  def get_tweets_to_a
     return @tweets
   end
 
-  def getHashtagsAsHash
+  def get_hashtags_to_h
     return sort(@parser.parse(@tweets, "Hashtags"))
   end
 
-  def getTwitterHandlesAsHash
+  def get_twitterhandles_to_h
     return sort(@parser.parse(@tweets, "TwitterHandles"))
   end
 
-  def getURLsAsHash
+  def get_urls_to_h
     return sort(@parser.parse(@tweets, "URLs"))
   end
 
@@ -48,7 +48,7 @@ class TwitterClient
     return output
   end
 
-  def resetTweets
+  def reset_tweets
     @tweets = []
   end
 

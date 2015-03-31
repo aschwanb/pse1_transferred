@@ -30,15 +30,15 @@ class TweetParser
     return tmp
   end
 
-  def parseHashtags(tweet)
+  def parse_hashtags(tweet)
     return tweet.text.downcase.scan(/#\w+/).flatten
   end
 
-  def parseTwitterHandles(tweet)
+  def parse_twitterhandles(tweet)
     return tweet.text.downcase.scan(/@\w+/).flatten
   end
 
-  def parseWebpages(tweet)
+  def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
     if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
@@ -49,7 +49,7 @@ class TweetParser
     return tmp
   end
 
-  def getAuthor(tweet)
+  def get_author(tweet)
     # TODO: Author is not currently being updated
     if Author.where(twitter_id: tweet.user.id).blank?
       return Author.create(
@@ -64,7 +64,7 @@ class TweetParser
     end
   end
 
-  def getTwitterId(tweet)
+  def get_twitter_id(tweet)
     return tweet.id
   end
 
