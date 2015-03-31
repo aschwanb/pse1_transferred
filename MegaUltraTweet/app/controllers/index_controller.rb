@@ -3,9 +3,8 @@ class IndexController < ApplicationController
   def start
   end
 
-  # TODO: Search still used?
   def search
-    @topics = TopicsStart.new.getTopics
+    @topics = Startingpoint.first.get_start
   end
 
   def find

@@ -31,7 +31,7 @@
                 <% tweets.each do |tweet| %>
                     <% tweet.get_webpages.each do |webpage| %>
                         <% if !webpage.nil? %>
-                            <%= link_to content_tag(:li, webpage.get_url), webpage.getUrl %>
+                            <%= link_to content_tag(:li, webpage.get_url), webpage.get_url %>
                         <% end %>
                     <% end %>
                 <% end %>
