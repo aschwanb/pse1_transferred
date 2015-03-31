@@ -3,8 +3,8 @@ class Tweet < ActiveRecord::Base
   has_many :webpages
   has_and_belongs_to_many :hashtags
 
-  def set_hashtags(hashtagsArray)
-    hashtagsArray.each do |tag|
+  def set_hashtags(hashtags_array)
+    hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
         hashtag = Hashtag.create(text: tag)
       else
@@ -14,10 +14,10 @@ class Tweet < ActiveRecord::Base
     end
   end
 
-  def set_webpages(webpagesArray)
-    if !webpagesArray.nil?
+  def set_webpages(webpages_array)
+    if !webpages_array.nil?
       puts "Inserting webpage into tweet"
-      webpagesArray.each { |webpage| self.webpages.create(url: webpage)  }
+      webpages_array.each { |webpage| self.webpages.create(url: webpage)  }
     end
   end
 
@@ -42,6 +42,6 @@ class Tweet < ActiveRecord::Base
   end
 
   def get_rank
-    return self.get_author.getFriendsCount + self.get_retweets_count
+    return self.get_author.get_friends_count + self.get_retweets_count
   end
 end

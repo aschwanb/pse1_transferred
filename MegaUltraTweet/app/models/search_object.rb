@@ -1,31 +1,31 @@
 
 # TODO: refactor this!
 class SearchObject
-  @searchSuccessful
-  @searchValid
-  @searchTerms = []
+  @search_successful
+  @search_valid
+  @search_terms = []
   @tweets = []
   @hashtags
   @authors = []
-  @authorsSorted
-  @hashtagsSorted
+  @authors_sorted
+  @hashtags_sorted
 
   def initialize(query)
-    @searchTerms = query
-    @searchTerms.empty? ? @searchValid = false : @searchValid = true
-    @searchSuccessful = false
+    @search_terms = query
+    @search_terms.empty? ? @search_valid = false : @search_valid = true
+    @search_successful = false
   end
 
   def is_valid?
-    return @searchValid
+    return @search_valid
   end
 
   def set_search_successful
-    @searchSuccessful = true
+    @search_successful = true
   end
 
   def is_successful?
-    return @searchSuccessful
+    return @search_successful
   end
 
   def add_tweets(tweets)
@@ -35,27 +35,27 @@ class SearchObject
   def set_tweets(tweets)
 
     # create an sorted array with author names (string)
-    authorNames = []
+    author_names = []
     hashtags = []
-    hashtagText = []
+    hashtag_text = []
     tweets.each do |tweet|
-      authorNames.append(tweet.get_author.getName)
+      author_names.append(tweet.get_author.get_name)
       hashtags.concat(tweet.get_hashtags)
     end
     count = Hash.new(0)
-    authorNames.each {|element| count[element] += 1}
-    authorNames = authorNames.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.set_authors_sorted(authorNames)
+    author_names.each {|element| count[element] += 1}
+    author_names = author_names.uniq.sort {|x,y| count[y] <=> count[x]}
+    self.set_authors_sorted(author_names)
 
     # create an sorted array with hashtags (string)
     hashtags = hashtags.flatten
     hashtags.each do |hashtag|
-      hashtagText.append(hashtag.get_text)
+      hashtag_text.append(hashtag.get_text)
     end
     count = Hash.new(0)
-    hashtagText.each {|element| count[element] += 1}
-    hashtagText = hashtagText.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.set_hashtags_sorted(hashtagText)
+    hashtag_text.each {|element| count[element] += 1}
+    hashtag_text = hashtag_text.uniq.sort {|x,y| count[y] <=> count[x]}
+    self.set_hashtags_sorted(hashtag_text)
 
     count = Hash.new(0)
     tweets.each {|element| count[element] += 1}
@@ -68,11 +68,11 @@ class SearchObject
   end
 
   def add_search_terms(terms)
-    @searchTerms += terms
+    @search_terms += terms
   end
 
   def get_search_terms
-    return @searchTerms
+    return @search_terms
   end
 
   def set_hashtags(hashtags)
@@ -93,20 +93,20 @@ class SearchObject
 
   # takes an unique array of strings sorted by occurrence
   def set_authors_sorted(authors)
-    @authorsSorted = authors
+    @authors_sorted = authors
   end
 
   # returns an unique array of strings containing author names sorted by occurrence
   def get_authors_sorted
-    return @authorsSorted
+    return @authors_sorted
   end
 
   def set_hashtags_sorted(hashtags)
-    @hashtagsSorted = hashtags
+    @hashtags_sorted = hashtags
   end
 
   def get_hashtags_sorted
-    return @hashtagsSorted
+    return @hashtags_sorted
   end
 
 end

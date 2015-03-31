@@ -14,12 +14,12 @@ class TwitterClient
     @parser = TweetParser.new
   end
 # TODO: Add combo search
-  def search_simple(query, querySize)
-    add_tweets(@client.search(query, :result_type => "recent").take(querySize).to_a)
+  def search_simple(query, query_size)
+    add_tweets(@client.search(query, :result_type => "recent").take(query_size).to_a)
   end
 
-  def search_since_id(query, querySize, minId)
-    add_tweets(@client.search("#{query} AND since_id:#{minId}", :result_type => "recent").take(querySize).to_a)
+  def search_since_id(query, query_size, min_id)
+    add_tweets(@client.search("#{query} AND since_id:#{min_id}", :result_type => "recent").take(query_size).to_a)
   end
 
   def add_tweets(tweets)
@@ -43,7 +43,7 @@ class TwitterClient
   end
 
   def sort(input)
-    output = input.each_with_object(Hash.new(0)){ |tag,counts| counts[tag] += 1 }
+    output = input.each_with_object(Hash.new(0)){ |tag, counts| counts[tag] += 1 }
     output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
     return output
   end

@@ -8,8 +8,8 @@ class TwitterScraper
   def initialize
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @providedSearches = 450
-    @usedSearches = 0
+    @provided_searches = 450
+    @used_searches = 0
   end
 
   def scrape(query, querySize, depth, detail)
@@ -17,15 +17,15 @@ class TwitterScraper
     begin
       self.run_query(query, querySize)
       puts query
-      newQuery = self.get_new_query(query, detail)
+      new_query = self.get_new_query(query, detail)
       # Save tweets and reset
       @client.get_tweets_to_a.each { |t| save_tweet(t) }
       @client.reset_tweets
       # Start a new search with one less depth
        while depth > 1
          depth = depth - 1
-         puts "Start new branch with #{newQuery}"
-         scrape(newQuery, querySize, depth, detail)
+         puts "Start new branch with #{new_query}"
+         scrape(new_query, querySize, depth, detail)
        end
     #rescue
     #  puts "Maximum searches for this time window used."
@@ -35,13 +35,13 @@ class TwitterScraper
 
   def run_query(query, querySize)
     while query.any? do
-      localQuery = query.pop
-      puts "Scraping for #{localQuery} ..."
-      @client.search_simple(localQuery, querySize)
-      @usedSearches = @usedSearches + 1
-      puts "Used searches #{@usedSearches}"
-      puts "Provided searches #{@providedSearches}"
-      if @providedSearches <= @usedSearches
+      local_query = query.pop
+      puts "Scraping for #{local_query} ..."
+      @client.search_simple(local_query, querySize)
+      @used_searches = @used_searches + 1
+      puts "Used searches #{@used_searches}"
+      puts "Provided searches #{@provided_searches}"
+      if @provided_searches <= @used_searches
         raise
       end
     end
@@ -49,11 +49,11 @@ class TwitterScraper
 
   def get_new_query(query, detail)
     # Get all new hashtags without the ones present in the last query
-    newQuery = @client.get_hashtags_to_h
-    query.each { |t| newQuery.delete(t.downcase) }
+    new_query = @client.get_hashtags_to_h
+    query.each { |t| new_query.delete(t.downcase) }
     # Determine how many of them to take
-    newQuery = newQuery.first(detail).map(&:first).to_a
-    return newQuery
+    new_query = new_query.first(detail).map(&:first).to_a
+    return new_query
   end
 
   def save_tweet(tweet)

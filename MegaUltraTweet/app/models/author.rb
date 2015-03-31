@@ -1,15 +1,15 @@
 class Author < ActiveRecord::Base
   has_many :tweets
 
-  def getName
+  def get_name
     return self.name
   end
 
-  def getFriendsCount
+  def get_friends_count
     return self.friends_count
   end
 
-  def getTweets
+  def get_tweets
     return self.tweets.to_a
   end
 
