@@ -3,19 +3,20 @@ class IndexController < ApplicationController
   def start
   end
 
+  # TODO: Search still used?
   def search
     @topics = TopicsStart.new.getTopics
   end
 
-  def finde
+  def find
     @query = params[:query]
     if !@query.blank?
-      twitterClient = TwitterClient.new
-      twitterClient.search_simple(@query, 10)
-      @tweets = twitterClient.get_tweets_to_a
-      @countsHashtags = twitterClient.get_hashtags_to_h
-      @countsTwitterHandles = twitterClient.get_twitterhandles_to_h
-      @countsWebpages = twitterClient.get_urls_to_h
+      client = TwitterClient.new
+      client.search_simple(@query, 10)
+      @tweets = client.get_tweets_to_a
+      @counts_hashtags = client.get_hashtags_to_h
+      @counts_twitterhandles = client.get_twitterhandles_to_h
+      @counts_webpages = client.get_urls_to_h
     end
   end
 
