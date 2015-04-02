@@ -1,5 +1,14 @@
 class Author < ActiveRecord::Base
+  include Filterable
   has_many :tweets
+
+  scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
+  # scope :name, -> (name) { where name: name }
+  # scope :friends_count, -> (friends_count) { where friends_count: friends_count }
+
+  # def self.screen_name(screen_name)
+  #   where(screen_name: screen_name)
+  # end
 
   def get_name
     return self.name
@@ -9,8 +18,18 @@ class Author < ActiveRecord::Base
     return self.friends_count
   end
 
-  def get_tweets
-    return self.tweets.to_a
+  def get_followers_count
+    return self.followers_count
+  end
+
+  def get_tweets(*args)
+    return self.tweets.to_a if args.size > 1 || args.size < 1
+    return self.tweets.take(args[0]).to_a
+  end
+
+  # values may not be adequate
+  def get_rank
+    return get_followers_count
   end
 
 end

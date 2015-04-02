@@ -3,6 +3,14 @@ class Tweet < ActiveRecord::Base
   has_many :webpages
   has_and_belongs_to_many :hashtags
 
+  def by_hashtags(hashtags)
+    where(:hashtags => hashtags.map(:text))
+  end
+
+  def by_hashtag(hashtag)
+
+  end
+
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
@@ -42,6 +50,6 @@ class Tweet < ActiveRecord::Base
   end
 
   def get_rank
-    return self.get_author.get_friends_count + self.get_retweets_count
+    return self.get_author.get_followers_count + self.get_retweets_count
   end
 end
