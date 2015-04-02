@@ -23,3 +23,9 @@ Datenbank neu aufsetzen:
 rake db:create
 rake db:schema:load
 ```
+Development Datenbank importiern:  
+Im Verzeichnis dokument/db befindet sich ein Dump der Server-Datenbank.
+```
+mysql -u root -p db/development.mysql < dump.sql
+```
+
