@@ -13,43 +13,14 @@ class DbSearch
     # Create array with the search terms
     search_terms = query.scan(/\w+/).flatten
 
-   # if search_terms.length == 1
-   #   term = search_terms[0].to_s
-   # end
-
-    # hashtags = query.scan(/#\w+/).flatten
-    # authors = query.scan(/@\w+/).flatten
-    # search_terms = hashtags + authors
-    # search_object = SearchObject.new(search_terms)
-    # dbe_hashtag = []
-    # dbe_hashtag.append(Hashtag.find_by_text(hashtags[0]))
-    #
-    # if !dbe_hashtag.first.nil?
-    #   search_object.set_hashtags(dbe_hashtag)
-    #   search_object.set_tweets(dbe_hashtag.first.get_tweets)
-    #   search_object.set_search_successful
-    # end
-
-    # if hashtags.length == 1
-    #   sobj = SearchObject.new(hashtags)
-    #   hashtag_id = Hashtag.find_by_text(hashtags[0]).id
-    #   tweets = Tweet.joins(:hashtags_tweets).where(hashtag_id: hashtag_id)
-    #   tweet_text = []
-    #   tweets.find_each do |tweet|
-    #     tweet_text += tweet.text
-    #   end
-    #   sobj.addTweets(tweet_text)
-    # end
-
     search_object = multi_search(search_terms, SearchObject.new(search_terms))
     search_object = evaluate(search_object)
     return search_object
   end
 
-  # private
+  private
 
   def single_search(search_term, search_object)
-    # search_object = SearchObject.new(search_term)
     # some authors have hashtags as screen name but no hashtag starts with '@'...
 
     # screen names are saved without '@' in the DB
@@ -64,7 +35,6 @@ class DbSearch
 
     search_object.add_criterion_author(author) unless author.nil?
     search_object.add_criterion_hashtag(hashtag) unless hashtag.nil?
-
 
     return search_object
   end
@@ -122,15 +92,6 @@ class DbSearch
     return Array.new if hashtags.empty?
     tweets = hashtags.first.get_tweets(limit)
     hashtags.each do |hashtag|
-      # does not work for some reason..
-      # tweets.each do |tweet|
-      #   if !tweet.get_hashtags.include?(hashtag)
-      #     tweets.delete(tweet)
-      #     if !tweets.include?(tweet)
-      #     end
-      #   end
-      #   # tweets.delete(tweet) unless tweet.get_hashtags.include?(hashtag)
-      # end
       tweets.delete_if { |tweet| !tweet.get_hashtags.include?(hashtag)}
     end
     return tweets
@@ -145,7 +106,5 @@ class DbSearch
     end
     return tweets
   end
-
-  # private_class_method :simple_search
 
 end

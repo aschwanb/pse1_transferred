@@ -1,14 +1,7 @@
 class Author < ActiveRecord::Base
-  include Filterable
   has_many :tweets
 
   scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
-  # scope :name, -> (name) { where name: name }
-  # scope :friends_count, -> (friends_count) { where friends_count: friends_count }
-
-  # def self.screen_name(screen_name)
-  #   where(screen_name: screen_name)
-  # end
 
   def get_name
     return self.name

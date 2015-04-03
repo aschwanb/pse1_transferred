@@ -7,10 +7,6 @@ class Tweet < ActiveRecord::Base
     where(:hashtags => hashtags.map(:text))
   end
 
-  def by_hashtag(hashtag)
-
-  end
-
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
