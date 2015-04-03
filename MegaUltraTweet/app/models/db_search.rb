@@ -84,6 +84,7 @@ class DbSearch
     search_object.set_tweets(tweets)
     search_object.set_authors(rel_authors)
     search_object.set_hashtags(rel_hashtags)
+    search_object.set_preview(review_links(tweets))
     return search_object
   end
 
@@ -105,6 +106,17 @@ class DbSearch
       tweets.concat(author.get_tweets(limit))
     end
     return tweets
+  end
+
+  def review_links(tweets)
+    previews = []
+    tweets.each do |tweet|
+      pages = tweet.get_webpages
+      pages.each do |page|
+        previews.push(LinkThumbnailer.generate(page.get_url))
+      end
+    end
+    return previews
   end
 
 end

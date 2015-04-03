@@ -1,3 +1,4 @@
+require 'link_thumbnailer'
 class IndexController < ApplicationController
 
   def start
@@ -31,6 +32,11 @@ class IndexController < ApplicationController
       redirect_to(root_path)
     end
 
+  end
+
+  def url_test
+    @tweets = Tweet.find(10)
+    object = LinkThumbnailer.generate('http://stackoverflow.com')
   end
 
 end

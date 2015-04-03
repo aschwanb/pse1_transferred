@@ -12,6 +12,8 @@ gem 'twitter'
 gem 'whenever', '0.9.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '0.3.18'
+# Generate thumbnails
+gem 'link_thumbnailer', '2.5.0'
 ####################################
 # Requirements for the webserver and Jenkins
 # gem 'ci_reporter'
