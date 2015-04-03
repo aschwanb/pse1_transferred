@@ -1,4 +1,3 @@
-require 'link_thumbnailer'
 class IndexController < ApplicationController
 
   def start
@@ -33,12 +32,6 @@ class IndexController < ApplicationController
     end
 
   end
-
-  def url_test
-    @tweets = Tweet.find(10)
-    object = LinkThumbnailer.generate('http://stackoverflow.com')
-  end
-
 end
 
 
