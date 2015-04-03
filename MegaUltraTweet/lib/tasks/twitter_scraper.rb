@@ -12,26 +12,30 @@ class TwitterScraper
     @used_searches = 0
   end
 
-  def scrape(query, querySize, depth, detail)
-    puts "Depth is at #{depth}"
-    begin
-      self.run_query(query, querySize)
-      puts query
-      new_query = self.get_new_query(query, detail)
-      # Save tweets and reset
-      @client.get_tweets_to_a.each { |t| save_tweet(t) }
-      @client.reset_tweets
-      # Start a new search with one less depth
-       while depth > 1
-         depth = depth - 1
-         puts "Start new branch with #{new_query}"
-         scrape(new_query, querySize, depth, detail)
-       end
-    #rescue
-    #  puts "Maximum searches for this time window used."
+  # Scraping for a array of key words
+  def scrape(query, query_size, depth, detail)
+    # puts "Depth is at #{depth}"
+    if depth > 0
+      begin
+        self.run_query(query, query_size)
+        new_query = self.get_new_query(query, detail)
+        self.save_and_reset
+        # Start a new search with one less depth
+        depth = depth - 1
+        puts "Start new branch with #{new_query}"
+        scrape(new_query, query_size, depth, detail)
+      rescue
+        puts "Maximum searches for this time window used."
+      end
+    else
+      puts "Finished scraping for now"
     end
-    puts "Finished scraping for now"
   end
+
+  # TODO: Scraper for individual key words
+  # As before, but take the n most popular hashtags for each key word
+
+
 
   def run_query(query, querySize)
     while query.any? do
@@ -56,6 +60,11 @@ class TwitterScraper
     return new_query
   end
 
+  def save_and_reset
+    @client.get_tweets_to_a.each { |t| save_tweet(t) }
+    @client.reset_tweets
+  end
+  # TODO: Move to TwitterClient
   def save_tweet(tweet)
      author = @parser.get_author(tweet)
      if Tweet.where(twitter_id: tweet.id).blank?

@@ -53,12 +53,12 @@ class TweetParser
     # TODO: Author is not currently being updated
     if Author.where(twitter_id: tweet.user.id).blank?
       return Author.create(
-          name: tweet.user.name,
-          friends_count: tweet.user.friends_count,
-          twitter_id: tweet.user.id,
-          followers_count: tweet.user.followers_count,
-          screen_name: tweet.user.screen_name
-          )
+              name: tweet.user.name,
+              friends_count: tweet.user.friends_count,
+              twitter_id: tweet.user.id,
+              followers_count: tweet.user.followers_count,
+              screen_name: tweet.user.screen_name
+            )
     else
       return Author.find_by_screen_name(tweet.user.screen_name)
     end
