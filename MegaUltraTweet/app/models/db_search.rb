@@ -1,4 +1,5 @@
 require 'search_object'
+require 'link_thumbnailer'
 class DbSearch
 
   @limit

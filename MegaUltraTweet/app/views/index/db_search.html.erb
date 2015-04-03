@@ -14,6 +14,7 @@
             <% crit_authors = "" %>
             <% @sobj.get_criteria_authors.each { |crit| crit_authors += crit.screen_name + ", " } %>
             <% crit_authors = crit_authors.slice(0, crit_authors.length-2) %>
+            <% pages = @sobj.get_preview %>
             <div class="item full">
               <h1>You searched for <%= terms %></h1>
 
@@ -70,6 +71,15 @@
                   </ul>
                 </div>
             <% end %>
+
+            <div class="item small">
+              <h1>web</h1>
+              <ul class="static-list">
+                <% pages.each do |page| %>
+                    <li><%= page.title %></li>
+                <% end %>
+              </ul>
+            </div>
 
         <% else %>
             <% if !@sobj.is_valid? %>
