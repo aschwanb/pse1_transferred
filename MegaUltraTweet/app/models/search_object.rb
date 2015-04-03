@@ -8,7 +8,7 @@ class SearchObject
   @search_criteria_authors
   @tweets
   @authors
-  @link_previews
+  @webpages
 
   def initialize(query)
     @search_terms = query
@@ -16,7 +16,7 @@ class SearchObject
     @search_successful = false
     @search_criteria_authors = Array.new
     @search_criteria_hashtags = Array.new
-    @link_previews = Array.new
+    @webpages = Array.new
   end
 
   def is_valid?
@@ -80,11 +80,11 @@ class SearchObject
     return @authors
   end
 
-  def set_preview(link_previews)
-    @link_previews = link_previews
+  def set_webpages(webpages)
+    @webpages = webpages
   end
 
-  def get_preview
-    return @link_previews
+  def get_webpages
+    return @webpages
   end
 end
