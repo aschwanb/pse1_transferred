@@ -111,10 +111,11 @@ class DbSearch
 
   def review_links(tweets)
     previews = []
-    tweets.each do |tweet|
+    Array(tweets.first).each do |tweet|
       pages = tweet.get_webpages
       pages.each do |page|
-        previews.push(LinkThumbnailer.generate(page.get_url))
+        tmp = page.get_url
+        previews.push(LinkThumbnailer.generate(tmp))
       end
     end
     return previews

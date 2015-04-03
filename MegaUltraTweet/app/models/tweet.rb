@@ -1,3 +1,5 @@
+require 'link_thumbnailer'
+
 class Tweet < ActiveRecord::Base
   belongs_to :author
   has_many :webpages
@@ -21,7 +23,14 @@ class Tweet < ActiveRecord::Base
   def set_webpages(webpages_array)
     if !webpages_array.nil?
       puts "Inserting webpage into tweet"
-      webpages_array.each { |webpage| self.webpages.create(url: webpage)  }
+      webpages_array.each do |webpage|
+        nailer = LinkThumbnailer.generate(webpage)
+        self.webpages.create(
+            url: webpage,
+            title: nailer.title,
+            description: nailer.description
+        )
+      end
     end
   end
 
