@@ -22,6 +22,7 @@ class Tweet < ActiveRecord::Base
 
   def set_webpages(webpages_array)
     if !webpages_array.nil?
+      #TODO: Handle errors thrown by Thumbnailer
       puts "Inserting webpage into tweet"
       webpages_array.each do |webpage|
         nailer = LinkThumbnailer.generate(webpage)
