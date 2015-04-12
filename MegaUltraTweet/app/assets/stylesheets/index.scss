@@ -26,12 +26,12 @@
   //  color: #fff;
 }
 
-.form > div {
-  height: 6.25em;
-  width: 100%;
-  border: 5px solid #fff;
-  border-bottom: none;
-}
+//.form > div {
+//  height: 6.25em;
+//  width: 100%;
+//  border: 5px solid #fff;
+//  border-bottom: none;
+//}
 
 .username {
   //  background-color: #4daf7c;
@@ -97,21 +97,21 @@
 //  //  font-family: "Bebas Neue", Arial;
 //}
 
-::placeholder {
-  color: #D31901;
-}
-
-::-moz-placeholder {
-  color: #D31901;
-}
-
-:-ms-input-placeholder {
-  color: #D31901;
-}
-
-::-webkit-input-placeholder {
-  color: #D31901;
-}
+//::placeholder {
+//  color: #D31901;
+//}
+//
+//::-moz-placeholder {
+//  color: #D31901;
+//}
+//
+//:-ms-input-placeholder {
+//  color: #D31901;
+//}
+//
+//::-webkit-input-placeholder {
+//  color: #D31901;
+//}
 
 .list {
   width: 500px;
@@ -127,23 +127,23 @@
 
 .list li {
   padding: 1em 3em 1em 3em;
-  border-top: 5px solid black;
-  border-left: 5px solid black;
-  border-right: 5px solid black;
+  border-top: 5px solid #3F3F3F;
+  border-left: 5px solid #3F3F3F;
+  border-right: 5px solid #3F3F3F;
 }
 
 .list li:last-child {
 //  border-bottom: 5px solid black;
 }
 .static-list li:last-child {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #3F3F3F;
 }
 .link-list a:last-child li {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #3F3F3F;
 }
 .link-list li:hover {
   color: #ffffff;
-  background: black;
+  background: #3F3F3F;
 }
 
 #container {
@@ -183,6 +183,21 @@
 }
 
 #highlight {
-  color: #D31901;
+//  color: #D31901;
 //  color: #E37F71;
+  color: #1A92CF;
+}
+
+.highlight {
+  color: #1A92CF;
+}
+
+.list-test {
+  color: #ffffff;
+  background: #1A92CF;
+  border: none;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
 }

@@ -21,7 +21,7 @@
 <div class="wrapper">
 <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search center") do %>
     <%= search_field_tag(:q, nil, class: "search-field") %>
-    <%= submit_tag("Search", :name => nil, class: "search-button") %>
+    <%= submit_tag("&#10148;".html_safe, :name => nil, class: "search-button") %>
 <% end %>
 </div>
 <body>

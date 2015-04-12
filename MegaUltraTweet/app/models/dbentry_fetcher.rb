@@ -12,7 +12,7 @@ class DbentryFetcher
   end
 
   def fetch_tweets
-    return Tweet.take(20)
+    return Tweet.take(5)
   end
 
 end

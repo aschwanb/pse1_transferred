@@ -85,7 +85,7 @@ class DbSearch
     search_object.set_tweets(tweets)
     search_object.set_authors(rel_authors)
     search_object.set_hashtags(rel_hashtags)
-    search_object.set_preview(review_links(tweets))
+    search_object.set_webpages(review_links(tweets))
     return search_object
   end
 
