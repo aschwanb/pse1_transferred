@@ -20,4 +20,14 @@ class Hashtag < ActiveRecord::Base
     return self.tweets.to_a if args.size > 1 || args.size < 1
     return self.tweets.take(args[0]).to_a
   end
+
+  def set_popularity_now(popularity)
+    self.popularity_now = popularity
+  end
+
+  def set_popularity_old(popularity)
+    self.populairity_old = popularity
+  end
+
+
 end
