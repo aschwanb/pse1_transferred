@@ -1,0 +1,74 @@
+/* Styling for the search */
+
+@import "common";
+
+.search {
+  @include margin_side();
+  margin-top: 1em;
+  width: auto;
+  padding: 0;
+  height: 1.25em;
+  font-size: 2em;
+  border-radius: 10px;
+}
+
+.search-field {
+  float: left;
+  width: 90%;
+  height: 100%;
+
+  border: 1px solid $color2;
+  border-right: none;
+  -webkit-border-top-left-radius: 2px;
+  -webkit-border-bottom-left-radius: 2px;
+  -moz-border-radius-topleft: 2px;
+  -moz-border-radius-bottomleft: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+
+  padding-left: 2em;
+  background: #fff;
+}
+
+.search-button {
+  position: relative;
+  float: left;
+  width: 10%;
+  height: 100%;
+
+  border: 1px solid $color2;
+  border-left: none;
+  -webkit-border-top-right-radius: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  -moz-border-radius-topright: 2px;
+  -moz-border-radius-bottomright: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  outline: none;
+  background: #fff;
+  color: $color2;
+  cursor: pointer;
+  font-size: 1em;
+  text-align: right;
+  padding-right: 0.5em;
+}
+.search-button:hover {
+  color: $color1;
+}
+
+.search-button:active, .search-button:focus {
+  text-align: right;
+  color: $color3;
+  transition: color 0.1s linear;
+}
+
+.search-field:focus, .search-field:active {
+  background: $color2;
+  color: #ffffff;
+}
+
+.search-field:focus + .search-button, .search-field:active + .search-button {
+  background: $color2;
+  color: #ffffff;
+}

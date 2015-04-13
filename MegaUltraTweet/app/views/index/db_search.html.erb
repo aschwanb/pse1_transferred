@@ -23,7 +23,7 @@
               <h2>Authors found: <%= crit_authors.blank? ? "none" : crit_authors %></h2>
 
             </div>
-            <div class="flex-item flex-item-tweet flex-list">
+            <div class="flex-item flex-item-tweet list">
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
@@ -32,14 +32,14 @@
                 </h1>
               </div>
 
-              <ul class="static-list">
+              <ul>
                 <% tweets.take(20).each do |tweet| %>
                     <li><%= tweet.get_text %></li>
                 <% end %>
               </ul>
             </div>
 
-            <div class="flex-item flex-list">
+            <div class="flex-item list">
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
@@ -48,14 +48,14 @@
                 </h1>
               </div>
 
-              <ul class="link-list">
+              <ul>
                 <% hashtags.each do |hashtag| %>
                     <%= link_to content_tag(:li, hashtag.text), action: "db_search", controller: "index", q: hashtag.text %>
                 <% end %>
               </ul>
             </div>
 
-            <div class="flex-item flex-list">
+            <div class="flex-item list">
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
@@ -64,7 +64,7 @@
                 </h1>
 
               </div>
-              <ul class="link-list">
+              <ul>
                 <% tweets.each do |tweet| %>
                     <% tweet.get_webpages.each do |webpage| %>
                         <% if !webpage.nil? %>
@@ -76,12 +76,12 @@
             </div>
 
             <% unless crit_hashtags.blank? %>
-                <div class="flex-item flex-list">
+                <div class="flex-item list">
                   <div class="item-headline-container">
                     <h1 class="item-headline">Authors associated with
                       <span class="highlight"><%= crit_hashtags %></span></h1>
                   </div>
-                  <ul class="static-list">
+                  <ul>
                     <% authors.each do |author| %>
                         <li><%= "@"+author.screen_name %></li>
                     <% end %>

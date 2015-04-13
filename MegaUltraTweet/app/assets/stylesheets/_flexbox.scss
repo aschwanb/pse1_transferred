@@ -1,5 +1,7 @@
 /* flexbox */
 
+@import "common";
+
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;
@@ -42,7 +44,7 @@
 }
 .flex-item {
   @include flex(1 1 auto);
-  margin: 10px;
+  margin: $minor_margin;
 //  flex-basis: auto;
   /*padding-right: 1em;*/
 //  flex-grow: 1;
@@ -66,21 +68,4 @@
   //  flex-basis: 350px;
   //  flex-shrink: 1;
   //  flex-grow: 3;
-}
-
-.flex-list {
-
-}
-
-.flex-list ul {
-  width: 100%;
-  list-style: none;
-  background: #ffffff;
-}
-
-.flex-list li {
-  padding: 1em 3em 1em 3em;
-  border-top: 5px solid #3F3F3F;
-  border-left: 5px solid #3F3F3F;
-  border-right: 5px solid #3F3F3F;
 }

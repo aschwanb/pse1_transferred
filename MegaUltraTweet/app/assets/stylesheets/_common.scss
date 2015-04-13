@@ -1,0 +1,43 @@
+/* This file contains the global variables, mixins, etc. */
+
+
+/* Colors */
+
+/*
+ * Color scheme old:
+ * background: F7F7F7
+ * basic text: 2E2F30
+ * links: E37F71
+ * accent color: 730E15 (ruby red)
+ * accent color: D31901
+*/
+
+/*
+ * Color scheme new:
+ * background: FFF
+ * basic text: 2E2F30
+ * links: E37F71
+ * accent color: 730E15 (ruby red)
+ * accent color: 1A92CF
+ * accent color: 3F3F3F
+*/
+
+// Dark grey, Text color
+$color1: #3F3F3F;
+// Twitter blue, main accent color
+$color2: #1A92CF;
+// Salmon, accent color
+$color3: #E37F71;
+// Ruby red, accent color
+$color4: #730E15;
+
+/* Minor margin */
+$minor_margin: 10px;
+
+/* Major margin */
+$major_margin: 5%;
+
+@mixin margin_side() {
+  margin-right: $minor_margin;
+  margin-left: $minor_margin;
+}

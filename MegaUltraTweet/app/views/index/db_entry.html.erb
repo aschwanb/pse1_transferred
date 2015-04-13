@@ -4,9 +4,9 @@
 
   <div class="flex-container">
 
-    <div class="flex-item flex-list">
+    <div class="flex-item list">
       <h1><span id="highlight">Hashtags</span> in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% hashtags = fetcher.fetch_hashtags %>
         <% hashtags.each do |entry| %>
@@ -18,9 +18,9 @@
       </ul>
     </div>
 
-    <div class="flex-item flex-list">
+    <div class="flex-item list">
       <h1><span id="highlight">Authors</span> in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% authors = fetcher.fetch_authors %>
         <% authors.each do |entry| %>
@@ -32,9 +32,9 @@
       </ul>
     </div>
 
-    <div class="flex-item flex-item-tweet flex-list">
+    <div class="flex-item flex-item-tweet list">
       <h1><span id="highlight">Tweets</span> in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% tweets = fetcher.fetch_tweets %>
         <% tweets.each do |entry| %>
@@ -50,7 +50,7 @@
   <div class="grid center list" style="display: none">
     <div class="col-1-3">
       <h1>Hashtags in the DB</h1>
-      <ul class="static-list">
+      <ul>
         <% hashtags = fetcher.fetch_hashtags %>
         <% hashtags.each do |entry| %>
             <li>
@@ -61,7 +61,7 @@
     </div>
     <div class="col-1-3">
       <h1>Authors in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% authors = fetcher.fetch_authors %>
         <% authors.each do |entry| %>
@@ -74,7 +74,7 @@
     </div>
     <div class="col-1-3">
       <h1>Tweets in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% tweets = fetcher.fetch_tweets %>
         <% tweets.each do |entry| %>
@@ -91,7 +91,7 @@
 
     <div>
       <h1>Hashtags in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% hashtags = fetcher.fetch_hashtags %>
         <% hashtags.each do |entry| %>
@@ -105,7 +105,7 @@
 
     <div>
       <h1>Authors in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% authors = fetcher.fetch_authors %>
         <% authors.each do |entry| %>
@@ -119,7 +119,7 @@
 
     <div>
       <h1>Tweets in the DB</h1>
-      <ul class="static-list">
+      <ul>
 
         <% tweets = fetcher.fetch_tweets %>
         <% tweets.each do |entry| %>
