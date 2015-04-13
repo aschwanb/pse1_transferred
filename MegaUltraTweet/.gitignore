@@ -104,6 +104,9 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+# needed for the server
+!/tmp/restart.txt
+
 # various artifacts
 **.war
 *.rbc
