@@ -28,7 +28,7 @@ class TwitterScraper
       puts "Finished with #{keyword}. Start new branch with #{new_query}"
       start(new_query, depth)
     end
-  rescue Exception::MaxSearchesError => e
+  rescue Exceptions::MaxSearchesError => e
     puts e.message
   rescue Twitter::Error => e
     puts e.message
@@ -37,7 +37,7 @@ class TwitterScraper
   def run_query(keyword)
     puts "Scraping for \"#{keyword}\" ..."
     if @provided_searches == @used_searches
-      raise MaxSearchesError.new, "Maximum searches for this time window used."
+      raise Exceptions::MaxSearchesError.new, "Maximum searches for this time window used."
     end
     @used_searches = @used_searches + 1
     @client.search_simple(keyword, @query_size)
