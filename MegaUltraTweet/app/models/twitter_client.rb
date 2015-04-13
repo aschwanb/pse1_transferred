@@ -52,4 +52,17 @@ class TwitterClient
     @tweets = []
   end
 
+  def save_tweet(tweet)
+    author = @parser.get_author(tweet)
+    if Tweet.where(twitter_id: tweet.id).blank?
+      t = author.tweets.create(
+          text: tweet.text,
+          retweets: tweet.retweet_count,
+          twitter_id: tweet.id
+      )
+      t.set_hashtags(@parser.parse_hashtags(tweet))
+      t.set_webpages(@parser.parse_webpages(tweet))
+    end
+  end
+  
 end
