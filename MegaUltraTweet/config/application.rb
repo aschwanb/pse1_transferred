@@ -25,6 +25,8 @@ module MegaUltraTweet
 
     # Autoload lib/ folder including all subdirectories
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    # Add fonts to the asset pipeline
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
   end
 end
