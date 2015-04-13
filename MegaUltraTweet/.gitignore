@@ -104,9 +104,6 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
-# needed for the server
-!/tmp/restart.txt
-
 # various artifacts
 **.war
 *.rbc
@@ -163,3 +160,6 @@ pickle-email-*.html
 # Environment files that may contain sensitive data
 .env
 .powenv
+
+# needed for the server
+!/tmp/restart.txt
