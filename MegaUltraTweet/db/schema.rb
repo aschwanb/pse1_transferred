@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403141320) do
+ActiveRecord::Schema.define(version: 20150413155853) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -24,9 +24,11 @@ ActiveRecord::Schema.define(version: 20150403141320) do
   end
 
   create_table "hashtags", force: :cascade do |t|
-    t.string   "text",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "text",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "popularity_now",  limit: 4
+    t.integer  "populairity_old", limit: 4
   end
 
   create_table "hashtags_startingpoints", id: false, force: :cascade do |t|
