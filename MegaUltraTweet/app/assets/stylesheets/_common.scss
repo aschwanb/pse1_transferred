@@ -41,3 +41,26 @@ $major_margin: 5%;
   margin-right: $minor_margin;
   margin-left: $minor_margin;
 }
+
+@mixin font-face($style-name, $file, $family, $category:"") {
+  $filepath: "fonts/" + $family + "/" + $file;
+  @font-face {
+    font-family: "#{$style-name}";
+    src: font_url($filepath + ".eot");
+    src: font_url($filepath + ".eot?#iefix") format('embedded-opentype'),
+    font_url($filepath + ".woff") format('woff'),
+    font_url($filepath + ".ttf")  format('truetype'),
+    font_url($filepath + ".svg#" + $style-name + "") format('svg');
+  }
+  %#{$style-name} {
+    font: {
+      @if $category != "" {
+        family: "#{$style-name}", #{$category};
+      }
+      @else {
+        family: "#{$style-name}";
+        weight: normal;
+      }
+    }
+  }
+}
