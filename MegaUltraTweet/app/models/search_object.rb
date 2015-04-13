@@ -3,17 +3,20 @@
 class SearchObject
   @search_successful
   @search_valid
-  @search_terms = []
-  @tweets = []
-  @hashtags
-  @authors = []
-  @authors_sorted
-  @hashtags_sorted
+  @search_terms
+  @search_criteria_hashtags
+  @search_criteria_authors
+  @tweets
+  @authors
+  @webpages
 
   def initialize(query)
     @search_terms = query
     @search_terms.empty? ? @search_valid = false : @search_valid = true
     @search_successful = false
+    @search_criteria_authors = Array.new
+    @search_criteria_hashtags = Array.new
+    @webpages = Array.new
   end
 
   def is_valid?
@@ -28,51 +31,37 @@ class SearchObject
     return @search_successful
   end
 
-  def add_tweets(tweets)
-    @tweets.append(tweets)
-  end
-
-  def set_tweets(tweets)
-
-    # create an sorted array with author names (string)
-    author_names = []
-    hashtags = []
-    hashtag_text = []
-    tweets.each do |tweet|
-      author_names.append(tweet.get_author.get_name)
-      hashtags.concat(tweet.get_hashtags)
-    end
-    count = Hash.new(0)
-    author_names.each {|element| count[element] += 1}
-    author_names = author_names.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.set_authors_sorted(author_names)
-
-    # create an sorted array with hashtags (string)
-    hashtags = hashtags.flatten
-    hashtags.each do |hashtag|
-      hashtag_text.append(hashtag.get_text)
-    end
-    count = Hash.new(0)
-    hashtag_text.each {|element| count[element] += 1}
-    hashtag_text = hashtag_text.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.set_hashtags_sorted(hashtag_text)
-
-    count = Hash.new(0)
-    tweets.each {|element| count[element] += 1}
-    tweets = tweets.uniq.sort {|x,y| count[y] <=> count[x]}
-    @tweets = tweets
-  end
-
-  def get_tweets
-    return @tweets
-  end
-
   def add_search_terms(terms)
     @search_terms += terms
   end
 
   def get_search_terms
     return @search_terms
+  end
+
+  def add_criterion_hashtag(hashtag)
+    @search_criteria_hashtags.append(hashtag)
+  end
+
+  def get_criteria_hashtags
+    return @search_criteria_hashtags
+  end
+
+  def add_criterion_author(author)
+    @search_criteria_authors.append(author)
+  end
+
+  def get_criteria_authors
+    return @search_criteria_authors
+  end
+
+  def set_tweets(tweets)
+    set_search_successful unless tweets.empty?
+    @tweets = tweets
+  end
+
+  def get_tweets
+    return @tweets
   end
 
   def set_hashtags(hashtags)
@@ -91,22 +80,11 @@ class SearchObject
     return @authors
   end
 
-  # takes an unique array of strings sorted by occurrence
-  def set_authors_sorted(authors)
-    @authors_sorted = authors
+  def set_webpages(webpages)
+    @webpages = webpages
   end
 
-  # returns an unique array of strings containing author names sorted by occurrence
-  def get_authors_sorted
-    return @authors_sorted
+  def get_webpages
+    return @webpages
   end
-
-  def set_hashtags_sorted(hashtags)
-    @hashtags_sorted = hashtags
-  end
-
-  def get_hashtags_sorted
-    return @hashtags_sorted
-  end
-
 end

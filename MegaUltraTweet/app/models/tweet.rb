@@ -1,7 +1,13 @@
+require 'link_thumbnailer'
+
 class Tweet < ActiveRecord::Base
   belongs_to :author
   has_many :webpages
   has_and_belongs_to_many :hashtags
+
+  def by_hashtags(hashtags)
+    where(:hashtags => hashtags.map(:text))
+  end
 
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|
@@ -15,10 +21,21 @@ class Tweet < ActiveRecord::Base
   end
 
   def set_webpages(webpages_array)
-    if !webpages_array.nil?
+    webpages_array.each do |webpage|
+      nailer = LinkThumbnailer.generate(webpage)
       puts "Inserting webpage into tweet"
-      webpages_array.each { |webpage| self.webpages.create(url: webpage)  }
-    end
+      self.webpages.create(
+          url: webpage,
+          title: nailer.title,
+          description: nailer.description
+      )
+      rescue LinkThumbnailer::Exceptions => e
+      puts "Error in LinkThumbnailer"
+      puts e
+      rescue Net::HTTPExceptions => e
+      puts "HTTP Error while thumbnailing"
+      puts e
+    end if !webpages_array.nil?
   end
 
   def get_webpages
@@ -42,6 +59,6 @@ class Tweet < ActiveRecord::Base
   end
 
   def get_rank
-    return self.get_author.get_friends_count + self.get_retweets_count
+    return self.get_author.get_followers_count + self.get_retweets_count
   end
 end
