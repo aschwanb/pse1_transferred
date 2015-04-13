@@ -3,30 +3,21 @@ class TweetParser
   def initialize
   end
 
-  # TODO: Refactor this!
-  # Performance-wise, it is worse then hell
-  def parse(tweets, type)
+  def parse_hashtags_a(tweets)
     tmp = []
-    tweets.each do |tweet|
-      case type
-        when "Hashtags"
-          tmp = tmp + tweet.text.downcase.scan(/#\w+/).flatten
-        when "TwitterHandles"
-          tmp = tmp + tweet.text.downcase.scan(/@\w+/).flatten
-        when "URLs"
-          tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-          if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
-            tmp.pop
-          end
-        else
-          puts "Invalide parameter"
-      end
-    end
+    tweets.each { |t| tmp += parse_hashtags(t) }
+    return tmp
+  end
 
-    if type == "URLs"
-      # Eliminate urls that are to short
-      tmp.each { |url| tmp.delete(url) if url.length < 10 }
-    end
+  def parse_twitterhandles_a(tweets)
+    tmp = []
+    tweets.each { |t| tmp += parse_twitterhandles(t) }
+    return tmp
+  end
+
+  def parse_webpages_a(tweets)
+    tmp = []
+    tweets.each { |t| tmp += parse_webpages(t) }
     return tmp
   end
 
@@ -41,7 +32,7 @@ class TweetParser
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-    if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) #regex: last char is alphabetic or numeric
+    if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
       tmp.pop
     end
     # Eliminate urls that are to short

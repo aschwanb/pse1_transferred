@@ -4,42 +4,33 @@ require_relative 'tweet_parser'
 class TwitterClient
 
   def initialize
+    @parser = TweetParser.new
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.secrets.twitter_client_consumer_key
       config.consumer_secret     = Rails.application.secrets.twitter_client_consumer_secret
       config.access_token        = Rails.application.secrets.twitter_client_access_token
       config.access_token_secret = Rails.application.secrets.twitter_client_access_token_secret
     end
-    @tweets = []
-    @parser = TweetParser.new
   end
-# TODO: Add combo search
+
   def search_simple(query, query_size)
-    add_tweets(@client.search(query, :result_type => "recent").take(query_size).to_a)
+    return @client.search(query, :result_type => "recent").take(query_size).to_a
   end
 
   def search_since_id(query, query_size, min_id)
-    add_tweets(@client.search("#{query} AND since_id:#{min_id}", :result_type => "recent").take(query_size).to_a)
+    return @client.search("#{query} AND since_id:#{min_id}", :result_type => "recent").take(query_size).to_a
   end
 
-  def add_tweets(tweets)
-    tweets.each { |t| @tweets.push(t) }
+  def get_hashtags_to_h(tweets)
+    return sort(@parser.parse_hashtags_a(tweets))
   end
 
-  def get_tweets_to_a
-    return @tweets
+  def get_twitterhandles_to_h(tweets)
+    return sort(@parser.parse_twitterhandles_a(tweets))
   end
 
-  def get_hashtags_to_h
-    return sort(@parser.parse(@tweets, "Hashtags"))
-  end
-
-  def get_twitterhandles_to_h
-    return sort(@parser.parse(@tweets, "TwitterHandles"))
-  end
-
-  def get_urls_to_h
-    return sort(@parser.parse(@tweets, "URLs"))
+  def get_urls_to_h(tweets)
+    return sort(@parser.parse_webpages_a(tweets))
   end
 
   def sort(input)
@@ -64,5 +55,5 @@ class TwitterClient
       t.set_webpages(@parser.parse_webpages(tweet))
     end
   end
-  
+
 end
