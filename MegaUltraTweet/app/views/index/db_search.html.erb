@@ -1,56 +1,70 @@
 <div class="wrapper">
-  <div id="container" class="center list">
-    <% if !@sobj.nil? %>
-        <% if @sobj.is_successful? %>
-            <% tweets = @sobj.get_tweets %>
-            <% authors = @sobj.get_authors %>
-            <% hashtags = @sobj.get_hashtags %>
-            <% terms = "" %>
-            <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
-            <% terms = terms.slice(0, terms.length-2) %>
-            <% crit_hashtags = "" %>
-            <% @sobj.get_criteria_hashtags.each { |crit| crit_hashtags += crit.text + ", " } %>
-            <% crit_hashtags = crit_hashtags.slice(0, crit_hashtags.length-2) %>
-            <% crit_authors = "" %>
-            <% @sobj.get_criteria_authors.each { |crit| crit_authors += crit.screen_name + ", " } %>
-            <% crit_authors = crit_authors.slice(0, crit_authors.length-2) %>
-            <% pages = @sobj.get_webpages %>
-            <div class="item full">
+  <% if !@sobj.nil? %>
+      <% if @sobj.is_successful? %>
+          <% tweets = @sobj.get_tweets %>
+          <% authors = @sobj.get_authors %>
+          <% hashtags = @sobj.get_hashtags %>
+          <% terms = "" %>
+          <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
+          <% terms = terms.slice(0, terms.length-2) %>
+          <% crit_hashtags = "" %>
+          <% @sobj.get_criteria_hashtags.each { |crit| crit_hashtags += crit.text + ", " } %>
+          <% crit_hashtags = crit_hashtags.slice(0, crit_hashtags.length-2) %>
+          <% crit_authors = "" %>
+          <% @sobj.get_criteria_authors.each { |crit| crit_authors += crit.screen_name + ", " } %>
+          <% crit_authors = crit_authors.slice(0, crit_authors.length-2) %>
+          <% pages = @sobj.get_webpages %>
+          <div class="flex-container">
+            <div class="" style="display: none">
               <h1>You searched for <%= terms %></h1>
 
               <h2>Hashtags found:  <%= crit_hashtags.blank? ? "none" : crit_hashtags %></h2>
 
               <h2>Authors found: <%= crit_authors.blank? ? "none" : crit_authors %></h2>
-              </p>
+
             </div>
-            <div class="item medium">
-              <h1>
-                <%= crit_hashtags.blank? ? "Tweets by " : "Tweets containing " %><span class="slabtext" id="highlight">
-                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-              </h1>
-              <ul class="static-list">
+            <div class="flex-item flex-item-tweet list">
+
+              <div class="item-headline-container">
+                <h1 class="item-headline">
+                  <%= crit_hashtags.blank? ? "Tweets by " : "Tweets containing " %><span id="highlight">
+                    <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                </h1>
+              </div>
+
+              <ul>
                 <% tweets.take(20).each do |tweet| %>
                     <li><%= tweet.get_text %></li>
                 <% end %>
               </ul>
             </div>
 
-            <div class="item small">
-              <h1>
-                <%= crit_hashtags.blank? ? "Hashtags used by " + crit_authors : "Hashtags intersecting with " + crit_hashtags %>
-              </h1>
-              <ul class="link-list">
+            <div class="flex-item list">
+
+              <div class="item-headline-container">
+                <h1 class="item-headline">
+                  <%= crit_hashtags.blank? ? ("Hashtags used by "+(content_tag(:span, crit_authors, class: "highlight")).html_safe)
+                      : ("Hashtags intersecting with " + content_tag(:span, crit_hashtags, class: "highlight")).html_safe %>
+                </h1>
+              </div>
+
+              <ul>
                 <% hashtags.each do |hashtag| %>
                     <%= link_to content_tag(:li, hashtag.text), action: "db_search", controller: "index", q: hashtag.text %>
                 <% end %>
               </ul>
             </div>
 
-            <div class="item small">
-              <h1>
-                <%= crit_hashtags.blank? ? "Links posted by " + crit_authors : "Links associated with " + crit_hashtags %>
-              </h1>
-              <ul class="link-list">
+            <div class="flex-item list">
+
+              <div class="item-headline-container">
+                <h1 class="item-headline">
+                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %><span class="highlight">
+                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                </h1>
+
+              </div>
+              <ul>
                 <% tweets.each do |tweet| %>
                     <% tweet.get_webpages.each do |webpage| %>
                         <% if !webpage.nil? %>
@@ -62,9 +76,12 @@
             </div>
 
             <% unless crit_hashtags.blank? %>
-                <div class="item small">
-                  <h1>Authors associated with <%= crit_hashtags %></h1>
-                  <ul class="static-list">
+                <div class="flex-item list">
+                  <div class="item-headline-container">
+                    <h1 class="item-headline">Authors associated with
+                      <span class="highlight"><%= crit_hashtags %></span></h1>
+                  </div>
+                  <ul>
                     <% authors.each do |author| %>
                         <li><%= "@"+author.screen_name %></li>
                     <% end %>
@@ -72,27 +89,19 @@
                 </div>
             <% end %>
 
-            <div class="item small">
-              <h1>web</h1>
-              <ul class="static-list">
-                <% pages.each do |page| %>
-                    <li><%= page.get_title %><br>
-                    <%= page.get_description %></li>
-                <% end %>
-              </ul>
-            </div>
-
-        <% else %>
-            <% if !@sobj.is_valid? %>
-                <h1>Invalid search</h1>
-            <% else %>
+          </div>
+      <% else %>
+          <% if !@sobj.is_valid? %>
+              <h1>Invalid search</h1>
+          <% else %>
+              <div class="content">
                 <h1>No historical data about <%= @sobj.get_search_terms.first %> available</h1>
 
                 <h1><%= link_to "Search on Twitter instead?", action: "find", controller: "index", query: @sobj.get_search_terms.at(0).to_s %></h1>
-            <% end %>
-        <% end %>
-    <% end %>
+              </div>
+          <% end %>
+      <% end %>
+  <% end %>
 
 
-  </div>
 </div>
