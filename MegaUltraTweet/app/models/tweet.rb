@@ -29,13 +29,13 @@ class Tweet < ActiveRecord::Base
           title: nailer.title,
           description: nailer.description
       )
-      rescue LinkThumbnailer::Exceptions => e
-      puts "Error in LinkThumbnailer"
-      puts e
-      rescue Net::HTTPExceptions => e
-      puts "HTTP Error while thumbnailing"
-      puts e
     end if !webpages_array.nil?
+  rescue LinkThumbnailer::Exceptions => e
+    puts "Error in LinkThumbnailer"
+    puts e
+  rescue Net::HTTPExceptions => e
+    puts "HTTP Error while thumbnailing"
+    puts e
   end
 
   def get_webpages
