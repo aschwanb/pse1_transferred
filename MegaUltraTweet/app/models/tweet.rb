@@ -31,11 +31,18 @@ class Tweet < ActiveRecord::Base
       )
     end if !webpages_array.nil?
   rescue LinkThumbnailer::Exceptions => e
-    puts "Error in LinkThumbnailer"
-    puts e
+    Rails.logger.debug "DEBUG: Error in LinkThumbnailer" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   rescue Net::HTTPExceptions => e
-    puts "HTTP Error while thumbnailing"
-    puts e
+    Rails.logger.debug "DEBUG: HTTP Error while thumbnailing" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
+  # TODO: Find the specific exception and rescue it. The current state is bad practice
+  rescue Exception => e
+    Rails.logger.debug "DEBUG: Unknown error while thumbnailing. Possibly ill formated url?" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   end
 
   def get_webpages
