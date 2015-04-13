@@ -19,6 +19,12 @@ class Tweet < ActiveRecord::Base
       self.hashtags<<hashtag
       # Update hashtag popularity
       hashtag.update(popularity_now: hashtag.get_popularity_now + 1 )
+      # If popularity exceedes a certain threshold -> ad hashtag to starting points
+      if hashtag.get_popularity_now >= 50 && !Startingpoint.first.hashtags.include?(hashtag)
+        Startingpoint.first.hashtags<<hashtag
+      end
+      # TODO: In implement Downvoting
+      # TODO: Move logic somewhere else
     end
   end
 
