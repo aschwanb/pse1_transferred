@@ -2,6 +2,10 @@ class Hashtag < ActiveRecord::Base
   has_and_belongs_to_many :tweets
   has_and_belongs_to_many :startingpoints
 
+  # TODO: Add has many for hashtag pairs ?
+  # has_many :hashtag_pairs, :as => :hashtag_first
+  # has_many :hashtag_pairs, :as => :hashtag_second
+
   scope :by_hashtag, -> (hashtag) { where text: hashtag}
 
   def get_text
