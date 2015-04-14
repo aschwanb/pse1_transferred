@@ -27,7 +27,6 @@ class Tweet < ActiveRecord::Base
       # TODO: Move logic somewhere els
       # TODO: Create hashtag pairs and update their popularity
 
-
     end
   end
 

@@ -2,9 +2,9 @@ class Hashtag < ActiveRecord::Base
   has_and_belongs_to_many :tweets
   has_and_belongs_to_many :startingpoints
 
-  # TODO: Add has many for hashtag pairs ?
-  # has_many :hashtag_pairs, :as => :hashtag_first
-  # has_many :hashtag_pairs, :as => :hashtag_second
+  # For hashtag pairs
+  has_many :hashtag_pairs_first, class_name: :HashtagPair, foreign_key: :hashtag_first_id
+  has_many :hashtag_pairs_second, class_name: :HashtagPair, foreign_key: :hashtag_second_id
 
   scope :by_hashtag, -> (hashtag) { where text: hashtag}
 
