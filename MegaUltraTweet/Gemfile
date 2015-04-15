@@ -66,5 +66,23 @@ group :development, :test do
 
   # Testing framework
   gem 'rspec-rails', '~> 3.0'
+
+  # For test data
+  gem 'factory_girl_rails'
+end
+
+group :test do
+
+  # Generates placeholders for factories
+  gem 'faker'
+
+  # Used to simulate users' interactions with your application
+  gem 'capybara'
+
+  # Runs specs automatically when it detects changes
+  gem 'guard-rspec'
+
+  #Opens default web browser upon failed integration specs to show what the application is rendering
+  gem 'launchy'
 end
 
