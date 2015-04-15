@@ -23,27 +23,6 @@ class Tweet < ActiveRecord::Base
       if hashtag.get_popularity_now >= 50 && !Startingpoint.first.hashtags.include?(hashtag)
         Startingpoint.first.hashtags<<hashtag
       end
-      # TODO: In implement downvoting
-      # TODO: Move logic somewhere els
-      # Loop through all combinations of pairs in hashtag array
-      case hashtag_two
-        when HashtagPair.where(hashtag_first: hashtag, hashtag_second: hashtag_two).blank? && HashtagPair.where(hashtag_first: hashtag_two, hashtag_second: hashtag).blank?
-          # Pair does not exist
-          pair = HashtagPair.create(
-                         hashtag_first: hashtag,
-                         hashtag_second: hasthatag_two,
-                         popularity_now: 0,
-                         popularity_old: 0
-          )
-        when !HashtagPair.where(hashtag_first: hashtag, hashtag_second: hashtag_two).blank?
-          # Pair exists. Update Popularity
-          pair = HashtagPair.find_by(hashtag_first: hashtag, hashtag_second: hashtag_two)
-        when !HashtagPair.where(hashtag_first: hashtag_two, hashtag_second: hashtag).blank?
-          # Pair exists. Update Popularity
-          pair = HashtagPair.find_by(hashtag_first: hashtag_two, hashtag_second: hashtag)
-      end
-      pair.update(popularity_now: pair.get_popularity_now + 1)
-
     end
   end
 
