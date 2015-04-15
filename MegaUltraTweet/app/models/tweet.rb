@@ -5,6 +5,7 @@ class Tweet < ActiveRecord::Base
   has_many :webpages
   has_and_belongs_to_many :hashtags
 
+  # TODO: Still used ?
   def by_hashtags(hashtags)
     where(:hashtags => hashtags.map(:text))
   end
