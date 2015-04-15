@@ -72,9 +72,11 @@ class DbSearch
     #Get relevant records and sort them by popularity (rank)
     rel_authors = []
     rel_hashtags = []
+    webpages = []
     tweets.each do |tweet|
       rel_authors.append(tweet.get_author)
       rel_hashtags.concat(tweet.get_hashtags)
+      webpages.concat(tweet.get_webpages)
     end
 
     sorter = Sorter.new
@@ -85,7 +87,7 @@ class DbSearch
     search_object.set_tweets(tweets)
     search_object.set_authors(rel_authors)
     search_object.set_hashtags(rel_hashtags)
-    search_object.set_webpages(review_links(tweets))
+    search_object.set_webpages(webpages)
     return search_object
   end
 
@@ -107,18 +109,6 @@ class DbSearch
       tweets.concat(author.get_tweets(limit))
     end
     return tweets
-  end
-
-  def review_links(tweets)
-    previews = []
-    Array(tweets.first).each do |tweet|
-      pages = tweet.get_webpages
-      pages.each do |page|
-        tmp = page.get_url
-        previews.push(LinkThumbnailer.generate(tmp))
-      end
-    end
-    return previews
   end
 
 end
