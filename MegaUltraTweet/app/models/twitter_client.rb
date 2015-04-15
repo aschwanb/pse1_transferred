@@ -64,8 +64,8 @@ class TwitterClient
       hashtags.each do |h_second|
         if HashtagPair.where(hashtag_first: h_first, hashtag_second: h_second).blank?
           pair = HashtagPair.create(
-              hashtag_first: hashtag,
-              hashtag_second: hasthatag_two,
+              hashtag_first: h_first,
+              hashtag_second: h_second,
               popularity_now: 0,
               popularity_old: 0
           )
