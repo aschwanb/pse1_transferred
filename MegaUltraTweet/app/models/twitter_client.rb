@@ -53,7 +53,27 @@ class TwitterClient
       )
       t.set_webpages(@parser.parse_webpages(tweet))
       t.set_hashtags(@parser.parse_hashtags(tweet))
-      
+      generate_hashtag_pairs(t.get_hashtags)
+    end
+  end
+
+  def generate_hashtag_pairs(hashtags)
+    hashtags.sort_by! { |h| h.text }
+    while !hashtags.blank?
+      h_first = hashtags.pop
+      hashtags.each do |h_second|
+        if HashtagPair.where(hashtag_first: h_first, hashtag_second: h_second).blank?
+          pair = HashtagPair.create(
+              hashtag_first: hashtag,
+              hashtag_second: hasthatag_two,
+              popularity_now: 0,
+              popularity_old: 0
+          )
+        else
+          pair = HashtagPair.find_by(hashtag_first: h_first, hashtag_second: h_second)
+        end
+        pair.update(popularity_now: pair.get_popularity_now + 1)
+      end
     end
   end
 
