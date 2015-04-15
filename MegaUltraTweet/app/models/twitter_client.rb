@@ -51,8 +51,9 @@ class TwitterClient
           retweets: tweet.retweet_count,
           twitter_id: tweet.id
       )
-      t.set_hashtags(@parser.parse_hashtags(tweet))
       t.set_webpages(@parser.parse_webpages(tweet))
+      t.set_hashtags(@parser.parse_hashtags(tweet))
+      
     end
   end
 

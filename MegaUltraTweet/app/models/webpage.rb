@@ -10,11 +10,11 @@ class Webpage < ActiveRecord::Base
   end
 
   def get_title
-    # TODO
+    return self.title
   end
 
   def get_description
-    # TODO
+    return self.description
   end
-  # TODO use link_thumbnailer to write title and descrption to webpage
+
 end

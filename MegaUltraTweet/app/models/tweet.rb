@@ -23,10 +23,6 @@ class Tweet < ActiveRecord::Base
       if hashtag.get_popularity_now >= 50 && !Startingpoint.first.hashtags.include?(hashtag)
         Startingpoint.first.hashtags<<hashtag
       end
-      # TODO: In implement downvoting
-      # TODO: Move logic somewhere els
-      # TODO: Create hashtag pairs and update their popularity
-
     end
   end
 
