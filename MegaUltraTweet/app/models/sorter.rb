@@ -14,5 +14,10 @@ class Sorter
     return records
   end
 
+  def sort_by_popularity(records)
+    records = records.uniq.sort_by! {|record| record.get_popularity_now}
+    return records.reverse
+  end
+
 
 end

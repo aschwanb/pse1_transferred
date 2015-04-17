@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get 'index/about'
   get 'index/search'
   get 'index/db_search'
+  get 'index/cont_search'
   get 'index/db_entry'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

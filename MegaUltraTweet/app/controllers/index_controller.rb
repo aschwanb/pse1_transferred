@@ -32,6 +32,15 @@ class IndexController < ApplicationController
     end
 
   end
+
+  def cont_search
+    hts = params[:hts]
+    anchor = params[:anchor]
+    if !hts.blank?
+      dbsearch = DbSearch.new
+      @cont_sobjs = dbsearch.continuous_search(hts, anchor)
+    end
+  end
 end
 
 

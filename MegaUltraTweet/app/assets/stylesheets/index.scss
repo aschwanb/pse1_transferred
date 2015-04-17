@@ -134,7 +134,7 @@ a:active li, a:focus li{
 .item-headline-container {
   position: relative;
   height: auto;
-  min-height: 150px;
+  min-height: 200px;
   width: auto;
 }
 .item-headline {
@@ -145,6 +145,33 @@ a:active li, a:focus li{
 
 
 /* Testing, derelict code */
+
+.link-preview {}
+.link-preview-title {}
+.link-preview-descr {
+  color: $color1;
+  margin-top: 1em;
+}
+
+a:hover li .link-preview-descr {
+  color: #ffffff;
+}
+
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: image_url('preloader.gif') center no-repeat #fff;
+}
+
+
+
+
 
 .list-test {
   color: #ffffff;
@@ -213,3 +240,16 @@ a:active li, a:focus li{
 /*.col-1-8 {*/
 /*width: 12.5%;*/
 /*}*/
+
+/* Media */
+@media screen and (max-width: 450px) {
+  .logo {
+    width: auto;
+  }
+  .search-field {
+    width: 85%
+  }
+  .search-button {
+    width: 15%
+  }
+}

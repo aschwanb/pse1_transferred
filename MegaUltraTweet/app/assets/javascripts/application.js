@@ -13,10 +13,33 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require masonry.pkgd.min
-//= require jquery.slabtext.min
 //= require_tree .
 
+$(init = function init() {
+    $(function() {
+        $(".continue-button").click(function() {
+            $(".se-pre-con").fadeIn("slow");
+            setTimeout(function () {
+                $('.se-pre-con').fadeOut("fast")}, 10000);
+        });
+    });
+    $(function() {
+        $(".search").submit(function() {
+            $(".se-pre-con").fadeIn("slow");
+            setTimeout(function () {
+                $('.se-pre-con').fadeOut("fast")}, 3000);
+        });
+    });
+
+});
+
+$(loader_after = function() {
+    $(".se-pre-con").fadeOut("slow");
+});
+
+$(document).ready(init);
+$(document).on('page:load', init);
+$(window).on('page:load', loader_after);
 
 //Wrapper function needed because of a bug in turbolinks.
 //$(init = function init() {

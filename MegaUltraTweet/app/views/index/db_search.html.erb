@@ -23,7 +23,7 @@
               <h2>Authors found: <%= crit_authors.blank? ? "none" : crit_authors %></h2>
 
             </div>
-            <div class="flex-item flex-item-tweet list">
+            <div class="flex-item flex-item-tweet list" style="display: none">
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
@@ -33,7 +33,7 @@
               </div>
 
               <ul>
-                <% tweets.take(20).each do |tweet| %>
+                <% tweets.take(10).each do |tweet| %>
                     <li><%= tweet.get_text %></li>
                 <% end %>
               </ul>
@@ -43,34 +43,22 @@
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? ("Hashtags used by "+(content_tag(:span, crit_authors, class: "highlight")).html_safe)
-                      : ("Hashtags intersecting with " + content_tag(:span, crit_hashtags, class: "highlight")).html_safe %>
+                  <%= crit_hashtags.blank? ? "Hashtags used by " : "Hashtags cooccurring with " %><span class="highlight">
+                  <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
                 </h1>
               </div>
 
               <ul>
-                <% hashtags.each do |hashtag| %>
+                <% hashtags.take(10).each do |hashtag| %>
                     <%= link_to content_tag(:li, hashtag.text), action: "db_search", controller: "index", q: hashtag.text %>
                 <% end %>
-              </ul>
-            </div>
 
-            <div class="flex-item list">
-
-              <div class="item-headline-container">
-                <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %><span class="highlight">
-                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-                </h1>
-
-              </div>
-              <ul>
-                <% tweets.each do |tweet| %>
-                    <% tweet.get_webpages.each do |webpage| %>
-                        <% if !webpage.nil? %>
-                            <%= link_to content_tag(:li, webpage.get_url), webpage.get_url %>
-                        <% end %>
-                    <% end %>
+                <% hts = "" %>
+                <% hashtags.take(10).each { |h| hts += " "+h.text } %>
+                <%= form_tag({controller: "index", action: "cont_search"}, method: "get") do %>
+                    <%= hidden_field_tag(:anchor, (@sobj.get_criteria_hashtags.first.text unless @sobj.get_criteria_hashtags.empty?)) %>
+                    <%= hidden_field_tag(:hts, hts) %>
+                    <%= submit_tag("Show details &#10148;".html_safe, :name => nil, class: "continue-button") %>
                 <% end %>
               </ul>
             </div>
@@ -82,12 +70,30 @@
                       <span class="highlight"><%= crit_hashtags %></span></h1>
                   </div>
                   <ul>
-                    <% authors.each do |author| %>
-                        <li><%= "@"+author.screen_name %></li>
+                    <% authors.take(20).each do |author| %>
+                        <%= link_to content_tag(:li, "@"+author.screen_name), action: "db_search", controller: "index", q: "@"+author.screen_name %>
                     <% end %>
                   </ul>
                 </div>
             <% end %>
+
+            <div class="flex-item flex-item-link list">
+
+              <div class="item-headline-container">
+                <h1 class="item-headline">
+                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %><span class="highlight">
+                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                </h1>
+
+              </div>
+              <ul>
+                <% pages.take(10).each do |page| %>
+                  <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview" ), page.get_url %>
+                <% end %>
+
+              </ul>
+
+            </div>
 
           </div>
       <% else %>
