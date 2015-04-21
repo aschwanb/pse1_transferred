@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Seed default starting point and hashtags
-h1 = Hashtag.create(text: "#technology", populairity_old: 0, popularity_now: 0)
-h2 = Hashtag.create(text: "#technologie", populairity_old: 0, popularity_now: 0)
+h1 = Hashtag.create(text: "#technology")
+h2 = Hashtag.create(text: "#technologie")
 
 s = Startingpoint.create
 

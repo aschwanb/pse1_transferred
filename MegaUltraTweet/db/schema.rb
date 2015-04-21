@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414200912) do
+ActiveRecord::Schema.define(version: 20150421203259) do
+
+  create_table "author_hashtag_pairs", force: :cascade do |t|
+    t.integer  "author_id",  limit: 4
+    t.integer  "hashtag_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "author_hashtag_pairs", ["author_id"], name: "index_author_hashtag_pairs_on_author_id", using: :btree
+  add_index "author_hashtag_pairs", ["hashtag_id"], name: "index_author_hashtag_pairs_on_hashtag_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -24,8 +34,6 @@ ActiveRecord::Schema.define(version: 20150414200912) do
   end
 
   create_table "hashtag_pairs", force: :cascade do |t|
-    t.integer  "popularity_now",    limit: 4
-    t.integer  "popularity_old",    limit: 4
     t.integer  "hashtag_first_id",  limit: 4
     t.integer  "hashtag_second_id", limit: 4
     t.datetime "created_at",                  null: false
@@ -36,7 +44,6 @@ ActiveRecord::Schema.define(version: 20150414200912) do
     t.string   "text",            limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "popularity_now",  limit: 4
     t.integer  "populairity_old", limit: 4
   end
 
@@ -55,6 +62,19 @@ ActiveRecord::Schema.define(version: 20150414200912) do
 
   add_index "hashtags_tweets", ["hashtag_id"], name: "index_hashtags_tweets_on_hashtag_id", using: :btree
   add_index "hashtags_tweets", ["tweet_id"], name: "index_hashtags_tweets_on_tweet_id", using: :btree
+
+  create_table "popularities", force: :cascade do |t|
+    t.boolean  "new",        limit: 1
+    t.integer  "now",        limit: 4
+    t.integer  "old_1",      limit: 4
+    t.integer  "old_2",      limit: 4
+    t.integer  "old_3",      limit: 4
+    t.integer  "popular_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "popularities", ["popular_id"], name: "index_popularities_on_popular_id", using: :btree
 
   create_table "startingpoints", force: :cascade do |t|
     t.datetime "created_at", null: false
