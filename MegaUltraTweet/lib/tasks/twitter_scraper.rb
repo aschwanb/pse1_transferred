@@ -29,9 +29,13 @@ class TwitterScraper
       start(new_query, depth)
     end
   rescue Exceptions::MaxSearchesError => e
-    puts e.message
+    Rails.logger.debug "DEBUG: Maximum Searches Used" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   rescue Twitter::Error => e
-    puts e.message
+    Rails.logger.debug "DEBUG: Error while parsing tweet message" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   end
 
   def run_query(keyword)
