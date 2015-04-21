@@ -13,13 +13,13 @@ class Tweet < ActiveRecord::Base
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
-        hashtag = Hashtag.create(text: tag, populairity_old: 0, popularity_now: 0)
-        hashtag.popularity.create
+        hashtag = Hashtag.create(text: tag)
+        hashtag.create_popularity
       else
         hashtag = Hashtag.find_by_text(tag)
       end
       self.hashtags<<hashtag
-      hashtag.update(popularity_now: hashtag.get_popularity_now + 1 )
+      hashtag.set_popularity_now(hashtag.get_popularity_now + 1)
     end
   end
 

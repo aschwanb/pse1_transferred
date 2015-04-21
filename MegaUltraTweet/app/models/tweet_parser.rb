@@ -51,7 +51,7 @@ class TweetParser
             )
     else
       author = Author.find_by_screen_name(tweet.user.screen_name)
-      author.updated_all(
+      author.update_all(
           tweet.user.name,
           tweet.user.friends_count,
           tweet.user.followers_count,

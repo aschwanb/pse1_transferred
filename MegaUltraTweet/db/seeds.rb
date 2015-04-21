@@ -9,6 +9,8 @@
 # Seed default starting point and hashtags
 h1 = Hashtag.create(text: "#technology")
 h2 = Hashtag.create(text: "#technologie")
+h1.create_popularity
+h2.create_popularity
 
 s = Startingpoint.create
 

@@ -23,4 +23,6 @@ class DBRollover
   
   # TODO: Clean db. Remove old tweets ?
   # If so, what happens with old authors, hashtags ... ?
+
+  # TODO: Small rollover for 15 min interval and statistics. Big rollover every 48 hours?
 end
