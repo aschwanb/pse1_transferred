@@ -63,16 +63,12 @@ class TwitterClient
       h_first = hashtags.pop
       hashtags.each do |h_second|
         if HashtagPair.where(hashtag_first: h_first, hashtag_second: h_second).blank?
-          pair = HashtagPair.create(
-              hashtag_first: h_first,
-              hashtag_second: h_second,
-              popularity_now: 0,
-              popularity_old: 0
-          )
+          pair = HashtagPair.create(hashtag_first: h_first, hashtag_second: h_second)
+          pair.popularity.create
         else
           pair = HashtagPair.find_by(hashtag_first: h_first, hashtag_second: h_second)
         end
-        pair.update(popularity_now: pair.get_popularity_now + 1)
+        pair.popularity.update(now: pair.get_popularity_now + 1)
       end
     end
   end

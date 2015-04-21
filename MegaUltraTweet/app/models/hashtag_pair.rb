@@ -21,19 +21,19 @@ class HashtagPair < ActiveRecord::Base
   end
 
   def set_popularity_now(popularity)
-    self.popularity.now = popularity
+    self.popularity.update(now: popularity)
   end
 
-  def set_popularity_old1(popularity)
-    self.popularity.old_1 = popularity
+  def set_popularity_old_1(popularity)
+    self.popularity.update(old_1: popularity)
   end
 
-  def set_popularity_old2(popularity)
-    self.popularity.old_2 = popularity
+  def set_popularity_old_2(popularity)
+    self.popularity.update(old_2: popularity)
   end
 
-  def set_popularity_old3(popularity)
-    self.popularity.old_3 = popularity
+  def set_popularity_old_3(popularity)
+    self.popularity.update(old_3: popularity)
   end
 
 

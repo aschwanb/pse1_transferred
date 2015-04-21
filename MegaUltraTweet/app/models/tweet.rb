@@ -14,6 +14,7 @@ class Tweet < ActiveRecord::Base
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
         hashtag = Hashtag.create(text: tag, populairity_old: 0, popularity_now: 0)
+        hashtag.popularity.create
       else
         hashtag = Hashtag.find_by_text(tag)
       end
