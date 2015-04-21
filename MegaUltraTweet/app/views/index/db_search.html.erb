@@ -55,11 +55,6 @@
 
                 <% hts = "" %>
                 <% hashtags.take(10).each { |h| hts += " "+h.text } %>
-                <%= form_tag({controller: "index", action: "cont_search"}, method: "get") do %>
-                    <%= hidden_field_tag(:anchor, (@sobj.get_criteria_hashtags.first.text unless @sobj.get_criteria_hashtags.empty?)) %>
-                    <%= hidden_field_tag(:hts, hts) %>
-                    <%= submit_tag("Show details &#10148;".html_safe, :name => nil, class: "continue-button") %>
-                <% end %>
               </ul>
             </div>
 
