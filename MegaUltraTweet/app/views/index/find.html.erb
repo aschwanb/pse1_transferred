@@ -1,0 +1,49 @@
+<div class="wrapper" xmlns="http://www.w3.org/1999/html">
+  <div id="container" class="center list">
+    <% if !@query.blank? %>
+        <div id="tweet-container" class="item wide">
+        <h1>You are searching for tweets containing <span class="slabtext" id="highlight"><%= @query %></span>
+        <%= @tweets.count %> tweets were fetched</h1>
+        <ul  class="static-list">
+        <% @tweets.each do |tweet| %>
+            <li><%= tweet.text %></li>
+        <% end %>
+        </ul>
+        </div>
+
+        <div class="item small">
+        <h1>Hashtags in these tweets</h1>
+        <ul class="link-list">
+        <% @counts_hashtags.each do |key, element| %>
+              <!--<li><%= link_to key.to_s, action: "find", controller: "index", query: key.to_s %> (<%= element.to_s %>)</li>-->
+              <%= link_to content_tag( :li, key.to_s + " (" + element.to_s + ")" ), action: "find", controller: "index", query: key.to_s %>
+        <% end %>
+        </ul>
+        </div>
+
+        <div class="item small">
+        <h1>TwitterHandles in <span class="slabtext">these tweets</span></h1>
+        <ul class="link-list">
+        <% @counts_twitterhandles.each do |key, element| %>
+              <!--<li><%= link_to key.to_s, action: "find", controller: "index", query: key.to_s %> (<%= element.to_s %>)</li>-->
+              <%= link_to content_tag( :li, key.to_s + " (" + element.to_s + ")" ), action: "find", controller: "index", query: key.to_s %>
+        <% end %>
+        </ul>
+        </div>
+
+        <div class="item small">
+        <h1>Webpages in these tweets</h1>
+        <ul class="link-list">
+        <% @counts_webpages.each do |key, element| %>
+            <a href="<%= key.to_s %>"><li><%= key.to_s %></li></a>
+        <% end %>
+        </ul>
+        </div>
+    <% else %>
+        <h1>Invalide search</h1>
+    <% end %>
+  </div>
+</div>
+
+
+

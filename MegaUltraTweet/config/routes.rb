@@ -3,14 +3,12 @@ Rails.application.routes.draw do
   get 'search/search'
 
   root 'index#start'
-  get 'index/finde'
-  get 'index/twitterHandle'
-  get 'index/twitterUser'
+  get 'index/find'
   get 'index/about'
   get 'index/search'
   get 'index/db_search'
-  get 'index/dbentry'
-
+  get 'index/cont_search'
+  get 'index/db_entry'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330133738) do
+ActiveRecord::Schema.define(version: 20150414200912) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -23,10 +23,21 @@ ActiveRecord::Schema.define(version: 20150330133738) do
     t.string   "screen_name",     limit: 255
   end
 
+  create_table "hashtag_pairs", force: :cascade do |t|
+    t.integer  "popularity_now",    limit: 4
+    t.integer  "popularity_old",    limit: 4
+    t.integer  "hashtag_first_id",  limit: 4
+    t.integer  "hashtag_second_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "hashtags", force: :cascade do |t|
-    t.string   "text",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "text",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "popularity_now",  limit: 4
+    t.integer  "populairity_old", limit: 4
   end
 
   create_table "hashtags_startingpoints", id: false, force: :cascade do |t|
@@ -62,10 +73,12 @@ ActiveRecord::Schema.define(version: 20150330133738) do
   add_index "tweets", ["author_id"], name: "index_tweets_on_author_id", using: :btree
 
   create_table "webpages", force: :cascade do |t|
-    t.integer  "tweet_id",   limit: 4
-    t.string   "url",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "tweet_id",    limit: 4
+    t.string   "url",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
   end
 
   add_index "webpages", ["tweet_id"], name: "index_webpages_on_tweet_id", using: :btree

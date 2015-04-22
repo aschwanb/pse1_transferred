@@ -12,6 +12,8 @@ gem 'twitter'
 gem 'whenever', '0.9.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '0.3.18'
+# Generate thumbnails
+gem 'link_thumbnailer', '2.5.0'
 ####################################
 # Requirements for the webserver and Jenkins
 # gem 'ci_reporter'
@@ -64,5 +66,23 @@ group :development, :test do
 
   # Testing framework
   gem 'rspec-rails', '~> 3.0'
+
+  # For test data
+  gem 'factory_girl_rails'
+end
+
+group :test do
+
+  # Generates placeholders for factories
+  gem 'faker'
+
+  # Used to simulate users' interactions with your application
+  gem 'capybara'
+
+  # Runs specs automatically when it detects changes
+  gem 'guard-rspec'
+
+  #Opens default web browser upon failed integration specs to show what the application is rendering
+  gem 'launchy'
 end
 

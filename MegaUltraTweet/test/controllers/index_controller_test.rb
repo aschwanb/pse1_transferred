@@ -7,7 +7,7 @@ class IndexControllerTest < ActionController::TestCase
   end
 
   test "should get finde" do
-    get :finde
+    get :find
     assert_response :success
   end
 
@@ -17,7 +17,7 @@ class IndexControllerTest < ActionController::TestCase
   end
 
   test "should get search" do
-    get :simpleSearch
+    get :search_simple
     assert_response :success
   end
 end

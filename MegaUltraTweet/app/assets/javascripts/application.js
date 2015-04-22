@@ -13,28 +13,51 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require masonry.pkgd.min
-//= require jquery.slabtext.min
 //= require_tree .
 
-
-//Wrapper function needed because of a bug in turbolinks.
 $(init = function init() {
-    $(function () {
-        msnry = new Masonry('#container', {
-            columnWidth: 1,
-            itemSelector: '.item'
+    $(function() {
+        $(".continue-button").click(function() {
+            $(".se-pre-con").fadeIn("slow");
+            setTimeout(function () {
+                $('.se-pre-con').fadeOut("fast")}, 10000);
         });
-        msnry.bindResize();
+    });
+    $(function() {
+        $(".search").submit(function() {
+            $(".se-pre-con").fadeIn("slow");
+            setTimeout(function () {
+                $('.se-pre-con').fadeOut("fast")}, 3000);
+        });
     });
 
-    $(function slabTextHeadlines() {
-        $("h1").slabText({
-            // Don't slabtext the headers if the viewport is under 380px
-            "viewportBreakpoint": 380
-        });
-    });
+});
+
+$(loader_after = function() {
+    $(".se-pre-con").fadeOut("slow");
 });
 
 $(document).ready(init);
-$(document).on('page:load', init)
+$(document).on('page:load', init);
+$(window).on('page:load', loader_after);
+
+//Wrapper function needed because of a bug in turbolinks.
+//$(init = function init() {
+//    $(function () {
+//        msnry = new Masonry('#container', {
+//            columnWidth: 1,
+//            itemSelector: '.item'
+//        });
+//        msnry.bindResize();
+//    });
+//
+//    $(function slabTextHeadlines() {
+//        $("h1").slabText({
+//            // Don't slabtext the headers if the viewport is under 380px
+//            "viewportBreakpoint": 380
+//        });
+//    });
+//});
+//
+//$(document).ready(init);
+//$(document).on('page:load', init)

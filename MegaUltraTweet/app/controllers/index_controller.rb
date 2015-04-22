@@ -4,18 +4,18 @@ class IndexController < ApplicationController
   end
 
   def search
-    @topics = TopicsStart.new.getTopics
+    @topics = Startingpoint.first.get_start
   end
 
-  def finde
+  def find
     @query = params[:query]
     if !@query.blank?
-      twitterClient = TwitterClient.new
-      twitterClient.simpleSearch(@query, 10)
-      @tweets = twitterClient.getTweetsAsArray
-      @countsHashtags = twitterClient.getHashtagsAsHash
-      @countsTwitterHandles = twitterClient.getTwitterHandlesAsHash
-      @countsWebpages = twitterClient.getURLsAsHash
+      client = TwitterClient.new
+      client.search_simple(@query, 10)
+      @tweets = client.get_tweets_to_a
+      @counts_hashtags = client.get_hashtags_to_h
+      @counts_twitterhandles = client.get_twitterhandles_to_h
+      @counts_webpages = client.get_urls_to_h
     end
   end
 
@@ -26,13 +26,21 @@ class IndexController < ApplicationController
     @q = params[:q]
     if !@q.blank?
       dbsearch = DbSearch.new
-      @sobj = dbsearch.parseQuery(@q)
+      @sobj = dbsearch.parse_query(@q)
     else
       redirect_to(root_path)
     end
 
   end
 
+  def cont_search
+    hts = params[:hts]
+    anchor = params[:anchor]
+    if !hts.blank?
+      dbsearch = DbSearch.new
+      @cont_sobjs = dbsearch.continuous_search(hts, anchor)
+    end
+  end
 end
 
 

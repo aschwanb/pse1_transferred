@@ -3,9 +3,9 @@ class Startingpoint < ActiveRecord::Base
 
   # Search terms that are used for scraping twitter
   # Output as Array of Strings
-  def getStart
+  def get_start
     out = []
-    self.hashtags.to_a.each { |t| out.push(t.getText) }
+    self.hashtags.to_a.each { |t| out.push(t.get_text) }
     return out
   end
 

@@ -1,0 +1,16 @@
+\frametitle{Use Cases}
+  Was für Hashtags werden gleichzeitig mit \#technology eingesetzt?\pause
+  \begin{lstlisting}
+twitterClient = TwitterClient.new
+twitterClient.search("#technology", 500)
+tags = twitterClient.getHashtagsAsHash
+tags.delete("#technology")
+tags.first(5).each { |key, value| puts "#{key} => #{value}" }
+  \end{lstlisting}\pause
+  \begin{lstlisting}
+#tech => 44
+#partner => 21
+#mobilephones => 20
+#startups => 18
+#smartphones => 15
+  \end{lstlisting}

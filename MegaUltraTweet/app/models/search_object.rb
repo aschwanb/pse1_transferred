@@ -1,112 +1,99 @@
 
-# refactor this!
+# TODO: refactor this!
 class SearchObject
-  @searchSuccessful
-  @searchValid
-  @searchTerms = []
-  @tweets = []
-  @hashtags
-  @authors = []
-  @authorsSorted
-  @hashtagsSorted
+  @search_successful
+  @search_valid
+  @search_terms
+  @search_criteria_hashtags
+  @search_criteria_authors
+  @tweets
+  @authors
+  @webpages
+  @pairs
 
   def initialize(query)
-    @searchTerms = query
-    @searchTerms.empty? ? @searchValid = false : @searchValid = true
-    @searchSuccessful = false
+    @search_terms = query
+    @search_terms.empty? ? @search_valid = false : @search_valid = true
+    @search_successful = false
+    @search_criteria_authors = Array.new
+    @search_criteria_hashtags = Array.new
+    @webpages = Array.new
   end
 
-  def isValid?
-    return @searchValid
+  def is_valid?
+    return @search_valid
   end
 
-  def setSearchSuccessful
-    @searchSuccessful = true
+  def set_search_successful
+    @search_successful = true
   end
 
-  def isSuccessful?
-    return @searchSuccessful
+  def is_successful?
+    return @search_successful
   end
 
-  def addTweets(tweets)
-    @tweets.append(tweets)
+  def add_search_terms(terms)
+    @search_terms += terms
   end
 
-  def setTweets(tweets)
+  def get_search_terms
+    return @search_terms
+  end
 
-    # create an sorted array with author names (string)
-    authorNames = []
-    hashtags = []
-    hashtagText = []
-    tweets.each do |tweet|
-      authorNames.append(tweet.getAuthor.getName)
-      hashtags.concat(tweet.getHashtags)
-    end
-    count = Hash.new(0)
-    authorNames.each {|element| count[element] += 1}
-    authorNames = authorNames.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.setAuthorsSorted(authorNames)
+  def add_criterion_hashtag(hashtag)
+    @search_criteria_hashtags.append(hashtag)
+  end
 
-    # create an sorted array with hashtags (string)
-    hashtags = hashtags.flatten
-    hashtags.each do |hashtag|
-      hashtagText.append(hashtag.getText)
-    end
-    count = Hash.new(0)
-    hashtagText.each {|element| count[element] += 1}
-    hashtagText = hashtagText.uniq.sort {|x,y| count[y] <=> count[x]}
-    self.setHashtagsSorted(hashtagText)
+  def get_criteria_hashtags
+    return @search_criteria_hashtags
+  end
 
-    count = Hash.new(0)
-    tweets.each {|element| count[element] += 1}
-    tweets = tweets.uniq.sort {|x,y| count[y] <=> count[x]}
+  def add_criterion_author(author)
+    @search_criteria_authors.append(author)
+  end
+
+  def get_criteria_authors
+    return @search_criteria_authors
+  end
+
+  def set_tweets(tweets)
+    set_search_successful unless tweets.empty?
     @tweets = tweets
   end
 
-  def getTweets
+  def get_tweets
     return @tweets
   end
 
-  def addSearchTerms(terms)
-    @searchTerms += terms
-  end
-
-  def getSearchTerms
-    return @searchTerms
-  end
-
-  def setHashtags(hashtags)
+  def set_hashtags(hashtags)
     @hashtags = hashtags
   end
 
-  def getHashtags
+  def get_hashtags
     return @hashtags
   end
 
-  def setAuthors(authors)
+  def set_authors(authors)
     @authors = authors
   end
 
-  def getAuthors
+  def get_authors
     return @authors
   end
 
-  # takes an unique array of strings sorted by occurrence
-  def setAuthorsSorted(authors)
-    @authorsSorted = authors
+  def set_webpages(webpages)
+    @webpages = webpages
   end
 
-  # returns an unique array of strings containing author names sorted by occurrence
-  def getAuthorsSorted
-    return @authorsSorted
+  def get_webpages
+    return @webpages
   end
 
-  def setHashtagsSorted(hashtags)
-    @hashtagsSorted = hashtags
+  def set_pairs(pairs)
+    @pairs = pairs
   end
 
-  def getHashtagsSorted
-    return @hashtagsSorted
+  def get_pairs
+    return @pairs
   end
-
 end

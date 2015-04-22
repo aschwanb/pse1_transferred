@@ -1,0 +1,71 @@
+/* flexbox */
+
+@import "common";
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-wrap($val) {
+  -webkit-flex-wrap: $val;
+  -ms-flex-wrap: $val;
+  flex-wrap: $val;
+}
+
+// flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}
+
+
+
+.flex-container {
+  @include flexbox();
+  @include flex-wrap(wrap);
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.flex-item {
+  @include flex(1 1 auto);
+  margin: $minor_margin;
+//  flex-basis: auto;
+  /*padding-right: 1em;*/
+//  flex-grow: 1;
+//  flex-shrink: 1;
+  /*max-width: 600px;*/
+}
+
+.flex-item-tweet {
+  @include flex(3 1 350px);
+  max-width: 600px;
+  min-width: 350px;
+//  flex-basis: 350px;
+//  flex-shrink: 1;
+//  flex-grow: 3;
+}
+
+.flex-item-link {
+  @include flex(4 1 300px);
+  max-width: 800px;
+  min-width: 300px;
+  //  flex-basis: 350px;
+  //  flex-shrink: 1;
+  //  flex-grow: 3;
+}

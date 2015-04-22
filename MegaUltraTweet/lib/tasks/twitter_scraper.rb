@@ -2,71 +2,52 @@ require_relative '../../app/models/twitter_client'
 require_relative '../../app/models/tweet'
 require_relative '../../app/models/tweet_parser'
 
-# TODO: Run a new search the most popular (depth) hashtags for one entry
 class TwitterScraper
 
-  def initialize
+  def initialize(query_size, detail)
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @providedSearches = 450
-    @usedSearches = 0
+    @provided_searches = 400  # Add some buffer for user input. Max searches is at 450
+    @used_searches = 0
+    @query_size = query_size  # How many results do we request from twitter
+    @detail = detail  # How many of the most relevant keywords do we follow up on ?
   end
 
-  def scrape(query, querySize, depth, detail)
-    puts "Depth is at #{depth}"
-    begin
-      self.runQuery(query, querySize)
-      puts query
-      newQuery = self.getNewQuery(query, detail)
-      # Save tweets and reset
-      @client.getTweetsAsArray.each { |t| saveTweet(t) }
-      @client.resetTweets
-      # Start a new search with one less depth
-       while depth > 1
-         depth = depth - 1
-         puts "Start new branch with #{newQuery}"
-         scrape(newQuery, querySize, depth, detail)
-       end
-    #rescue
-    #  puts "Maximum searches for this time window used."
+  # Scraping for a array of key words
+  def start(query, depth)
+    Array(query).each { |keyword| scrape(keyword, depth) }
+  end
+
+  # Scraping for a keyword. Start a new searches with one less depth
+  def scrape(keyword, depth)
+    tweets = run_query(keyword)
+    tweets.each { |t| @client.save_tweet(t) }
+    new_query = self.get_new_query(keyword, tweets)
+    depth -= 1
+    if depth > 0
+      puts "Finished with #{keyword}. Start new branch with #{new_query}"
+      start(new_query, depth)
     end
-    puts "Finished scraping for now"
+  rescue Exceptions::MaxSearchesError => e
+    puts e.message
+  rescue Twitter::Error => e
+    puts e.message
   end
 
-  def runQuery(query, querySize)
-    while query.any? do
-      localQuery = query.pop
-      puts "Scraping for #{localQuery} ..."
-      @client.simpleSearch(localQuery, querySize)
-      @usedSearches = @usedSearches + 1
-      puts "Used searches #{@usedSearches}"
-      puts "Provided searches #{@providedSearches}"
-      if @providedSearches <= @usedSearches
-        raise
-      end
+  def run_query(keyword)
+    puts "Scraping for \"#{keyword}\" ..."
+    if @provided_searches == @used_searches
+      raise Exceptions::MaxSearchesError.new, "Maximum searches for this time window used."
     end
+    @used_searches = @used_searches + 1
+    @client.search_simple(keyword, @query_size)
   end
 
-  def getNewQuery(query, detail)
-    # Get all new hashtags without the ones present in the last query
-    newQuery = @client.getHashtagsAsHash
-    query.each { |t| newQuery.delete(t.downcase) }
-    # Determine how many of them to take
-    newQuery = newQuery.first(detail).map(&:first).to_a
-    return newQuery
-  end
-
-  def saveTweet(tweet)
-     author = @parser.getAuthor(tweet)
-     if Tweet.where(twitter_id: tweet.id).blank?
-        t = author.tweets.create(
-          text: tweet.text,
-          retweets: tweet.retweet_count,
-          twitter_id: tweet.id
-        )
-      t.setHashtags(@parser.parseHashtags(tweet))
-      t.setWebpages(@parser.parseWebpages(tweet))
-    end
+  # Returns the "detail" most relevant keywords - without the one present in the last query
+  def get_new_query(keyword, tweets)
+    new_query = @client.get_hashtags_to_h(tweets)
+    new_query.delete(keyword.downcase)
+    return new_query.first(@detail).map(&:first).to_a
   end
 
 end

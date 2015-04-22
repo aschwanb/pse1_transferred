@@ -4,7 +4,7 @@
     <ul class="static-list">
 
       <% @topics.each do |element| %>
-          <li><%= link_to element.to_s, action: "finde", controller: "index", query: element.to_s %></li>
+          <li><%= link_to element.to_s, action: "find", controller: "index", query: element.to_s %></li>
       <% end %>
 
     </ul>

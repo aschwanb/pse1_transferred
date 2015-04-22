@@ -3,16 +3,16 @@ class DbentryFetcher
   def initialize
   end
 
-  def fetchHashtags
+  def fetch_hashtags
     return Hashtag.take(20)
   end
 
-  def fetchAuthors
+  def fetch_authors
     return Author.take(20)
   end
 
-  def fetchTweets
-    return Tweet.take(20)
+  def fetch_tweets
+    return Tweet.take(5)
   end
 
 end

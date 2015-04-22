@@ -8,6 +8,7 @@
 
 .dev nav {
   visibility: hidden;
+  display: none;
 }
 
 .dev ul {
@@ -39,4 +40,5 @@
 
 .dev:hover nav {
   visibility: visible;
+  display: inherit;
 }
