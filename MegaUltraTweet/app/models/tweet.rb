@@ -26,7 +26,6 @@ class Tweet < ActiveRecord::Base
   def set_webpages(webpages_array)
     webpages_array.each do |webpage|
       nailer = LinkThumbnailer.generate(webpage)
-      puts "Inserting webpage into tweet"
       self.webpages.create(
           url: webpage,
           title: nailer.title,

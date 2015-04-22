@@ -54,6 +54,8 @@ class TwitterClient
       t.set_webpages(@parser.parse_webpages(tweet))
       t.set_hashtags(@parser.parse_hashtags(tweet))
       generate_hashtag_pairs(t.get_hashtags)
+      generate_author_hashtag_pairs(t.get_author, t.get_hashtags)
+
     end
   end
 
@@ -70,6 +72,19 @@ class TwitterClient
         end
         pair.set_popularity_now(pair.get_popularity_now + 1)
       end
+    end
+  end
+
+  def generate_author_hashtag_pairs(author, hashtags)
+    while !hashtags.blank?
+      hashtag = hashtags.pop
+      if AuthorHashtagPair.where(author: author, hashtag: hashtag).blank?
+        pair = AuthorHashtagPair.create(author: author, hashtag: hashtag)
+        pair.create_popularity
+      else
+        pair = AuthorHashtagPair.find_by(author: author, hashtag: hashtag)
+      end
+      pair.set_popularity_now(pair.get_popularity_now + 1)
     end
   end
 
