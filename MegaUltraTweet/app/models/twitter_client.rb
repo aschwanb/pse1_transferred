@@ -55,7 +55,6 @@ class TwitterClient
       t.set_hashtags(@parser.parse_hashtags(tweet))
       generate_hashtag_pairs(t.get_hashtags)
       generate_author_hashtag_pairs(t.get_author, t.get_hashtags)
-
     end
   end
 

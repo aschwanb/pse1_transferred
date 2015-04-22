@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421212826) do
+ActiveRecord::Schema.define(version: 20150422102355) do
 
   create_table "author_hashtag_pairs", force: :cascade do |t|
     t.integer  "author_id",  limit: 4
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20150421212826) do
   end
 
   create_table "hashtags", force: :cascade do |t|
-    t.string   "text",            limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "text",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "hashtags_startingpoints", id: false, force: :cascade do |t|
@@ -61,20 +61,6 @@ ActiveRecord::Schema.define(version: 20150421212826) do
 
   add_index "hashtags_tweets", ["hashtag_id"], name: "index_hashtags_tweets_on_hashtag_id", using: :btree
   add_index "hashtags_tweets", ["tweet_id"], name: "index_hashtags_tweets_on_tweet_id", using: :btree
-
-  create_table "popularities", force: :cascade do |t|
-    t.boolean  "new",          limit: 1,   default: true
-    t.integer  "now",          limit: 4,   default: 0
-    t.integer  "old_1",        limit: 4,   default: 0
-    t.integer  "old_2",        limit: 4,   default: 0
-    t.integer  "old_3",        limit: 4,   default: 0
-    t.integer  "popular_id",   limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.string   "popular_type", limit: 255
-  end
-
-  add_index "popularities", ["popular_id"], name: "index_popularities_on_popular_id", using: :btree
 
   create_table "startingpoints", force: :cascade do |t|
     t.datetime "created_at", null: false
