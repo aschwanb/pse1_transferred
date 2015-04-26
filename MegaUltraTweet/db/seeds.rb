@@ -12,6 +12,7 @@ start = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth W
 
 start.each do |p|
   h = Hashtag.create(text: "##{p}")
+  h.create_popularity
   s.hashtags<<h
 end
 
