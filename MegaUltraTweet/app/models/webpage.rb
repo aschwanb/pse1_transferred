@@ -1,12 +1,12 @@
 class Webpage < ActiveRecord::Base
-  belongs_to :tweet
+  has_and_belongs_to_many :tweets
 
   def get_url
     return self.url
   end
 
-  def get_tweet
-    return self.tweet
+  def get_tweets
+    return self.tweets
   end
 
   def get_title

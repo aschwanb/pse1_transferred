@@ -1,6 +1,6 @@
 class Author < ActiveRecord::Base
   has_many :tweets
-  has_and_belongs_to_many :author_hashtag_pairs
+  has_and_belongs_to_many :authors_hashtags
 
   scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
 
