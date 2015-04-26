@@ -8,13 +8,10 @@
 
 # Seed default starting point and hashtags
 s = Startingpoint.create
+start = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
 
-h1 = Hashtag.create(text: "#technology")
-h2 = Hashtag.create(text: "#technologie")
-
-h1.create_popularity
-h2.create_popularity
-
-s.hashtags<<h1
-s.hashtags<<h2
+start.each do |p|
+  h = Hashtag.create(text: "##{p}")
+  s.hashtags<<h
+end
 
