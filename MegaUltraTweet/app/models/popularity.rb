@@ -1,4 +1,4 @@
 class Popularity < ActiveRecord::Base
   belongs_to :popular, polymorphic: true
-  serialize :usage
+  serialize :usage, Array
 end

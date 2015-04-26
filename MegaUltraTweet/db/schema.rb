@@ -71,8 +71,9 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "popularities", force: :cascade do |t|
     t.integer  "popular_id",   limit: 4
     t.string   "popular_type", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "usage",        limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "popularities", ["popular_id"], name: "index_popularities_on_popular_id", using: :btree
