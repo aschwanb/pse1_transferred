@@ -73,3 +73,31 @@
   background: $color2;
   color: #ffffff;
 }
+
+.continue-button {
+  margin-top: 1em;
+  width: 100%;
+  height: auto;
+  padding: 1em;
+
+  border: 1px solid $color2;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  outline: none;
+  background: #fff;
+  color: $color2;
+  cursor: pointer;
+  font-size: 1em;
+  text-align: center;
+}
+
+.continue-button:hover {
+  background: $color2;
+  color: #ffffff;
+}
+
+.continue-button:focus, .continue-button:active {
+  border-color: $color1;
+  color: $color1;
+}

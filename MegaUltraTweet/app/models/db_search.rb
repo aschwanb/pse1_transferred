@@ -5,7 +5,7 @@ class DbSearch
   @limit
 
   def initialize
-    @limit = 30
+    @limit = 500
   end
 
   def parse_query(query)
@@ -17,6 +17,18 @@ class DbSearch
     search_object = multi_search(search_terms, SearchObject.new(search_terms))
     search_object = evaluate(search_object)
     return search_object
+  end
+
+  def continuous_search(hashtags, anchor)
+    cont_sobjs = []
+    hashtags = hashtags.scan(/\w+/).flatten
+    hashtags.each do |hashtag|
+      search_terms = Array.new
+      search_terms.append(anchor)
+      search_terms.append(hashtag)
+      cont_sobjs.append(evaluate(multi_search(search_terms, SearchObject.new(search_terms))))
+    end
+    return cont_sobjs
   end
 
   private
@@ -73,16 +85,20 @@ class DbSearch
     rel_authors = []
     rel_hashtags = []
     webpages = []
+
+    sorter = Sorter.new
+    tweets = sorter.sort_by_rank(tweets)
+
     tweets.each do |tweet|
       rel_authors.append(tweet.get_author)
       rel_hashtags.concat(tweet.get_hashtags)
       webpages.concat(tweet.get_webpages)
     end
 
-    sorter = Sorter.new
-    tweets = sorter.sort_by_rank(tweets)
+    rel_hashtags.delete_if { |hashtag| hashtags.include?(hashtag)}
+
     rel_authors = sorter.sort_by_rank(rel_authors)
-    rel_hashtags = sorter.sort_by_occurrence(rel_hashtags)
+    rel_hashtags = sorter.sort_by_popularity(rel_hashtags)
 
     search_object.set_tweets(tweets)
     search_object.set_authors(rel_authors)
@@ -94,6 +110,8 @@ class DbSearch
   # given an array of hashtags, returns the tweets containing all given hashtags
   def retrieve_tweets_by_hashtags(hashtags, limit)
     return Array.new if hashtags.empty?
+    # tweets = []
+    # tweets.append(Tweet.joins(:hashtags).where(hashtags: {:id => hashtags.first.id}).order(retweets: :DESC).limit(limit))
     tweets = hashtags.first.get_tweets(limit)
     hashtags.each do |hashtag|
       tweets.delete_if { |tweet| !tweet.get_hashtags.include?(hashtag)}
@@ -109,6 +127,26 @@ class DbSearch
       tweets.concat(author.get_tweets(limit))
     end
     return tweets
+  end
+
+  def retrieve_hashtag_pairs(hashtags)
+    return Array.new if hashtags.empty?
+    pairs = []
+    hashtags.each do |hashtag|
+      pairs.concat(HashtagPair.where(:hashtag_first_id => hashtag.id).order(popularity_now: :desc).limit(30))
+      # pairs.concat(HashtagPair.where(:hashtag_second_id => hashtag.id).order(popularity_now: :desc).limit(30))
+    end
+    return pairs
+  end
+
+  def get_hashtags_from_pairs(pairs)
+    return Array.new if pairs.empty?
+    hashtags = []
+    pairs.each do |pair|
+      hashtags.append(pair.hashtag_first)
+      hashtags.append(pair.hashtag_second)
+    end
+    return hashtags.uniq
   end
 
 end

@@ -9,6 +9,7 @@ class SearchObject
   @tweets
   @authors
   @webpages
+  @pairs
 
   def initialize(query)
     @search_terms = query
@@ -86,5 +87,13 @@ class SearchObject
 
   def get_webpages
     return @webpages
+  end
+
+  def set_pairs(pairs)
+    @pairs = pairs
+  end
+
+  def get_pairs
+    return @pairs
   end
 end
