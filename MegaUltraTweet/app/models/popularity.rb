@@ -10,6 +10,7 @@ class Popularity < ActiveRecord::Base
 
   def set_times_used(usage)
     self.times_used[0] = usage
+    self.save
   end
 
   def get_trend_short
