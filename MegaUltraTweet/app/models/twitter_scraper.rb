@@ -7,10 +7,9 @@ class TwitterScraper
   def initialize(query_size, detail)
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @provided_searches = 400  # Add some buffer for user input. Max searches is at 450
-    @used_searches = 0
     @query_size = query_size  # How many results do we request from twitter
     @detail = detail  # How many of the most relevant keywords do we follow up on ?
+    @used_searches = 0
   end
 
   # Scraping for a array of key words
@@ -40,7 +39,7 @@ class TwitterScraper
 
   def run_query(keyword)
     puts "Scraping for \"#{keyword}\" ..."
-    if @provided_searches == @used_searches
+    if MegaUltraTweet::Application::PROVIDED_SEARCHES == @used_searches
       raise Exceptions::MaxSearchesError.new, "Maximum searches for this time window used."
     end
     @used_searches = @used_searches + 1

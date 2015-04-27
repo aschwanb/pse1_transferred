@@ -12,13 +12,11 @@ class Popularity < ActiveRecord::Base
   end
 
   def get_trend_short
-    # TODO: Read interval length from config file
-    return self.get_trend(1)
+    return self.get_trend(MegaUltraTweet::Application::POPULARITY_SHORT_INTERVAL)
   end
 
   def get_trend_long
-    # TODO: Read interval length from config file
-    return self.get_trend(10)
+    return self.get_trend(MegaUltraTweet::Application::POPULARITY_LONG_INTERVAL)
   end
 
   def get_trend(interval)

@@ -2,15 +2,13 @@ class Trending < ActiveRecord::Base
 has_and_belongs_to_many :hashtags
 
   def get_popular
-    # TODO: Move numbers to config file
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
-    return hashtags.first(10)
+    return hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
   end
 
   def get_unpopular
-    # TODO: Move numbers to config file
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
-    return hashtags.last(10)
+    return hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
   end
 
   def reset_hashtags
@@ -26,9 +24,8 @@ has_and_belongs_to_many :hashtags
   def build_new
     hashtags = Hashtag.all
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
-    # TODO: Move number to config file
-    top = hashtags.first(10)
-    bottom = hashtags.last(10)
+    top = hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
+    bottom = hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
     reset_hashtags
     set_hashtags(top)
     set_hashtags(bottom)

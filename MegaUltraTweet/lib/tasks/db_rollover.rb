@@ -2,11 +2,11 @@ class DBRollover
   # Cronjob. Run to clean db.
 
   def initialize
-    # TODO: Move numbers to config file
-    @hashtag_nr = 10 # Amount of hashtags to add to startingpoint
-    @query_depth = 5
     @startingpoint = Startingpoint.first
-    @scraper = TwitterScraper.new(400, 10)
+    @scraper = TwitterScraper.new(
+        MegaUltraTweet::Application::GET_THIS_MANY,
+        MegaUltraTweet::Application::QUERY_DETAIL
+        )
     @trending = Trending.first
   end
 
@@ -14,13 +14,16 @@ class DBRollover
     reset_startingpoint
     update_popularities
     @scraper.delete_old_tweets
-    @scraper.get_tweets(@startingpoint.get_start, @query_depth)
+    @scraper.get_tweets(
+        @startingpoint.get_start,
+        MegaUltraTweet::Application::QUERY_DEPTH
+        )
     @trending.build_new
   end
 
   def reset_startingpoint
-    @startingpoint.add_popular_hashtags(@hashtag_nr)
-    @startingpoint.remove_unpopular_hashtags(@hashtag_nr)
+    @startingpoint.add_popular_hashtags(MegaUltraTweet::Application::HASHTAG_TO_START_NUMBER)
+    @startingpoint.remove_unpopular_hashtags(MegaUltraTweet::Application::HASHTAG_TO_START_NUMBER)
     @startingpoint.repair_defaults
   end
 

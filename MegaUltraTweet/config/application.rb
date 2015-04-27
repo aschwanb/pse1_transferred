@@ -8,26 +8,16 @@ Bundler.require(*Rails.groups)
 
 module MegaUltraTweet
   class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
-
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
-
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
     # Autoload lib/ folder including all subdirectories
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     # Add fonts to the asset pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    # Rspec setup     
+
+    # Rspec setup
     config.generators do |g|
       g.test_framework :rspec,
           :fixtures => true,
@@ -38,6 +28,18 @@ module MegaUltraTweet
           :request_specs => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+
+    # Global Variables
+    DEFAULT_STARTING_VALUES = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
+    POPULARITY_SHORT_INTERVAL = 1
+    POPULARITY_LONG_INTERVAL = 50
+    TRENDING_HASHTAGS_NUMBER = 20
+    HASHTAG_TO_START_NUMBER = 30
+    QUERY_DEPTH = 5
+    QUERY_DETAIL = 10
+    GET_THIS_MANY = 400
+    DELETE_OLDER_TWEETS = 3.days.ago
+    PROVIDED_SEARCHES = 400 # Add some buffer for user input. Max searches is at 450
 
   end
 end

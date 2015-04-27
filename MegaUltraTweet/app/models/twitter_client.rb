@@ -89,7 +89,6 @@ class TwitterClient
   end
 
   def delete_old_tweets
-    # TODO: Move number to config file
-    Tweet.destroy_all(['created_at < ?', 3.days.ago])
+    Tweet.destroy_all(['created_at < ?', MegaUltraTweet::Application::DELETE_OLDER_TWEETS])
   end
 end
