@@ -17,15 +17,25 @@ class Popularity < ActiveRecord::Base
   end
 
   def get_trend_short
-    if self.times_used[1].nil?
-      return self.get_times_used
+    # TODO: Fix nil values
+    current = self.times_used[0, 1]  # 10 being the length of the intervall
+    old = self.times_used[0+1, 1]     # Starting Point and Length
+    if old.nil?
+      return current.inject(:+)
     else
-      return self.times_used[0] - self.times_used[1]
+      return current.inject(:+) - old.inject(:+)
     end
   end
 
   def get_trend_long
-    # TODO
+    # TODO: What to do if interval is not jet full ?
+    current = self.times_used[0, 10]  # 10 being the length of the intervall
+    old = self.times_used[0+ 10, 10]     # Starting Point and Length
+    if old.nil?
+      return current.inject(:+)
+    else
+      return current.inject(:+) - old.inject(:+)
+    end
   end
 
   # Add new times_used entry
