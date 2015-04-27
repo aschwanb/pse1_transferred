@@ -2,11 +2,15 @@ class Trending < ActiveRecord::Base
 has_and_belongs_to_many :hashtags
 
   def get_popular
-    # TODO
+    # TODO: Move numbers to config file
+    hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
+    return hashtags.first(10)
   end
 
   def get_unpopular
-    # TODO
+    # TODO: Move numbers to config file
+    hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
+    return hashtags.last(10)
   end
 
   def reset_hashtags
