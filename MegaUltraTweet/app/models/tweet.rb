@@ -19,7 +19,7 @@ class Tweet < ActiveRecord::Base
         hashtag = Hashtag.find_by_text(tag)
       end
       self.hashtags<<hashtag
-      hashtag.set_popularity_now(hashtag.get_popularity_now + 1)
+      # hashtag.set_popularity_now(hashtag.get_popularity_now + 1)
     end
   end
 
@@ -73,7 +73,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def get_rank
-    return self.rank
+    return self.get_retweets_count + self.get_author.get_rank
   end
 
 end

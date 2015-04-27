@@ -1,7 +1,7 @@
 class Hashtag < ActiveRecord::Base
   has_and_belongs_to_many :tweets
   has_and_belongs_to_many :startingpoints
-  has_and_belongs_to_many :authors_hashtags
+  has_many :author_hashtags
   has_one :popularity, as: :popular
 
   # For hashtag pairs

@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20150426081400) do
 
+  create_table "author_hashtags", force: :cascade do |t|
+    t.integer "author_id",  limit: 4
+    t.integer "hashtag_id", limit: 4
+  end
+
+  add_index "author_hashtags", ["author_id"], name: "index_author_hashtags_on_author_id", using: :btree
+  add_index "author_hashtags", ["hashtag_id"], name: "index_author_hashtags_on_hashtag_id", using: :btree
+
   create_table "authors", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "screen_name",     limit: 255
@@ -23,25 +31,17 @@ ActiveRecord::Schema.define(version: 20150426081400) do
     t.datetime "updated_at",                  null: false
   end
 
-  create_table "authors_hashtags", id: false, force: :cascade do |t|
-    t.integer "author_id",  limit: 4
-    t.integer "hashtag_id", limit: 4
+  create_table "hashtag_hashtags", force: :cascade do |t|
+    t.integer  "hashtag_first_id",  limit: 4
+    t.integer  "hashtag_second_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
-
-  add_index "authors_hashtags", ["author_id"], name: "index_authors_hashtags_on_author_id", using: :btree
-  add_index "authors_hashtags", ["hashtag_id"], name: "index_authors_hashtags_on_hashtag_id", using: :btree
 
   create_table "hashtags", force: :cascade do |t|
     t.string   "text",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  create_table "hashtags_hashtags", force: :cascade do |t|
-    t.integer  "hashtag_first_id",  limit: 4
-    t.integer  "hashtag_second_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
   end
 
   create_table "hashtags_startingpoints", id: false, force: :cascade do |t|
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "tweets", force: :cascade do |t|
     t.string   "text",       limit: 255
     t.integer  "retweets",   limit: 4
-    t.integer  "rank",       limit: 4
     t.integer  "twitter_id", limit: 8
     t.integer  "author_id",  limit: 4
     t.datetime "created_at",             null: false

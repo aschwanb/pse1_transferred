@@ -1,6 +1,6 @@
 class Author < ActiveRecord::Base
   has_many :tweets
-  has_and_belongs_to_many :authors_hashtags
+  has_many :author_hashtags
 
   scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
 
@@ -40,7 +40,6 @@ class Author < ActiveRecord::Base
     return self.tweets.take(args[0]).to_a
   end
 
-  # values may not be adequate
   def get_rank
     return get_followers_count
   end

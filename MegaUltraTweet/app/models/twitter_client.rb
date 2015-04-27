@@ -49,7 +49,6 @@ class TwitterClient
       t = author.tweets.create(
           text: tweet.text,
           retweets: tweet.retweet_count,
-          rank: author.get_followers_count + tweet.retweet_count,
           twitter_id: tweet.id
       )
       t.set_webpages(@parser.parse_webpages(tweet))
