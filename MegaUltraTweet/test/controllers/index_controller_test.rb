@@ -2,7 +2,7 @@ require 'test_helper'
 
 class IndexControllerTest < ActionController::TestCase
   test "should get start" do
-    get :start
+    get :get_tweets
     assert_response :success
   end
 

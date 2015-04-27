@@ -14,7 +14,7 @@ class TwitterScraper
   end
 
   # Scraping for a array of key words
-  def start(query, depth)
+  def get_tweets(query, depth)
     Array(query).each { |keyword| scrape(keyword, depth) }
   end
 
@@ -26,7 +26,7 @@ class TwitterScraper
     depth -= 1
     if depth > 0
       puts "Finished with #{keyword}. Start new branch with #{new_query}"
-      start(new_query, depth)
+      get_tweets(new_query, depth)
     end
   rescue Exceptions::MaxSearchesError => e
     Rails.logger.debug "DEBUG: Maximum Searches Used" if Rails.logger.debug?

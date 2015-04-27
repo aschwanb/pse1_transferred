@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Seed default starting point and hashtags
+t = Trending.create
 s = Startingpoint.create
 start = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
 
