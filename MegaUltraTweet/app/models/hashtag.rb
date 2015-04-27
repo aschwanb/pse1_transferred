@@ -14,6 +14,7 @@ class Hashtag < ActiveRecord::Base
     return self.text.to_s
   end
 
+  # TODO: Refactor ?
   def get_tweets(*args)
     return self.tweets.to_a if args.size > 1 || args.size < 1
     return self.tweets.take(args[0]).to_a

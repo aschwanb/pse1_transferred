@@ -49,41 +49,42 @@ class TwitterClient
       t = author.tweets.create(
           text: tweet.text,
           retweets: tweet.retweet_count,
+          rank: author.get_followers_count + tweet.retweet_count,
           twitter_id: tweet.id
       )
       t.set_webpages(@parser.parse_webpages(tweet))
       t.set_hashtags(@parser.parse_hashtags(tweet))
-      generate_hashtag_pairs(t.get_hashtags)
-      generate_author_hashtag_pairs(t.get_author, t.get_hashtags)
+      generate_hashtag_hashtag(t.get_hashtags)
+      generate_author_hashtag(t.get_author, t.get_hashtags)
     end
   end
 
-  def generate_hashtag_pairs(hashtags)
+  def generate_hashtag_hashtag(hashtags)
     hashtags.sort_by! { |h| h.text }
     while !hashtags.blank?
       h_first = hashtags.pop
       hashtags.each do |h_second|
-        if HashtagPair.where(hashtag_first: h_first, hashtag_second: h_second).blank?
-          pair = HashtagPair.create(hashtag_first: h_first, hashtag_second: h_second)
+        if HashtagHashtag.where(hashtag_first: h_first, hashtag_second: h_second).blank?
+          pair = HashtagHashtag.create(hashtag_first: h_first, hashtag_second: h_second)
           pair.create_popularity
         else
-          pair = HashtagPair.find_by(hashtag_first: h_first, hashtag_second: h_second)
+          pair = HashtagHashtag.find_by(hashtag_first: h_first, hashtag_second: h_second)
         end
-        pair.set_popularity_now(pair.get_popularity_now + 1)
+        # pair.set_popularity_now(pair.get_popularity_now + 1)
       end
     end
   end
 
-  def generate_author_hashtag_pairs(author, hashtags)
+  def generate_author_hashtag(author, hashtags)
     while !hashtags.blank?
       hashtag = hashtags.pop
-      if AuthorHashtagPair.where(author: author, hashtag: hashtag).blank?
-        pair = AuthorHashtagPair.create(author: author, hashtag: hashtag)
+      if AuthorHashtag.where(author: author, hashtag: hashtag).blank?
+        pair = AuthorHashtag.create(author: author, hashtag: hashtag)
         pair.create_popularity
       else
-        pair = AuthorHashtagPair.find_by(author: author, hashtag: hashtag)
+        pair = AuthorHashtag.find_by(author: author, hashtag: hashtag)
       end
-      pair.set_popularity_now(pair.get_popularity_now + 1)
+      # pair.set_popularity_now(pair.get_popularity_now + 1)
     end
   end
 

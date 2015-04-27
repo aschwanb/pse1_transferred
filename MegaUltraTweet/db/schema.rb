@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "popularities", force: :cascade do |t|
     t.integer  "popular_id",   limit: 4
     t.string   "popular_type", limit: 255
-    t.text     "usage",        limit: 65535
+    t.text     "times_used",   limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "tweets", force: :cascade do |t|
     t.string   "text",       limit: 255
     t.integer  "retweets",   limit: 4
+    t.integer  "rank",       limit: 4
     t.integer  "twitter_id", limit: 8
     t.integer  "author_id",  limit: 4
     t.datetime "created_at",             null: false
