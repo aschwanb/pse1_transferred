@@ -13,6 +13,7 @@ class DBRollover
   def rollover
     reset_startingpoint
     update_popularities
+    # TODO: Remove tweets older then n iterations
     @scraper.get_tweets(@startingpoint.get_start, @query_depth)
     @trending.build_new
   end
@@ -21,14 +22,10 @@ class DBRollover
     @startingpoint.add_popular_hashtags(@hashtag_nr)
     @startingpoint.remove_unpopular_hashtags(@hashtag_nr)
     @startingpoint.repair_defaults
-    # TODO: Re-add standard hashtags if not present
   end
 
   def update_popularities
     Popularity.all.each { |p| p.add_new}
   end
-
-  # TODO: Clean db. Remove old tweets ?
-  # TODO: Small rollover for 15 min interval and statistics. Big rollover every 48 hours?
 
 end
