@@ -23,6 +23,14 @@ class Hashtag < ActiveRecord::Base
     self.popularity.set_times_used(number)
   end
 
+  def get_trend_short
+    self.popularity.get_trend_short
+  end
+
+  def get_trend_long
+    self.popularity.get_trend_long
+  end
+
   # TODO: Refactor ?
   def get_tweets(*args)
     return self.tweets.to_a if args.size > 1 || args.size < 1

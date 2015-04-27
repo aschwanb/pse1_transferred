@@ -2,6 +2,9 @@ class Popularity < ActiveRecord::Base
   belongs_to :popular, polymorphic: true
   serialize :times_used, Array
 
+  @short_interval = 1 # Number of elements in one interval
+  @long_interval = 20 # Number of elements in one interval
+
   # Newest times_used is always at index 0
   # Use unshift to guarantee this
   def get_times_used
@@ -22,7 +25,7 @@ class Popularity < ActiveRecord::Base
   end
 
   def get_trend_long
-
+    # TODO
   end
 
   # Add new times_used entry

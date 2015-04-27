@@ -11,4 +11,12 @@ class AuthorHashtag < ActiveRecord::Base
     self.popularity.set_times_used(number)
   end
 
+  def get_trend_short
+    self.popularity.get_trend_short
+  end
+
+  def get_trend_long
+    self.popularity.get_trend_long
+  end
+
 end
