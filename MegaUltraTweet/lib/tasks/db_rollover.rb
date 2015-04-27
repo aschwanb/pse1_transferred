@@ -11,9 +11,7 @@ class DBRollover
   end
 
   def rollover
-    puts "Reset Startingpoint"
     reset_startingpoint
-    puts "Update Popularities"
     update_popularities
     @scraper.get_tweets(@startingpoint.get_start, @query_depth)
     @trending.build_new

@@ -10,7 +10,9 @@ has_and_belongs_to_many :hashtags
   end
 
   def reset_hashtags
-    self.hashtags.clear
+    if !self.hashtags.nil?
+      self.hashtags.clear
+    end
   end
 
   def set_hashtags(hashtags)
@@ -23,9 +25,9 @@ has_and_belongs_to_many :hashtags
     # TODO: Move number to config file
     top = hashtags.first(10)
     bottom = hashtags.last(10)
-    @trending.reset_hashtags
-    @trending.set_hashtags(top)
-    @trending.set_hashtags(bottom)
+    reset_hashtags
+    set_hashtags(top)
+    set_hashtags(bottom)
   end
 
 end

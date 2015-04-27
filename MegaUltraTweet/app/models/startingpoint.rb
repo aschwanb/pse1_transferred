@@ -13,8 +13,8 @@ class Startingpoint < ActiveRecord::Base
     hashtags = Hashtag.all
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_rank }.reverse
     hashtags.first(number).each do |hashtag|
-      if !@startingpoint.hashtags.include?(hashtag)
-        @startingpoint.hashtags<<hashtag
+      if !self.hashtags.include?(hashtag)
+        self.hashtags<<hashtag
       end
     end
   end
