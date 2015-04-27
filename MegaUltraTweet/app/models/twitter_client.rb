@@ -39,6 +39,7 @@ class TwitterClient
     return output
   end
 
+  # TODO: Still used ?
   def reset_tweets
     @tweets = []
   end
@@ -87,4 +88,8 @@ class TwitterClient
     end
   end
 
+  def delete_old_tweets
+    # TODO: Move number to config file
+    Tweet.destroy_all(['created_at < ?', 3.days.ago])
+  end
 end

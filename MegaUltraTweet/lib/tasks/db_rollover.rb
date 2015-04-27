@@ -13,7 +13,7 @@ class DBRollover
   def rollover
     reset_startingpoint
     update_popularities
-    # TODO: Remove tweets older then n iterations
+    @scraper.delete_old_tweets
     @scraper.get_tweets(@startingpoint.get_start, @query_depth)
     @trending.build_new
   end
