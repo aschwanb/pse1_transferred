@@ -65,11 +65,11 @@ class TwitterClient
       hashtags.each do |h_second|
         if HashtagHashtag.where(hashtag_first: h_first, hashtag_second: h_second).blank?
           pair = HashtagHashtag.create(hashtag_first: h_first, hashtag_second: h_second)
-          pair.create_popularity
+          pair.create_popularity(times_used: [0])
         else
           pair = HashtagHashtag.find_by(hashtag_first: h_first, hashtag_second: h_second)
         end
-        # pair.set_popularity_now(pair.get_popularity_now + 1)
+        pair.set_rank(pair.get_rank + 1)
       end
     end
   end
@@ -79,11 +79,11 @@ class TwitterClient
       hashtag = hashtags.pop
       if AuthorHashtag.where(author: author, hashtag: hashtag).blank?
         pair = AuthorHashtag.create(author: author, hashtag: hashtag)
-        pair.create_popularity
+        pair.create_popularity(times_used: [0])
       else
         pair = AuthorHashtag.find_by(author: author, hashtag: hashtag)
       end
-      # pair.set_popularity_now(pair.get_popularity_now + 1)
+      pair.set_rank(pair.get_rank + 1)
     end
   end
 

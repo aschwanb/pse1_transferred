@@ -14,12 +14,12 @@ class Tweet < ActiveRecord::Base
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
         hashtag = Hashtag.create(text: tag)
-        hashtag.create_popularity
+        hashtag.create_popularity(times_used: [0])
       else
         hashtag = Hashtag.find_by_text(tag)
       end
       self.hashtags<<hashtag
-      # hashtag.set_popularity_now(hashtag.get_popularity_now + 1)
+      hashtag.set_rank(hashtag.get_rank + 1)
     end
   end
 

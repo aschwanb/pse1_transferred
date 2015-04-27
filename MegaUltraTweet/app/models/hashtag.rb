@@ -1,6 +1,7 @@
 class Hashtag < ActiveRecord::Base
   has_and_belongs_to_many :tweets
   has_and_belongs_to_many :startingpoints
+  has_and_belongs_to_many :trendings
   has_many :author_hashtags
   has_one :popularity, as: :popular
 
@@ -14,10 +15,20 @@ class Hashtag < ActiveRecord::Base
     return self.text.to_s
   end
 
+  def get_rank
+    self.popularity.get_times_used
+  end
+
+  def set_rank(number)
+    self.popularity.set_times_used(number)
+  end
+
   # TODO: Refactor ?
   def get_tweets(*args)
     return self.tweets.to_a if args.size > 1 || args.size < 1
     return self.tweets.take(args[0]).to_a
   end
+
+
 
 end
