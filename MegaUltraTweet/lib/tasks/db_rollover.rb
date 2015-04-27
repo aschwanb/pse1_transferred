@@ -20,6 +20,7 @@ class DBRollover
   def reset_startingpoint
     @startingpoint.add_popular_hashtags(@hashtag_nr)
     @startingpoint.remove_unpopular_hashtags(@hashtag_nr)
+    @startingpoint.repair_defaults
     # TODO: Re-add standard hashtags if not present
   end
 

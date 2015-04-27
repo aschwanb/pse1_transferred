@@ -26,6 +26,16 @@ class Startingpoint < ActiveRecord::Base
     end
   end
 
-  # TODO: Re-add standard hashtags if not present
+  def repair_defaults
+    # TODO: Move start to config file
+    start = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
+    start.each do |s|
+      hashtag = Hashtag.find_by_text("##{s}")
+      # TODO: If a hashtag is added, should a less popular one be removed?
+      if !self.hashtags.exists?(hashtag.id)
+        self.hashtags<<hashtag
+      end
+    end
+  end
 
 end
