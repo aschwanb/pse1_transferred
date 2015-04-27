@@ -31,11 +31,13 @@ class Popularity < ActiveRecord::Base
   # Add new times_used entry
   def rollover
     self.times_used.unshift(0)
+    self.save
   end
 
   # Delete oldest times_used entry
   def delete_oldest
     self.times_used.pop
+    self.save
   end
 
 end

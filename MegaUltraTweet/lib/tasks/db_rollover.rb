@@ -14,9 +14,10 @@ class DBRollover
   def reset_startingpoint
     # Use standard set of hashtags
     # Add most popular tags / authors / ...
-    add_hashtags
+    # add_hashtags
     # Remove most unpopular tags / authors / ...
-    remove_hashtags
+    # remove_hashtags
+    update_popularities
 
   end
 
@@ -34,6 +35,10 @@ class DBRollover
   def remove_hashtags
     hashtags = @startingpoint.hashtags
 
+  end
+
+  def update_popularities
+    Popularity.all.each { |p| p.rollover}
   end
   # TODO: Clean db. Remove old tweets ?
   # If so, what happens with old authors, hashtags ... ?
