@@ -3,6 +3,8 @@ class AuthorHashtag < ActiveRecord::Base
   belongs_to :hashtag
   has_one :popularity, as: :popular
 
+  validates :id, :author_id, :hashtag_id, presence: true
+
   def get_rank
     self.popularity.get_times_used
   end

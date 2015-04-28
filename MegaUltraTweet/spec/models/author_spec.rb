@@ -7,6 +7,10 @@ describe Author do
     expect(FactoryGirl.create(:author)).to be_valid
   end
 
+  it "is invalid without a id" do
+    expect(FactoryGirl.build(:author, id: nil)).not_to be_valid
+  end
+
   it "is invalid without a name" do
     expect(FactoryGirl.build(:author, name: nil)).not_to be_valid
   end
@@ -33,8 +37,7 @@ describe Author do
     expect(FactoryGirl.build(:author, created_at: nil)).not_to be_valid
   end
 
-  it "is invalid without a u
-pdated_at" do
+  it "is invalid without a updated_at" do
     expect(FactoryGirl.build(:author, updated_at: nil)).not_to be_valid
   end
 
