@@ -11,8 +11,12 @@ class DBRollover
   end
 
   def rollover
+    # Always update short interval information
     reset_startingpoint
     update_popularities
+    set_new_short(false)
+    # At n times, update long interval information too
+    # set_new_long(false)
     @scraper.delete_old_tweets
     @scraper.get_tweets(
         @startingpoint.get_start,
@@ -29,6 +33,16 @@ class DBRollover
 
   def update_popularities
     Popularity.all.each { |p| p.add_new}
+  end
+
+  def set_new_short(bool)
+    AuthorHashtag.where(new_short: true).all.each { |ah| ah.set_new_short(bool) }
+    HashtagHashtag.where(new_short: true).all.each { |hh| hh.set_new_short(bool) }
+  end
+
+  def set_new_long(bool)
+    AuthorHashtag.where(new_long: true).all.each { |ah| ah.set_new_long(bool) }
+    HashtagHashtag.where(new_long: true).all.each { |hh| hh.set_new_long(bool) }
   end
 
 end

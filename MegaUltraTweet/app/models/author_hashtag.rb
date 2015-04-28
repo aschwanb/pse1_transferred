@@ -24,7 +24,7 @@ class AuthorHashtag < ActiveRecord::Base
   end
 
   def set_new_short(bool)
-    self.new_short = bool
+    self.update(new_short: bool)
   end
 
   def get_new_long?
@@ -32,7 +32,7 @@ class AuthorHashtag < ActiveRecord::Base
   end
 
   def set_new_long(bool)
-    self.new_long = bool
+    self.update(new_long: bool)
   end
 
 end
