@@ -5,6 +5,8 @@ class Tweet < ActiveRecord::Base
   has_and_belongs_to_many :webpages
   has_and_belongs_to_many :hashtags
 
+  validates :id, :text, :retweets, :twitter_id, :author_id, :created_at, :updated_at, presence: true
+
   # TODO: Still used ?
   def by_hashtags(hashtags)
     where(:hashtags => hashtags.map(:text))
