@@ -10,19 +10,20 @@ class DBRollover
     @trending = Trending.first
   end
 
-  def rollover
-    # Always update short interval information
+  def short_rollover
     reset_startingpoint
     update_popularities
     set_new_short(false)
-    # At n times, update long interval information too
-    # set_new_long(false)
     @scraper.delete_old_tweets
     @scraper.get_tweets(
         @startingpoint.get_start,
         MegaUltraTweet::Application::QUERY_DEPTH
         )
     @trending.build_new
+  end
+
+  def long_rollover
+    set_new_long(false)
   end
 
   def reset_startingpoint

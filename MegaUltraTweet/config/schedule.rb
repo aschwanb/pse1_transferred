@@ -8,8 +8,14 @@ set :output, "%s/tmp/cron.log" % [ root ]
 
 
 # Define cron jobs
-every 15.minutes do
+every MegaUltraTweet::Application::INTERVAL_SHORT_TIME do
   command '/usr/bin/date'
-  command '/usr/bin/echo "Running cron job for TwitterScraper"'
-  runner 's = Startingpoint.first; r = DBRollover.new; r.rollover'
+  command '/usr/bin/echo "Cron job for TwitterScraper: Short Rollover"'
+  runner 's = Startingpoint.first; r = DBRollover.new; r.short_rollover'
+end
+
+every MegaUltraTweet::Application::INTERVAL_LONG_TIME do
+  command '/usr/bin/date'
+  command '/usr/bin/echo "Cron job for TwitterScraper: Long Rollover"'
+  runner 's = Startingpoint.first; r = DBRollover.new; r.long_rollover'
 end

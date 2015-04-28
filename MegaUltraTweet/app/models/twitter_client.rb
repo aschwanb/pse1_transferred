@@ -92,4 +92,5 @@ class TwitterClient
   def delete_old_tweets
     Tweet.destroy_all(['created_at < ?', MegaUltraTweet::Application::DELETE_OLDER_TWEETS])
   end
+
 end
