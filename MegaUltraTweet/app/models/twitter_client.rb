@@ -14,8 +14,7 @@ class TwitterClient
   end
 
   def search_simple(query, query_size)
-    # TODO: Recent is not new enough
-    return @client.search(query, :result_type => "recent").take(query_size).to_a
+    return @client.search(query, since: MegaUltraTweet::Application::TWEETS_SINCE_STRING).take(query_size).to_a
   end
 
   def search_since_id(query, query_size, min_id)

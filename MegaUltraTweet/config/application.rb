@@ -31,6 +31,7 @@ module MegaUltraTweet
 
     # Global Variables
     DEFAULT_STARTING_VALUES = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
+    TWEETS_SINCE_STRING = 2.days.ago.strftime("%Y-%m-%d")
     INTERVAL_SHORT_TIME = 15.minutes
     INTERVAL_LONG_TIME = 2.days
     POPULARITY_SHORT_INTERVAL = 1
