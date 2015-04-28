@@ -26,10 +26,6 @@ describe AuthorHashtag do
     it "set the rank of the author_hashtag"
   end
 
-  describe "#get_rank" do
-    it "returns the rank of the author_hashtag"
-  end
-
   describe "#get_trend_short" do
     it "returns the trend_short of the author_hashtag"
   end
