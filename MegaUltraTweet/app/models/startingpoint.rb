@@ -1,6 +1,8 @@
 class Startingpoint < ActiveRecord::Base
   has_and_belongs_to_many :hashtags
 
+  validates :id, :created_at, :updated_at, presence: true
+
   # Search terms that are used for scraping twitter
   # Output as Array of Strings
   def get_start
