@@ -11,21 +11,19 @@ class DBRollover
   end
 
   def short_rollover
-    # reset_startingpoint
-    # update_popularities
-    # set_new_short(false)
-    # @scraper.delete_old_tweets
-    # @scraper.get_tweets(
-    #     @startingpoint.get_start,
-    #     MegaUltraTweet::Application::QUERY_DEPTH
-    #     )
-    # @trending.build_new
-    puts "Hello from short rollover"
+    reset_startingpoint
+    update_popularities
+    set_new_short(false)
+    @scraper.delete_old_tweets
+    @scraper.get_tweets(
+        @startingpoint.get_start,
+        MegaUltraTweet::Application::QUERY_DEPTH
+        )
+    @trending.build_new
   end
 
   def long_rollover
-    # set_new_long(false)
-    puts "Hello from long rollover"
+    set_new_long(false)
   end
 
   def reset_startingpoint
