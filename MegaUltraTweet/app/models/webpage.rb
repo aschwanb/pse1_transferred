@@ -1,6 +1,8 @@
 class Webpage < ActiveRecord::Base
   has_and_belongs_to_many :tweets
 
+  validates :id, :url, :title, :description, :created_at, :updated_at, presence: true
+
   def get_url
     return self.url
   end
