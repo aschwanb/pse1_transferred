@@ -2,7 +2,7 @@ require 'link_thumbnailer'
 
 class Tweet < ActiveRecord::Base
   belongs_to :author
-  has_many :webpages
+  has_and_belongs_to_many :webpages
   has_and_belongs_to_many :hashtags
 
   # TODO: Still used ?
@@ -13,29 +13,29 @@ class Tweet < ActiveRecord::Base
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|
       if Hashtag.where(text: tag).blank?
-        hashtag = Hashtag.create(text: tag, populairity_old: 0, popularity_now: 0)
+        hashtag = Hashtag.create(text: tag)
+        hashtag.create_popularity(times_used: [0])
       else
         hashtag = Hashtag.find_by_text(tag)
       end
       self.hashtags<<hashtag
-      # Update hashtag popularity
-      hashtag.update(popularity_now: hashtag.get_popularity_now + 1 )
-      # If popularity exceedes a certain threshold -> ad hashtag to starting points
-      if hashtag.get_popularity_now >= 50 && !Startingpoint.first.hashtags.include?(hashtag)
-        Startingpoint.first.hashtags<<hashtag
-      end
+      hashtag.set_rank(hashtag.get_rank + 1)
     end
   end
 
   def set_webpages(webpages_array)
-    webpages_array.each do |webpage|
-      nailer = LinkThumbnailer.generate(webpage)
-      puts "Inserting webpage into tweet"
-      self.webpages.create(
-          url: webpage,
-          title: nailer.title,
-          description: nailer.description
-      )
+    webpages_array.each do |url|
+      nailer = LinkThumbnailer.generate(url)
+      if Webpage.where(url: url).blank?
+        webpage = Webpage.create(
+            url: url,
+            title: nailer.title,
+            description: nailer.description
+        )
+      else
+        webpage = Webpage.find_by_url(url)
+      end
+      self.webpages<<webpage
     end if !webpages_array.nil?
   rescue LinkThumbnailer::Exceptions => e
     Rails.logger.debug "DEBUG: Error in LinkThumbnailer" if Rails.logger.debug?
@@ -45,7 +45,7 @@ class Tweet < ActiveRecord::Base
     Rails.logger.debug "DEBUG: HTTP Error while thumbnailing" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
-  # TODO: Find the specific exception and rescue it. The current state is bad practice
+      # TODO: Find the specific exception and rescue it. The current state is bad practice
   rescue Exception => e
     Rails.logger.debug "DEBUG: Unknown error while thumbnailing. Possibly ill formated url?" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
@@ -73,6 +73,7 @@ class Tweet < ActiveRecord::Base
   end
 
   def get_rank
-    return self.get_author.get_followers_count + self.get_retweets_count
+    return self.get_retweets_count + self.get_author.get_rank
   end
+
 end

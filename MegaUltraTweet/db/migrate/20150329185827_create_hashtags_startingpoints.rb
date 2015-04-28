@@ -1,11 +1,8 @@
 class CreateHashtagsStartingpoints < ActiveRecord::Migration
   def change
-    create_table :hashtags_startingpoints, :id => false do |t|
-      t.integer :hashtag_id
-      t.integer :startingpoint_id
+    create_table :hashtags_startingpoints, id: false do |t|
+      t.belongs_to :hashtag, index: true
+      t.belongs_to :startingpoint, index: true
     end
-
-    add_index :hashtags_startingpoints, :hashtag_id
-    add_index :hashtags_startingpoints, :startingpoint_id
   end
 end

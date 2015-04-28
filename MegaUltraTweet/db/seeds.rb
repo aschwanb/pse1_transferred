@@ -7,11 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Seed default starting point and hashtags
-h1 = Hashtag.create(text: "#technology", populairity_old: 0, popularity_now: 0)
-h2 = Hashtag.create(text: "#technologie", populairity_old: 0, popularity_now: 0)
-
+t = Trending.create
 s = Startingpoint.create
 
-s.hashtags<<h1
-s.hashtags<<h2
+MegaUltraTweet::Application::DEFAULT_STARTING_VALUES.each do |p|
+  h = Hashtag.create(text: "##{p}")
+  h.create_popularity(times_used: [0])
+  s.hashtags<<h
+end
 

@@ -7,14 +7,13 @@ class TwitterScraper
   def initialize(query_size, detail)
     @client = TwitterClient.new
     @parser = TweetParser.new
-    @provided_searches = 400  # Add some buffer for user input. Max searches is at 450
-    @used_searches = 0
     @query_size = query_size  # How many results do we request from twitter
     @detail = detail  # How many of the most relevant keywords do we follow up on ?
+    @used_searches = 0
   end
 
   # Scraping for a array of key words
-  def start(query, depth)
+  def get_tweets(query, depth)
     Array(query).each { |keyword| scrape(keyword, depth) }
   end
 
@@ -26,17 +25,21 @@ class TwitterScraper
     depth -= 1
     if depth > 0
       puts "Finished with #{keyword}. Start new branch with #{new_query}"
-      start(new_query, depth)
+      get_tweets(new_query, depth)
     end
   rescue Exceptions::MaxSearchesError => e
-    puts e.message
+    Rails.logger.debug "DEBUG: Maximum Searches Used" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   rescue Twitter::Error => e
-    puts e.message
+    Rails.logger.debug "DEBUG: Error while parsing tweet message" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   end
 
   def run_query(keyword)
     puts "Scraping for \"#{keyword}\" ..."
-    if @provided_searches == @used_searches
+    if MegaUltraTweet::Application::PROVIDED_SEARCHES == @used_searches
       raise Exceptions::MaxSearchesError.new, "Maximum searches for this time window used."
     end
     @used_searches = @used_searches + 1
