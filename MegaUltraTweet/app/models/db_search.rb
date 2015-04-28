@@ -13,6 +13,8 @@ class DbSearch
 
     # Create array with the search terms
     search_terms = query.scan(/\w+/).flatten
+    # Consider only 2 search terms
+    search_terms = search_terms.take(2) if search_terms.size > 2
 
     search_object = multi_search(search_terms, SearchObject.new(search_terms))
     search_object = evaluate(search_object)
