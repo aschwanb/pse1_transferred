@@ -2,7 +2,7 @@ class Author < ActiveRecord::Base
   has_many :tweets
   has_many :author_hashtags
 
-  validates :name, :screen_name, :twitter_id, :friends_count, :followers_count, presence: true
+  validates :name, :screen_name, :twitter_id, :friends_count, :followers_count, :created_at, :updated_at, presence: true
 
   scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
 

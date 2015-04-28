@@ -29,6 +29,15 @@ describe Author do
     expect(FactoryGirl.build(:author, screen_name: nil)).not_to be_valid
   end
 
+  it "is invalid without a created_at" do
+    expect(FactoryGirl.build(:author, created_at: nil)).not_to be_valid
+  end
+
+  it "is invalid without a u
+pdated_at" do
+    expect(FactoryGirl.build(:author, updated_at: nil)).not_to be_valid
+  end
+
   describe "#get_name" do
     it "returns the name of the author" do
       author = FactoryGirl.create(:author, name: "John")
