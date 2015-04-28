@@ -19,4 +19,20 @@ class AuthorHashtag < ActiveRecord::Base
     self.popularity.get_trend_long
   end
 
+  def get_new_short?
+    self.new_short?
+  end
+
+  def set_new_short(bool)
+    self.new_short = bool
+  end
+
+  def get_new_long?
+    self.new_long?
+  end
+
+  def set_new_long(bool)
+    self.new_long = bool
+  end
+
 end

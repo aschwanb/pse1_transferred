@@ -14,6 +14,7 @@ class TwitterClient
   end
 
   def search_simple(query, query_size)
+    # TODO: Recent is not new enough
     return @client.search(query, :result_type => "recent").take(query_size).to_a
   end
 

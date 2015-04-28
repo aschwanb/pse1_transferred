@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "author_hashtags", force: :cascade do |t|
     t.integer "author_id",  limit: 4
     t.integer "hashtag_id", limit: 4
+    t.boolean "new_short",  limit: 1, default: true
+    t.boolean "new_long",   limit: 1, default: true
   end
 
   add_index "author_hashtags", ["author_id"], name: "index_author_hashtags_on_author_id", using: :btree
@@ -34,8 +36,10 @@ ActiveRecord::Schema.define(version: 20150426081400) do
   create_table "hashtag_hashtags", force: :cascade do |t|
     t.integer  "hashtag_first_id",  limit: 4
     t.integer  "hashtag_second_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.boolean  "new_short",         limit: 1, default: true
+    t.boolean  "new_long",          limit: 1, default: true
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   create_table "hashtags", force: :cascade do |t|
