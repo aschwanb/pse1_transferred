@@ -44,6 +44,7 @@ class TwitterClient
     @tweets = []
   end
 
+  # TODO: What if tweets has no hashtag (theoretically, this is not possible, because we are searching by hashtag)
   def save_tweet(tweet)
     author = @parser.get_author(tweet)
     if Tweet.where(twitter_id: tweet.id).blank?
@@ -53,7 +54,7 @@ class TwitterClient
           twitter_id: tweet.id
       )
       t.set_webpages(@parser.parse_webpages(tweet))
-      t.set_hashtags(@parser.parse_hashtags(tweet))
+      t.set_hashtags(@parser.parse_hashtags(tweet)) unless @parser.parse_hashtags(tweet).nil?
       generate_hashtag_hashtag(t.get_hashtags)
       generate_author_hashtag(t.get_author, t.get_hashtags)
     end
