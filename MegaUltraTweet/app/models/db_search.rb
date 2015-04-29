@@ -13,6 +13,8 @@ class DbSearch
 
     # Create array with the search terms
     search_terms = query.scan(/\w+/).flatten
+    # Consider only 2 search terms
+    search_terms = search_terms.take(2) if search_terms.size > 2
 
     search_object = multi_search(search_terms, SearchObject.new(search_terms))
     search_object = evaluate(search_object)
@@ -98,7 +100,7 @@ class DbSearch
     rel_hashtags.delete_if { |hashtag| hashtags.include?(hashtag)}
 
     rel_authors = sorter.sort_by_rank(rel_authors)
-    rel_hashtags = sorter.sort_by_popularity(rel_hashtags)
+    rel_hashtags = sorter.sort_by_rank(rel_hashtags)
 
     search_object.set_tweets(tweets)
     search_object.set_authors(rel_authors)
