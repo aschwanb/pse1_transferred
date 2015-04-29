@@ -2,6 +2,11 @@
 
 @import "common";
 
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
 .search {
   @include margin_side();
   margin-top: 1em;
@@ -19,12 +24,11 @@
 
   border: 1px solid $color2;
   border-right: none;
-  -webkit-border-top-left-radius: 2px;
-  -webkit-border-bottom-left-radius: 2px;
-  -moz-border-radius-topleft: 2px;
-  -moz-border-radius-bottomleft: 2px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 2px 0 0 2px;
+  -moz-border-radius: 2px 0 0 2px;
+  border-radius: 2px 0 0 2px;
 
   padding-left: 2em;
   background: #fff;
@@ -38,12 +42,11 @@
 
   border: 1px solid $color2;
   border-left: none;
-  -webkit-border-top-right-radius: 2px;
-  -webkit-border-bottom-right-radius: 2px;
-  -moz-border-radius-topright: 2px;
-  -moz-border-radius-bottomright: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
+
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 0 2px 2px 0;
+  -moz-border-radius: 0 2px 2px 0;
+  border-radius: 0 2px 2px 0;
 
   outline: none;
   background: #fff;
