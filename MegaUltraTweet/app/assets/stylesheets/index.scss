@@ -20,6 +20,12 @@
   line-height: 1;
 }
 
+html, body {
+  max-width: 2000px;
+  width: 100%;
+  height: auto;
+}
+
 // Get rid of the dotted line around buttons when using firefox
 a:focus, a:active,
 button::-moz-focus-inner,
