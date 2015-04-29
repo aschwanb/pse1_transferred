@@ -11,6 +11,7 @@ class Hashtag < ActiveRecord::Base
 
   scope :by_hashtag, -> (hashtag) { where text: hashtag}
 
+  # TODO: Handle hashtags that have no tweets
   def get_text
     return self.text.to_s
   end

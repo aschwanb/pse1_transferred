@@ -11,12 +11,13 @@ class DBRollover
     @trending = Trending.first
   end
 
-  # TODO: Rescue nil class error
   def short_rollover
     reset_startingpoint
     update_popularities
     set_new_short(false)
     @client.delete_old_tweets
+    # TODO: Delete old popularity entries if to long ?
+    # TODO: Delete old links depending on last updated
     @scraper.get_tweets(
         @startingpoint.get_start,
         MegaUltraTweet::Application::QUERY_DEPTH
