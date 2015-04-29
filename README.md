@@ -31,10 +31,10 @@ mysql -u root -p db/development.mysql < dump.sql
 
 # Run Tests
 In das Verzeichnis wechseln
-...
+```
 cd ../MegaUltraTweet
-...
+```
 Test ausführen:
-...
+```
 rspec spec
-...
+```
