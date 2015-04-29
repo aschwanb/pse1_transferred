@@ -7,6 +7,7 @@ class DBRollover
         MegaUltraTweet::Application::GET_THIS_MANY,
         MegaUltraTweet::Application::QUERY_DETAIL
         )
+    @client = TwitterClient.new
     @trending = Trending.first
   end
 
@@ -14,7 +15,7 @@ class DBRollover
     reset_startingpoint
     update_popularities
     set_new_short(false)
-    @scraper.delete_old_tweets
+    @client.delete_old_tweets
     @scraper.get_tweets(
         @startingpoint.get_start,
         MegaUltraTweet::Application::QUERY_DEPTH
