@@ -22,6 +22,10 @@ class DBRollover
         MegaUltraTweet::Application::QUERY_DEPTH
         )
     @trending.build_new
+  rescue NoMethodError
+    Rails.logger.debug "DEBUG: Error during rollover" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   end
 
   def long_rollover
