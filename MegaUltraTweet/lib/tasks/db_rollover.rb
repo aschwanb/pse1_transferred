@@ -11,6 +11,7 @@ class DBRollover
     @trending = Trending.first
   end
 
+  # TODO: Rescue nil class error
   def short_rollover
     reset_startingpoint
     update_popularities
