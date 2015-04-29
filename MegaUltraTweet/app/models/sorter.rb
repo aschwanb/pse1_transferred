@@ -1,5 +1,6 @@
 class Sorter
 
+  # TODO : Refactor this
   #Returns array in which records are sorted by popularity (Descending)
   def sort_by_rank(records)
     records = records.uniq.sort_by! {|record| record.get_rank}

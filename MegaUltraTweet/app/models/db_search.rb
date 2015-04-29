@@ -135,8 +135,8 @@ class DbSearch
     return Array.new if hashtags.empty?
     pairs = []
     hashtags.each do |hashtag|
-      pairs.concat(HashtagPair.where(:hashtag_first_id => hashtag.id).order(popularity_now: :desc).limit(30))
-      # pairs.concat(HashtagPair.where(:hashtag_second_id => hashtag.id).order(popularity_now: :desc).limit(30))
+      pairs.concat(HashtagPair.where(hashtag_first_id: hashtag.id).order(popularity_now: :desc).limit(30))
+      pairs.concat(HashtagPair.where(hashtag_second_id: hashtag.id).order(popularity_now: :desc).limit(30))
     end
     return pairs
   end
