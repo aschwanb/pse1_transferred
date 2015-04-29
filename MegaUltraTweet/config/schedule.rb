@@ -5,7 +5,7 @@
 root = File.expand_path(File.dirname(File.dirname(__FILE__)))
 require_relative '../config/application'
 set :environment, "development"
-set :output, "%s/tmp/cron.log" % [ root ]
+set :output, "%s/log/cron.log" % [ root ]
 
 # Define cron jobs
 every MegaUltraTweet::Application::INTERVAL_SHORT_TIME do
