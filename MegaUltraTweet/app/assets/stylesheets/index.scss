@@ -249,12 +249,7 @@ a:hover li .link-preview-descr {
 /*}*/
 
 /* Media */
-@media only screen and  (max-width: 800px) {
-  body {
-    width: 100%;
-  }
 
-}
 
 @media only screen and (max-width: 450px) {
   .logo {
@@ -265,5 +260,8 @@ a:hover li .link-preview-descr {
   }
   .search-button {
     width: 15%
+  }
+  .list li.link-preview {
+    padding: 1em 1em 1em 1em;
   }
 }
