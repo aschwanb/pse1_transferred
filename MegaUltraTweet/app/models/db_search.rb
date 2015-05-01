@@ -21,18 +21,6 @@ class DbSearch
     return search_object
   end
 
-  def continuous_search(hashtags, anchor)
-    cont_sobjs = []
-    hashtags = hashtags.scan(/\w+/).flatten
-    hashtags.each do |hashtag|
-      search_terms = Array.new
-      search_terms.append(anchor)
-      search_terms.append(hashtag)
-      cont_sobjs.append(evaluate(multi_search(search_terms, SearchObject.new(search_terms))))
-    end
-    return cont_sobjs
-  end
-
   private
 
   def single_search(search_term, search_object)
