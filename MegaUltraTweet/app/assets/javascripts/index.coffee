@@ -5,51 +5,14 @@
 #= require jquery
 #= require wiselinks
 
-
-#(($) ->
-#  msnry_data = {
-#    columnWidth: 200,
-#    itemSelector: '.item'
-#  }
-#  msnry = new Masonry('#container', msnry_data)
-#)jQuery
-
-
+# initialize wiselinks
 $(document).ready ->
   window.wiselinks = new Wiselinks('#content')
 
+# toggle loading animation on and off
 $(document).on 'page:loading', ->
   $('.se-pre-con').fadeIn 'fast'
 $(document).on 'page:always', ->
   $('.se-pre-con').fadeOut 'fast'
 $(document).ready ->
   $('.se-pre-con').fadeOut 'slow'
-
-
-#$(window).on 'page:load', ->
-#  $('.se-pre-con').fadeOut 'slow'
-#
-#$(window).on 'page:fetch', ->
-#  $('.se-pre-con').fadeIn 'slow'
-#
-#$(window).on 'page:before-unload', ->
-#  $('.se-pre-con').fadeOut 'slow'
-#
-#$(window).on 'page:change', ->
-#  $('.se-pre-con').fadeOut 'slow'
-#
-#$(window).on 'page:restore', ->
-#  $('.se-pre-con').fadeOut 'slow'
-#
-#$(window).on 'page:update', ->
-#  $('.se-pre-con').fadeOut 'slow'
-#
-#$(window).on 'before-change', ->
-#  $('.se-pre-con').fadeOut 'slow'
-
-
-#$(window).addEventListener 'page:restore', ->
-#  $('.se-pre-con').fadeOut 'slow'
-
-#$(document).on 'page:fetch', -> $('.se-pre-con').fadeIn 'slow'
-#$(document).on 'page:receive', -> $('.se-pre-con').fadeOut 'slow'
