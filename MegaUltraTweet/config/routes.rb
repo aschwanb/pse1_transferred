@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'index/find'
   get 'index/about'
   get 'index/search'
-  get 'index/db_search'
+  match 'index/db_search' ,via: [:get, :post] , :path => '/search/'
   get 'index/cont_search'
   get 'index/db_entry'
 
