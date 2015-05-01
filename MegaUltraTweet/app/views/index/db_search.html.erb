@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" id="content">
   <% if !@sobj.nil? %>
       <% if @sobj.is_successful? %>
           <% tweets = @sobj.get_tweets %>
@@ -50,7 +50,7 @@
 
               <ul>
                 <% hashtags.take(10).each do |hashtag| %>
-                    <%= link_to content_tag(:li, hashtag.text), action: "db_search", controller: "index", q: hashtag.text %>
+                    <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: hashtag.text}, data: {push: true}) %>
                 <% end %>
 
                 <% hts = "" %>
@@ -66,7 +66,7 @@
                   </div>
                   <ul>
                     <% authors.take(20).each do |author| %>
-                        <%= link_to content_tag(:li, "@"+author.screen_name), action: "db_search", controller: "index", q: "@"+author.screen_name %>
+                        <%= link_to content_tag(:li, "@"+author.screen_name), {action: "db_search", controller: "index", q: "@"+author.screen_name}, data: {push: true} %>
                     <% end %>
                   </ul>
                 </div>

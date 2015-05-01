@@ -20,13 +20,13 @@
   </nav>
 </div>
 <div class="wrapper">
-<%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search") do %>
+<%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
     <%= search_field_tag(:q, nil, class: "search-field") %>
     <%= submit_tag("&#10148;".html_safe, :name => nil, class: "search-button") %>
 <% end %>
 </div>
 <body>
-<div class="se-pre-con"></div>
+<div id="loader" class="se-pre-con"></div>
 <%= yield %>
 
 </body>
