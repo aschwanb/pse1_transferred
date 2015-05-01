@@ -1,15 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'search/search'
-
   root 'index#start'
-  get 'index/find'
-  get 'index/about'
-  get 'index/search'
-  match 'index/db_search' ,via: [:get, :post] , :path => '/search/'
-  get 'index/cont_search'
-  get 'index/db_entry'
-
+  get 'index/about', path: '/about'
+  match 'index/db_search' ,via: [:get, :post] , path: '/search'
+  get 'index/db_entry', path: '/entries'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -7,14 +7,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<div class="dev" style="display: none">
+<div class="dev">
   <div>DEV MENU</div>
   <nav>
     <ul>
       <li><%= link_to("Landing", root_path) %></li>
       <li><%= link_to("About", index_about_path) %></li>
-      <li><%= link_to("Search", index_search_path) %></li>
-      <li><%= link_to("Find", index_find_path) %></li>
       <li><%= link_to("DB Entries", index_db_entry_path) %></li>
     </ul>
   </nav>
