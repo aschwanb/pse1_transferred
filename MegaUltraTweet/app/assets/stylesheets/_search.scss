@@ -3,6 +3,7 @@
 @import "common";
 
 input {
+  -moz-appearance: none;
   -webkit-appearance: none;
   border-radius: 0;
 }
@@ -32,6 +33,7 @@ input {
 
   padding-left: 2em;
   background: #fff;
+  color: $color2;
 }
 
 .search-button {
