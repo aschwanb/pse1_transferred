@@ -29,6 +29,9 @@ module MegaUltraTweet
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 
+    # Config for custom error pages
+    config.exceptions_app = self.routes
+
     # Global Variables
     DEFAULT_STARTING_VALUES = %w[ Technology Smartphone Phone Tablet Mobile Wireless PC TV Bluetooth WiFi Notebook Laptop Computer Web Electronics VR Watch Portable Processor Internet Robotics Drone CPU GSM LTE LCD Nano LED OLED HD Cmos Digital SLR DSLR Smart Screen Microphone Speaker ]
     TWEETS_SINCE_STRING = 2.days.ago.strftime("%Y-%m-%d")
