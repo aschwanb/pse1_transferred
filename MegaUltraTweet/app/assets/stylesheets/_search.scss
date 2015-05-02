@@ -9,6 +9,13 @@ input {
   -webkit-appearance: none;
   border-radius: 0;
 }
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
 
 #search-wrapper {
   margin-top: 2em;
@@ -26,6 +33,7 @@ input {
   width: 90%;
   height: 100%;
 
+  outline: none;
   border: 1px solid $color2;
   border-right: none;
 
@@ -97,7 +105,7 @@ input {
 .home-icon {
   float: left;
   height: $search_height - 0.1em;
-  width: auto;
+  width: 2em;
   margin-right: 1%;
   margin-top: 0.05em;
 }
