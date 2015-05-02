@@ -2,7 +2,7 @@
 
 @import "common";
 
-$search_height: 1.25em;
+$search_height: 2.5em;
 
 input {
   -moz-appearance: none;
@@ -10,21 +10,21 @@ input {
   border-radius: 0;
 }
 
-.search {
-  display: table;
-  width: 100%;
-  @include margin_side();
-  margin-top: 1em;
-  padding: 0;
+#search-wrapper {
+  margin-top: 2em;
   height: $search_height;
-  font-size: 2em;
-  border-radius: 10px;
+  @include margin_side();
+}
+
+.search {
+  overflow: hidden;
+  height: $search_height;
 }
 
 .search-field {
+  float: left;
+  width: 90%;
   height: 100%;
-  width: 100%;
-  vertical-align: top;
 
   border: 1px solid $color2;
   border-right: none;
@@ -37,16 +37,19 @@ input {
   padding-left: 2em;
   background: #fff;
   color: $color2;
+
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
 }
 
 .search-button {
-  width: 100%;
-  height: 100%;
-  vertical-align: top;
+  float: left;
+  width: 10%;
+  font-size: 2em;
+  height: $search_height/2;
 
   background: #fff;
   color: $color2;
-
   border: 1px solid $color2;
   border-left: none;
 
@@ -57,44 +60,51 @@ input {
 
   outline: none;
   cursor: pointer;
-  font-size: 1em;
- // font-size-adjust: 0.4;
   text-align: right;
   padding-right: 0.5em;
-}
-.js-search-button-focus {
-  background: $color2;
-  color: #fff;
-}
-.search-button:hover {
-  color: $color1;
+
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
 }
 
+//.js-search-button-focus {
+//  background: $color2;
+//  color: #fff;
+//}
+//.search-button:hover {
+//  color: $color1;
+//}
+
 .search-button:active, .search-button:focus {
-  text-align: right;
   color: $color3;
-  @include transition(color, 0.1s, linear, 0s);
+  @include transition(color, 0.1s);
 }
 
 .search-field:focus, .search-field:active {
   background: $color2;
   color: #ffffff;
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
 }
 
-//.search-field:focus + .search-button, .search-field:active + .search-button {
-//  background: $color2;
-//  color: #ffffff;
-//}
+.search-field:focus + .search-button, .search-field:active + .search-button {
+  background: $color2;
+  color: #ffffff;
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
+}
 
 .home-icon {
-  vertical-align: middle;
-  height: $search_height - 0.05em;
-  width: $search_height + 0.25em;
+  float: left;
+  height: $search_height - 0.1em;
+  width: auto;
+  margin-right: 1%;
+  margin-top: 0.05em;
 }
 
 #home-icon-inner {
   fill: rgba(0,0,0,0);
-  @include transition(fill, 0.5s, linear, 0s);
+  @include transition(fill, 0.5s);
 }
 #home-icon-outer path{
   fill: $color2;
@@ -102,50 +112,50 @@ input {
 
 .home-icon:hover #home-icon-inner {
   fill: $color2;
-  @include transition(fill, 0.5s, linear, 0s);
+  @include transition(fill, 0.5s);
 }
 
-.continue-button {
-  margin-top: 1em;
-  width: 100%;
-  height: auto;
-  padding: 1em;
+//.continue-button {
+//  margin-top: 1em;
+//  width: 100%;
+//  height: auto;
+//  padding: 1em;
+//
+//  border: 1px solid $color2;
+//  -webkit-border-radius: 2px;
+//  -moz-border-radius: 2px;
+//  border-radius: 2px;
+//  outline: none;
+//  background: #fff;
+//  color: $color2;
+//  cursor: pointer;
+//  font-size: 1em;
+//  text-align: center;
+//}
+//
+//.continue-button:hover {
+//  background: $color2;
+//  color: #ffffff;
+//}
+//
+//.continue-button:focus, .continue-button:active {
+//  border-color: $color1;
+//  color: $color1;
+//}
 
-  border: 1px solid $color2;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  outline: none;
-  background: #fff;
-  color: $color2;
-  cursor: pointer;
-  font-size: 1em;
-  text-align: center;
-}
-
-.continue-button:hover {
-  background: $color2;
-  color: #ffffff;
-}
-
-.continue-button:focus, .continue-button:active {
-  border-color: $color1;
-  color: $color1;
-}
-
-.container-fixed-home {
-  width: 1.5em;
-  height: $search_height;
-  display:table-cell;
-}
-
-.container-dynamic-input {
-  width: auto;
-  height: $search_height;
-  display:table-cell;
-}
-.container-fixed-button {
-  width: 10%;
-  height: $search_height;
-  display:table-cell;
-}
+//.container-fixed-home {
+//  width: 1.5em;
+//  height: $search_height;
+//  display:table-cell;
+//}
+//
+//.container-dynamic-input {
+//  width: auto;
+//  height: $search_height;
+//  display:table-cell;
+//}
+//.container-fixed-button {
+//  width: 10%;
+//  height: $search_height;
+//  display:table-cell;
+//}

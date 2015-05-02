@@ -249,10 +249,12 @@ a:hover li .link-preview-descr {
   .logo {
     width: auto;
   }
-
-//  .search-button {
-//    width: 15%
-//  }
+  .search-field {
+    width: 85%;
+  }
+  .search-button {
+    width: 15%
+  }
   .list li.link-preview {
     padding: 1em 1em 1em 1em;
   }

@@ -18,17 +18,20 @@
   </nav>
 </div>
 <div class="wrapper">
+  <div id="search-wrapper">
+  <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
   <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
-      <div class="container-fixed-home">
-        <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
-      </div>
-      <div class="container-dynamic-input">
+      <!--<div class="container-fixed-home">-->
+
+      <!--</div>-->
+      <!--<div class="container-dynamic-input">-->
         <%= search_field_tag(:q, nil, class: "search-field") %>
-      </div>
-      <div class="container-fixed-button">
+      <!--</div>-->
+      <!--<div class="container-fixed-button">-->
         <%= submit_tag("&#10148;".html_safe, name: nil, class: "search-button") %>
-      </div>
+      <!--</div>-->
   <% end %>
+  </div>
 </div>
 <body>
 <div id="loader" class="se-pre-con"></div>
