@@ -33,7 +33,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   width: 90%;
   height: 100%;
 
-  outline: $color2;
   border: 1px solid $color2;
   border-right: none;
 
@@ -66,7 +65,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   -moz-border-radius: 0 2px 2px 0;
   border-radius: 0 2px 2px 0;
 
-  outline: none;
   cursor: pointer;
   text-align: right;
   padding-right: 0.5em;
@@ -90,7 +88,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .search-field:focus, .search-field:active {
-  outline: $color2;
   background: $color2;
   color: #ffffff;
   @include transition(background, 0.3s);
