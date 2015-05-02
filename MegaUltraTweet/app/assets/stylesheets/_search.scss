@@ -73,32 +73,92 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   @include transition(color, 0.3s);
 }
 
-//.js-search-button-focus {
-//  background: $color2;
-//  color: #fff;
+.search-button {
+  &:hover polygon, &:focus polygon {
+    fill: $color1;
+    @include transition(fill, 0.3s);
+  }
+  &:active polygon {
+    fill: $color3;
+    @include transition(fill, 0.3s);
+  }
+}
+
+//.search-button:active, .search-button:focus {
+//    color: $color3;
+//    @include transition(color, 0.1s);
+//  }
+
+//.search-button:hover {
+//  color: $color1;
+//  @include transition(color, 0.3s);
 //}
-.search-button:hover {
-  color: $color1;
-  @include transition(color, 0.3s);
+
+.search-field {
+  &:focus, &:active {
+    background: $color2;
+    color: #ffffff;
+    @include transition(background, 0.3s);
+    @include transition(color, 0.3s);
+
+    + .search-button {
+      background: $color2;
+      color: #ffffff;
+      @include transition(background, 0.3s);
+      @include transition(color, 0.3s);
+
+      polygon {
+        fill: #fff;
+        @include transition(fill, 0.3s);
+      }
+
+      &:hover polygon {
+        fill: $color1;
+        @include transition(fill, 0.3s);
+      }
+    }
+  }
 }
 
-.search-button:active, .search-button:focus {
-  color: $color3;
-  @include transition(color, 0.1s);
-}
+//.search-field:focus, .search-field:active {
+//  background: $color2;
+//  color: #ffffff;
+//  @include transition(background, 0.3s);
+//  @include transition(color, 0.3s);
+//}
 
-.search-field:focus, .search-field:active {
-  background: $color2;
-  color: #ffffff;
-  @include transition(background, 0.3s);
-  @include transition(color, 0.3s);
-}
+//.search-field:focus + .search-button, .search-field:active + .search-button {
+//  background: $color2;
+//  color: #ffffff;
+//  @include transition(background, 0.3s);
+//  @include transition(color, 0.3s);
+//}
+//.search-field:focus + .search-button:hover, .search-field:active + .search-button:hover {
+//  color: $color1;
+//  @include transition(color, 0.3s);
+//}
 
-.search-field:focus + .search-button, .search-field:active + .search-button {
-  background: $color2;
-  color: #ffffff;
-  @include transition(background, 0.3s);
-  @include transition(color, 0.3s);
+//.search-field:focus + .search-button polygon, .search-field:active + .search-button polygon{
+//  fill: #fff;
+//  @include transition(fill, 0.3s);
+//}
+//.search-field:focus + .search-button:hover polygon, .search-field:active + .search-button:hover polygon{
+//  fill: $color1;
+//  @include transition(fill, 0.3s);
+//}
+//.search-field:focus + .search-button:focus polygon, .search-field:active + .search-button:focus polygon{
+//  fill: $color3;
+//  @include transition(fill, 0.3s);
+//}
+
+.submit-arrow {
+  width: 1.25em;
+  height: 0.65em;
+  margin-top: 0.2em;
+}
+.submit-arrow polygon {
+  fill: $color2;
+  @include transition(fill, 0.3s);
 }
 
 .home-icon {

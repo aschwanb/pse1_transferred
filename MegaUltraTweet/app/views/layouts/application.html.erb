@@ -19,18 +19,13 @@
 </div>
 <div class="wrapper">
   <div id="search-wrapper">
-  <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
-  <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
-      <!--<div class="container-fixed-home">-->
-
-      <!--</div>-->
-      <!--<div class="container-dynamic-input">-->
+    <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
+    <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
         <%= search_field_tag(:q, nil, class: "search-field") %>
-      <!--</div>-->
-      <!--<div class="container-fixed-button">-->
-        <%= submit_tag("&#10148;".html_safe, name: nil, class: "search-button") %>
-      <!--</div>-->
-  <% end %>
+        <%= button_tag(type: "submit", class: "search-button") do %>
+            <%= embedded_svg('submit_arrow_02.svg', class: "submit-arrow") %>
+        <% end %>
+    <% end %>
   </div>
 </div>
 <body>
