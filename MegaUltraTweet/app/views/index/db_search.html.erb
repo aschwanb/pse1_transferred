@@ -1,12 +1,13 @@
 <div class="wrapper" id="content">
+
   <% if !@sobj.nil? %>
+      <% terms = "" %>
+      <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
+      <% terms = terms.slice(0, terms.length-2) %>
       <% if @sobj.is_successful? %>
           <% tweets = @sobj.get_tweets %>
           <% authors = @sobj.get_authors %>
           <% hashtags = @sobj.get_hashtags %>
-          <% terms = "" %>
-          <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
-          <% terms = terms.slice(0, terms.length-2) %>
           <% crit_hashtags = "" %>
           <% @sobj.get_criteria_hashtags.each { |crit| crit_hashtags += crit.text + ", " } %>
           <% crit_hashtags = crit_hashtags.slice(0, crit_hashtags.length-2) %>
@@ -27,7 +28,8 @@
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Tweets by " : "Tweets containing " %><span id="highlight">
+                  <%= crit_hashtags.blank? ? "Tweets by " : "Tweets containing " %>
+                  <span id="highlight">
                     <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
                 </h1>
               </div>
@@ -43,8 +45,9 @@
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Hashtags used by " : "Hashtags cooccurring with " %><span class="highlight">
-                  <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                  <%= crit_hashtags.blank? ? "Hashtags used by " : "Hashtags cooccurring with " %>
+                  <span class="highlight">
+                    <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
                 </h1>
               </div>
 
@@ -76,14 +79,15 @@
 
               <div class="item-headline-container">
                 <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %><span class="highlight">
-                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %>
+                  <span class="highlight">
+                    <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
                 </h1>
 
               </div>
               <ul>
                 <% pages.take(10).each do |page| %>
-                  <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview" ), page.get_url %>
+                    <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url %>
                 <% end %>
 
               </ul>
@@ -96,13 +100,10 @@
               <h1>Invalid search</h1>
           <% else %>
               <div class="content">
-                <h1>No historical data about <%= @sobj.get_search_terms.first %> available</h1>
-
-                <h1><%= link_to "Search on Twitter instead?", action: "find", controller: "index", query: @sobj.get_search_terms.at(0).to_s %></h1>
+                <h1>No historical data about <span class="highlight"><%= terms %></span> available</h1>
               </div>
           <% end %>
       <% end %>
   <% end %>
-
 
 </div>
