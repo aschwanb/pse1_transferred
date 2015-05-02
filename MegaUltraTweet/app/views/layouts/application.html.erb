@@ -3,7 +3,7 @@
 <head>
   <title>MegaUltraTweet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -18,10 +18,17 @@
   </nav>
 </div>
 <div class="wrapper">
-<%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
-    <%= search_field_tag(:q, nil, class: "search-field") %>
-    <%= submit_tag("&#10148;".html_safe, :name => nil, class: "search-button") %>
-<% end %>
+  <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
+      <div class="container-fixed-home">
+        <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
+      </div>
+      <div class="container-dynamic-input">
+        <%= search_field_tag(:q, nil, class: "search-field") %>
+      </div>
+      <div class="container-fixed-button">
+        <%= submit_tag("&#10148;".html_safe, name: nil, class: "search-button") %>
+      </div>
+  <% end %>
 </div>
 <body>
 <div id="loader" class="se-pre-con"></div>

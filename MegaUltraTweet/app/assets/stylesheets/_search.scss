@@ -2,6 +2,8 @@
 
 @import "common";
 
+$search_height: 1.25em;
+
 input {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -9,19 +11,20 @@ input {
 }
 
 .search {
+  display: table;
+  width: 100%;
   @include margin_side();
   margin-top: 1em;
-  width: auto;
   padding: 0;
-  height: 1.25em;
+  height: $search_height;
   font-size: 2em;
   border-radius: 10px;
 }
 
 .search-field {
-  float: left;
-  width: 90%;
   height: 100%;
+  width: 100%;
+  vertical-align: top;
 
   border: 1px solid $color2;
   border-right: none;
@@ -37,10 +40,12 @@ input {
 }
 
 .search-button {
-  position: relative;
-  float: left;
-  width: 10%;
+  width: 100%;
   height: 100%;
+  vertical-align: top;
+
+  background: #fff;
+  color: $color2;
 
   border: 1px solid $color2;
   border-left: none;
@@ -51,13 +56,15 @@ input {
   border-radius: 0 2px 2px 0;
 
   outline: none;
-  background: #fff;
-  color: $color2;
   cursor: pointer;
   font-size: 1em;
  // font-size-adjust: 0.4;
   text-align: right;
   padding-right: 0.5em;
+}
+.js-search-button-focus {
+  background: $color2;
+  color: #fff;
 }
 .search-button:hover {
   color: $color1;
@@ -66,7 +73,7 @@ input {
 .search-button:active, .search-button:focus {
   text-align: right;
   color: $color3;
-  transition: color 0.1s linear;
+  @include transition(color, 0.1s, linear, 0s);
 }
 
 .search-field:focus, .search-field:active {
@@ -74,9 +81,28 @@ input {
   color: #ffffff;
 }
 
-.search-field:focus + .search-button, .search-field:active + .search-button {
-  background: $color2;
-  color: #ffffff;
+//.search-field:focus + .search-button, .search-field:active + .search-button {
+//  background: $color2;
+//  color: #ffffff;
+//}
+
+.home-icon {
+  vertical-align: middle;
+  height: $search_height - 0.05em;
+  width: $search_height + 0.25em;
+}
+
+#home-icon-inner {
+  fill: rgba(0,0,0,0);
+  @include transition(fill, 0.5s, linear, 0s);
+}
+#home-icon-outer path{
+  fill: $color2;
+}
+
+.home-icon:hover #home-icon-inner {
+  fill: $color2;
+  @include transition(fill, 0.5s, linear, 0s);
 }
 
 .continue-button {
@@ -105,4 +131,21 @@ input {
 .continue-button:focus, .continue-button:active {
   border-color: $color1;
   color: $color1;
+}
+
+.container-fixed-home {
+  width: 1.5em;
+  height: $search_height;
+  display:table-cell;
+}
+
+.container-dynamic-input {
+  width: auto;
+  height: $search_height;
+  display:table-cell;
+}
+.container-fixed-button {
+  width: 10%;
+  height: $search_height;
+  display:table-cell;
 }

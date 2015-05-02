@@ -42,6 +42,13 @@ $major_margin: 5%;
   margin-left: $minor_margin;
 }
 
+@mixin transition($property, $duration, $timing_function, $delay) {
+  -webkit-transition: $property, $duration, $timing_function, $delay;
+  -moz-transition: $property, $duration, $timing_function, $delay;
+  -o-transition: $property, $duration, $timing_function, $delay;
+  transition: $property, $duration, $timing_function, $delay;
+}
+
 @mixin font-face($style-name, $file, $family, $category:"") {
   $filepath: "fonts/" + $family + "/" + $file;
   @font-face {

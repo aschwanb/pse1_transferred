@@ -149,8 +149,6 @@ a:active li, a:focus li{
   bottom: 0;
 }
 
-
-
 /* Testing, derelict code */
 
 .link-preview {}
@@ -175,10 +173,6 @@ a:hover li .link-preview-descr {
   z-index: 9999;
   background: image_url('preloader.gif') center no-repeat #fff;
 }
-
-
-
-
 
 .list-test {
   color: #ffffff;
@@ -255,12 +249,10 @@ a:hover li .link-preview-descr {
   .logo {
     width: auto;
   }
-  .search-field {
-    width: 85%
-  }
-  .search-button {
-    width: 15%
-  }
+
+//  .search-button {
+//    width: 15%
+//  }
   .list li.link-preview {
     padding: 1em 1em 1em 1em;
   }

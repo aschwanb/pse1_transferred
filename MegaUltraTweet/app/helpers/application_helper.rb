@@ -6,4 +6,15 @@ module ApplicationHelper
         content_tag(:p, title, class: "link-preview-title").concat(content_tag(:p, page.get_description, class: "link-preview-descr"))
   end
 
+  def embedded_svg(filename, options = {})
+    assets = Rails.application.assets
+    file = assets.find_asset(filename).body.force_encoding("UTF-8")
+    doc = Nokogiri::HTML::DocumentFragment.parse file
+    svg = doc.at_css "svg"
+    if options[:class].present?
+      svg["class"] = options[:class]
+    end
+    raw doc
+  end
+
 end
