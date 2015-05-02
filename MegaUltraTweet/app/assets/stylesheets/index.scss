@@ -122,6 +122,19 @@ a:active li, a:focus li{
 }
 
 
+/* Link preview */
+.link-preview {}
+.link-preview-title {}
+.link-preview-descr {
+  color: $color1;
+  margin-top: 1em;
+}
+
+a:hover li .link-preview-descr {
+  color: #ffffff;
+}
+
+
 /* Text and headline classes */
 
 .highlight {
@@ -141,18 +154,8 @@ a:active li, a:focus li{
   bottom: 0;
 }
 
-/* Testing, derelict code */
 
-.link-preview {}
-.link-preview-title {}
-.link-preview-descr {
-  color: $color1;
-  margin-top: 1em;
-}
-
-a:hover li .link-preview-descr {
-  color: #ffffff;
-}
+/* Loader */
 
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
@@ -166,6 +169,8 @@ a:hover li .link-preview-descr {
   background: image_url('preloader.gif') center no-repeat #fff;
 }
 
+/* Testing, derelict code */
+
 .list-test {
   color: #ffffff;
   background: $color2;
@@ -175,24 +180,6 @@ a:hover li .link-preview-descr {
   -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
   box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
 }
-
-.full {
-  width: 100%;
-  height: 250px;
-}
-
-.wide {
-  width: 50%;
-}
-
-.medium {
-  width: 30%;
-}
-
-.small {
-  width: 300px;
-}
-
 
 
 /* Media */
