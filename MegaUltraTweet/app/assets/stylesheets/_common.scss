@@ -1,16 +1,6 @@
 /* This file contains the global variables, mixins, etc. */
 
-
 /* Colors */
-
-/*
- * Color scheme old:
- * background: F7F7F7
- * basic text: 2E2F30
- * links: E37F71
- * accent color: 730E15 (ruby red)
- * accent color: D31901
-*/
 
 /*
  * Color scheme new:
@@ -65,27 +55,6 @@ $major_margin: 5%;
 
   @return $prefixed;
 }
-//
-//
-//@mixin transition($values...) {
-//  $transitions: ();
-//  @each $declaration in $values {
-//    $prop: nth($declaration, 1);
-//    $prop-opts: ();
-//    $length: length($declaration);
-//    @for $i from 2 through $length {
-//      $prop-opts: append($prop-opts, nth($declaration, $i));
-//    }
-//    $trans: ($prop, $prop-opts);
-//    $transitions: append($transitions, $trans, comma);
-//  }
-//
-//  -webkit-transition: trans-prefix($transitions, webkit);
-//  -moz-transition: trans-prefix($transitions, moz);
-//  -o-transition: trans-prefix($transitions, o);
-//  transition: $values;
-//}
-
 
 @mixin transition($property: all, $duration: 1s, $timing_function: ease, $delay: 0s) {
   -webkit-transition: $property, $duration, $timing_function, $delay;

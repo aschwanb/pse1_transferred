@@ -50,6 +50,7 @@ h1 {
   padding: 1em 0 1em 0;
 }
 
+
 /* Links */
 
 a, a:visited {
@@ -88,6 +89,7 @@ a:active li, a:focus li{
   @include margin_side();
 }
 
+
 /* Landing page logo */
 
 .logo {
@@ -100,11 +102,8 @@ a:active li, a:focus li{
   height: auto;
 }
 
+
 /* Lists */
-
-.list {
-
-}
 
 .list ul {
   width: 100%;
@@ -122,16 +121,6 @@ a:active li, a:focus li{
   border-bottom: 5px solid #3F3F3F;
 }
 
-//.static-list li:last-child {
-//  border-bottom: 5px solid #3F3F3F;
-//}
-//.link-list a:last-child li {
-//  border-bottom: 5px solid #3F3F3F;
-//}
-//.link-list li:hover {
-//  color: #ffffff;
-//  background: #3F3F3F;
-//}
 
 /* Text and headline classes */
 
@@ -204,49 +193,9 @@ a:hover li .link-preview-descr {
   width: 300px;
 }
 
-/*.grid {*/
-/*width: auto;*/
-/*margin-left: 5px;*/
-/*margin-right: 5px;*/
-/*}*/
 
-/*.grid:after {*/
-/*content: "";*/
-/*display: table;*/
-/*clear: both;*/
-/*}*/
-
-/*.grid-pad {*/
-/*padding: 20px 0 20px 20px;*/
-/*}*/
-
-/*[class*='col-'] {*/
-/*float: left;*/
-/*padding-right: 20px;*/
-/*}*/
-/*[class*='col-']:last-of-type {*/
-/*padding-right: 0;*/
-/*}*/
-
-/*.col-2-3 {*/
-/*width: 66.66%;*/
-/*}*/
-/*.col-1-3 {*/
-/*width: 33.33%;*/
-/*}*/
-
-/*.col-1-2 {*/
-/*width: 50%;*/
-/*}*/
-/*.col-1-4 {*/
-/*width: 25%;*/
-/*}*/
-/*.col-1-8 {*/
-/*width: 12.5%;*/
-/*}*/
 
 /* Media */
-
 
 @media only screen and (max-width: 450px) {
   .logo {
