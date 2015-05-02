@@ -65,33 +65,34 @@ $major_margin: 5%;
 
   @return $prefixed;
 }
-
-
-@mixin transition($values...) {
-  $transitions: ();
-  @each $declaration in $values {
-    $prop: nth($declaration, 1);
-    $prop-opts: ();
-    $length: length($declaration);
-    @for $i from 2 through $length {
-      $prop-opts: append($prop-opts, nth($declaration, $i));
-    }
-    $trans: ($prop, $prop-opts);
-    $transitions: append($transitions, $trans, comma);
-  }
-
-  -webkit-transition: trans-prefix($transitions, webkit);
-  -moz-transition: trans-prefix($transitions, moz);
-  -o-transition: trans-prefix($transitions, o);
-  transition: $values;
-}
-
-//@mixin transition($property, $duration, $timing_function, $delay) {
-//  -webkit-transition: $property, $duration, $timing_function, $delay;
-//  -moz-transition: $property, $duration, $timing_function, $delay;
-//  -o-transition: $property, $duration, $timing_function, $delay;
-//  transition: $property, $duration, $timing_function, $delay;
+//
+//
+//@mixin transition($values...) {
+//  $transitions: ();
+//  @each $declaration in $values {
+//    $prop: nth($declaration, 1);
+//    $prop-opts: ();
+//    $length: length($declaration);
+//    @for $i from 2 through $length {
+//      $prop-opts: append($prop-opts, nth($declaration, $i));
+//    }
+//    $trans: ($prop, $prop-opts);
+//    $transitions: append($transitions, $trans, comma);
+//  }
+//
+//  -webkit-transition: trans-prefix($transitions, webkit);
+//  -moz-transition: trans-prefix($transitions, moz);
+//  -o-transition: trans-prefix($transitions, o);
+//  transition: $values;
 //}
+
+
+@mixin transition($property: all, $duration: 1s, $timing_function: ease, $delay: 0s) {
+  -webkit-transition: $property, $duration, $timing_function, $delay;
+  -moz-transition: $property, $duration, $timing_function, $delay;
+  -o-transition: $property, $duration, $timing_function, $delay;
+  transition: $property, $duration, $timing_function, $delay;
+}
 
 @mixin font-face($style-name, $file, $family, $category:"") {
   $filepath: "fonts/" + $family + "/" + $file;
