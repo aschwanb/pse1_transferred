@@ -79,9 +79,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 //  background: $color2;
 //  color: #fff;
 //}
-//.search-button:hover {
-//  color: $color1;
-//}
+.search-button:hover {
+  color: $color1;
+  @include transition(color, 0.3s);
+}
 
 .search-button:active, .search-button:focus {
   color: $color3;

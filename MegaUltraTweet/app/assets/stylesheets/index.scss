@@ -19,6 +19,9 @@
   padding: 0;
   line-height: 1;
 }
+*:focus {
+  outline: 0;
+}
 
 html, body {
   max-width: 2000px;
