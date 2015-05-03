@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Seed default starting point and hashtags
-t = Trending.create
+trending_short_intervall = Trending.create
+trending_long_intervall = Trending.create
 s = Startingpoint.create
 
 MegaUltraTweet::Application::DEFAULT_STARTING_VALUES.each do |p|
@@ -15,4 +16,7 @@ MegaUltraTweet::Application::DEFAULT_STARTING_VALUES.each do |p|
   h.create_popularity(times_used: [0])
   s.hashtags<<h
 end
+
+trending_short_intervall.build_new_short
+trending_long_intervall.build_new_long
 

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :trending do
+  factory :trending_short do
     
   end
 

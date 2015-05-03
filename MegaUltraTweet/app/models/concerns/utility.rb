@@ -34,7 +34,7 @@ module Utility
   # filters an array of hashtags for the trending ones
   def filter_trending_hashtags(hashtags)
     return Array.new if hashtags.blank?
-    return hashtags & Trending.get_popular
+    return hashtags & Trending.get_popular_short
   end
 
   # unused or not yet used methods:
