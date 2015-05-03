@@ -13,6 +13,7 @@
           <% pages = @sobj.get_webpages %>
 
           <h1 class="main-headline highlight"><%= crit_hashtags %></h1>
+
           <div class="flex-container">
 
             <% paired_hashtags_popular.each_pair do |anchor, sub_hash| %>
@@ -57,24 +58,26 @@
                 <% end %>
             <% end %>
 
-            <div class="flex-item flex-item-link list">
+            <% unless pages.blank? %>
+                <div class="flex-item flex-item-link list">
 
-              <div class="item-headline-container">
-                <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %>
-                  <span class="highlight">
+                  <div class="item-headline-container">
+                    <h1 class="item-headline">
+                      <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %>
+                      <span class="highlight">
                     <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-                </h1>
+                    </h1>
 
-              </div>
-              <ul>
-                <% pages.take(10).each do |page| %>
-                    <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url %>
-                <% end %>
+                  </div>
+                  <ul>
+                    <% pages.take(10).each do |page| %>
+                        <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url %>
+                    <% end %>
 
-              </ul>
+                  </ul>
 
-            </div>
+                </div>
+            <% end %>
 
           </div>
       <% else %>
