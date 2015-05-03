@@ -84,4 +84,15 @@ class TwitterClient
     Tweet.destroy_all(['created_at < ?', MegaUltraTweet::Application::DELETE_OLDER_TWEETS])
   end
 
+  # TODO: This function is not currently used
+  # If you intend on using it, make sure your app
+  # has write access to your twitter account
+  def post_message_on_twitter(message)
+    @client.update(message)
+  rescue Twitter::Error::Unauthorized => e
+    Rails.logger.debug "DEBUG: Error in TwitterClient" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
+  end
+
 end
