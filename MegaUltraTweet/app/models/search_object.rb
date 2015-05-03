@@ -5,7 +5,8 @@ class SearchObject
   @search_terms
   @search_criteria_hashtags
   @search_criteria_authors
-  @paired_hashtags
+  @paired_hashtags_popular
+  @paired_hashtags_trending
   @authors
   @webpages
 
@@ -17,7 +18,8 @@ class SearchObject
     @search_criteria_authors = Array.new
     @search_criteria_hashtags = Array.new
     @webpages = Array.new
-    @paired_hashtags = Hash.new
+    @paired_hashtags_popular = Hash.new
+    @paired_hashtags_trending = Hash.new
   end
 
   def is_valid?
@@ -64,12 +66,21 @@ class SearchObject
     return @search_criteria_authors
   end
 
-  def set_paired_hashtags(anchor, paired_hash)
-    @paired_hashtags.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
+  def set_paired_hashtags_popular(anchor, paired_hash)
+    @paired_hashtags_popular.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
   end
 
-  def get_paired_hashtags
-    return @paired_hashtags
+  def get_paired_hashtags_popular
+    return @paired_hashtags_popular
+  end
+
+  def set_paired_hashtags_trending(anchor, paired_hash)
+    return if paired_hash.blank?
+    @paired_hashtags_trending.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
+  end
+
+  def get_paired_hashtags_trending
+    return @paired_hashtags_trending
   end
 
   def set_authors(authors)

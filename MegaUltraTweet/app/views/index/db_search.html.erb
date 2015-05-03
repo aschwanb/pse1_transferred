@@ -5,7 +5,8 @@
       <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
       <% terms = terms.slice(0, terms.length-2) %>
       <% if @sobj.is_successful? %>
-          <% paired_hashtags = @sobj.get_paired_hashtags %>
+          <% paired_hashtags_popular = @sobj.get_paired_hashtags_popular %>
+          <% paired_hashtags_trending = @sobj.get_paired_hashtags_trending %>
           <% crit_hashtags = "" %>
           <% @sobj.get_criteria_hashtags.each { |crit| crit_hashtags += crit.text + ", " } %>
           <% crit_hashtags = crit_hashtags.slice(0, crit_hashtags.length-2) %>
@@ -14,7 +15,7 @@
           <h1 class="main-headline highlight"><%= crit_hashtags %></h1>
           <div class="flex-container">
 
-            <% paired_hashtags.each_pair do |anchor, sub_hash| %>
+            <% paired_hashtags_popular.each_pair do |anchor, sub_hash| %>
                 <div class="flex-item list">
 
                   <div class="item-headline-container">
@@ -32,6 +33,28 @@
 
                   </ul>
                 </div>
+            <% end %>
+
+            <% unless paired_hashtags_trending.blank? || paired_hashtags_popular.size > 1 %>
+                <% paired_hashtags_trending.each_pair do |anchor, trending_partners| %>
+                    <div class="flex-item list">
+
+                      <div class="item-headline-container">
+                        <h1 class="item-headline">
+                          <%= "Trending Hashtags cooccurring with " %>
+                          <span class="highlight">
+                            <%= anchor.text %></span>
+                        </h1>
+                      </div>
+
+                      <ul>
+                        <% trending_partners.take(10).each do |hashtag| %>
+                            <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                        <% end %>
+
+                      </ul>
+                    </div>
+                <% end %>
             <% end %>
 
             <div class="flex-item flex-item-link list">

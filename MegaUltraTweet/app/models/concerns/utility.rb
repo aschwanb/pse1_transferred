@@ -21,7 +21,7 @@ module Utility
   # given an array of hashtags, returns the tweets containing all given hashtags
   def retrieve_tweets_by_hashtags(hashtags, limit=nil)
     return Array.new if hashtags.empty?
-    limit.nil? ? tweets = hashtags.first.get_tweets() : tweets = hashtags.first.get_tweets(limit)
+    limit.nil? ? tweets = hashtags.first.get_tweets : tweets = hashtags.first.get_tweets(limit)
     if hashtags.size > 1
       hashtags.each_with_index do |el, index|
         next if index == 0
@@ -29,6 +29,12 @@ module Utility
       end
     end
     return tweets
+  end
+
+  # filters an array of hashtags for the trending ones
+  def filter_trending_hashtags(hashtags)
+    return Array.new if hashtags.blank?
+    return hashtags & Trending.get_popular
   end
 
   # unused or not yet used methods:
