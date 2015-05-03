@@ -20,12 +20,13 @@ class Popularity < ActiveRecord::Base
   end
 
   def get_trend(interval)
-    current = self.times_used[0, interval]  # Starting Point and Length
+    current = self.times_used[0, interval] # Starting Point and Length
     old = self.times_used[0+interval, interval]
-    if old.nil?
-      return current.inject(:+)
-    else
+
+    if !old.nil? && old.any?
       return current.inject(:+) - old.inject(:+)
+    else
+      return current.inject(:+)
     end
   end
 
