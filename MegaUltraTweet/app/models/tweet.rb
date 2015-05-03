@@ -1,14 +1,7 @@
-require 'link_thumbnailer'
-
 class Tweet < ActiveRecord::Base
   belongs_to :author
   has_and_belongs_to_many :webpages
   has_and_belongs_to_many :hashtags
-
-  # TODO: Still used ?
-  def by_hashtags(hashtags)
-    where(:hashtags => hashtags.map(:text))
-  end
 
   def set_hashtags(hashtags_array)
     hashtags_array.each do |tag|

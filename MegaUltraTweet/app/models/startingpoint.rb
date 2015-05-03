@@ -1,8 +1,6 @@
 class Startingpoint < ActiveRecord::Base
   has_and_belongs_to_many :hashtags
 
-  # Search terms that are used for scraping twitter
-  # Output as Array of Strings
   def get_start
     out = []
     self.hashtags.to_a.each { |t| out.push(t.get_text) }
@@ -26,12 +24,13 @@ class Startingpoint < ActiveRecord::Base
     end
   end
 
+  # If a hashtag is re-added, a less popular one is removed
   def repair_defaults
     MegaUltraTweet::Application::DEFAULT_STARTING_VALUES.each do |s|
       hashtag = Hashtag.find_by_text("##{s}")
-      # TODO: If a hashtag is added, should a less popular one be removed?
       if !self.hashtags.exists?(hashtag.id)
         self.hashtags<<hashtag
+        self.remove_unpopular_hashtags(1)
       end
     end
   end

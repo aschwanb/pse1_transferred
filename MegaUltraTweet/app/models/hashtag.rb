@@ -9,7 +9,6 @@ class Hashtag < ActiveRecord::Base
   has_many :hashtag_pairs_first, class_name: :HashtagHashtag, foreign_key: :hashtag_first_id
   has_many :hashtag_pairs_second, class_name: :HashtagHashtag, foreign_key: :hashtag_second_id
 
-  # TODO: Handle hashtags that have no tweets
   def get_text
     return self.text.to_s
   end

@@ -1,8 +1,5 @@
 class TweetParser
 
-  def initialize
-  end
-
   def parse_hashtags_a(tweets)
     tmp = []
     tweets.each { |t| tmp += parse_hashtags(t) }

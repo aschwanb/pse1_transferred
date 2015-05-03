@@ -37,7 +37,6 @@ class Popularity < ActiveRecord::Base
     self.save
   end
 
-  # Delete oldest times_used entry
   def delete_oldest
     self.times_used.pop
     self.save

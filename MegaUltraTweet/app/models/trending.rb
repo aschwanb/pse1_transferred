@@ -2,7 +2,6 @@ class Trending < ActiveRecord::Base
 has_and_belongs_to_many :hashtags
 
   def get_popular
-    # TODO: This might be a better solution: Article.find(10).comments.reorder('name')
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
     return hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
   end

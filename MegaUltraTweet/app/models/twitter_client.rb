@@ -1,6 +1,3 @@
-require 'twitter'
-require_relative 'tweet_parser'
-
 class TwitterClient
 
   def initialize
@@ -39,12 +36,6 @@ class TwitterClient
     return output
   end
 
-  # TODO: Still used ?
-  def reset_tweets
-    @tweets = []
-  end
-
-  # TODO: What if tweets has no hashtag (theoretically, this is not possible, because we are searching by hashtag)
   def save_tweet(tweet)
     author = @parser.get_author(tweet)
     if Tweet.where(twitter_id: tweet.id).blank?
