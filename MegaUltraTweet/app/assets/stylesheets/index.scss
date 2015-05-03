@@ -137,6 +137,11 @@ a:hover li .link-preview-descr {
 
 /* Text and headline classes */
 
+.main-headline {
+  font-size: 3em;
+  width: 100%;
+}
+
 .highlight {
   //  color: #D31901;
   //  color: #E37F71;
@@ -148,10 +153,14 @@ a:hover li .link-preview-descr {
   height: auto;
   min-height: 200px;
   width: auto;
+  min-width: 200px;
 }
 .item-headline {
+  width: 100%;
   position: absolute;
   bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -184,17 +193,32 @@ a:hover li .link-preview-descr {
 
 /* Media */
 
-@media only screen and (max-width: 450px) {
-  .logo {
-    width: auto;
-  }
+@media only screen and (max-width: 500px) {
   .search-field {
     width: 85%;
   }
   .search-button {
     width: 15%
   }
+  .main-headline {
+    font-size: 2em;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .logo {
+    width: auto;
+  }
   .list li.link-preview {
     padding: 1em 1em 1em 1em;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .search-field {
+    width: 80%;
+  }
+  .search-button {
+    width: 20%
   }
 }
