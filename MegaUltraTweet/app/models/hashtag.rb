@@ -38,6 +38,4 @@ class Hashtag < ActiveRecord::Base
     return self.tweets.take(args[0]).to_a
   end
 
-
-
 end

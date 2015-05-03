@@ -1,5 +1,3 @@
-
-# TODO: refactor this!
 class SearchObject
   @search_successful
   @search_valid
@@ -8,7 +6,6 @@ class SearchObject
   @search_criteria_hashtags
   @search_criteria_authors
   @paired_hashtags
-  @tweets
   @authors
   @webpages
 
