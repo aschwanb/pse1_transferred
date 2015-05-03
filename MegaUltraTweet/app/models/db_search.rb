@@ -71,8 +71,8 @@ class DbSearch
         paired_hash = build_pair_hash(h, pairs)
         search_object.set_paired_hashtags_popular(h, paired_hash)
 
-        # trending_partners = filter_trending_hashtags(paired_hash.keys)
-        # search_object.set_paired_hashtags_trending(h, trending_partners)
+        trending_partners = filter_trending_hashtags(paired_hash.keys)
+        search_object.set_paired_hashtags_trending(h, trending_partners)
 
       end
 
