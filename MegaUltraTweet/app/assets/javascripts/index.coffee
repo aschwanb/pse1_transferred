@@ -16,4 +16,3 @@ $(document).on 'page:always', ->
   $('.se-pre-con').fadeOut 'fast'
 $(document).ready ->
   $('.se-pre-con').fadeOut 'slow'
-

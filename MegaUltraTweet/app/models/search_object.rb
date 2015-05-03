@@ -3,21 +3,24 @@
 class SearchObject
   @search_successful
   @search_valid
+  @search_deprecated
   @search_terms
   @search_criteria_hashtags
   @search_criteria_authors
+  @paired_hashtags
   @tweets
   @authors
   @webpages
-  @pairs
 
   def initialize(query)
     @search_terms = query
     @search_terms.empty? ? @search_valid = false : @search_valid = true
     @search_successful = false
+    @search_deprecated = false
     @search_criteria_authors = Array.new
     @search_criteria_hashtags = Array.new
     @webpages = Array.new
+    @paired_hashtags = Hash.new
   end
 
   def is_valid?
@@ -30,6 +33,14 @@ class SearchObject
 
   def is_successful?
     return @search_successful
+  end
+
+  def set_search_deprecated
+    @search_deprecated = true
+  end
+
+  def is_deprecated?
+    return @search_deprecated
   end
 
   def add_search_terms(terms)
@@ -56,21 +67,12 @@ class SearchObject
     return @search_criteria_authors
   end
 
-  def set_tweets(tweets)
-    set_search_successful unless tweets.empty?
-    @tweets = tweets
+  def set_paired_hashtags(anchor, paired_hash)
+    @paired_hashtags.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
   end
 
-  def get_tweets
-    return @tweets
-  end
-
-  def set_hashtags(hashtags)
-    @hashtags = hashtags
-  end
-
-  def get_hashtags
-    return @hashtags
+  def get_paired_hashtags
+    return @paired_hashtags
   end
 
   def set_authors(authors)
@@ -87,13 +89,5 @@ class SearchObject
 
   def get_webpages
     return @webpages
-  end
-
-  def set_pairs(pairs)
-    @pairs = pairs
-  end
-
-  def get_pairs
-    return @pairs
   end
 end
