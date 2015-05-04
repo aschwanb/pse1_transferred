@@ -94,12 +94,9 @@ class DbSearch
     end
 
     #Get relevant records and sort them by popularity (rank)
-    webpages = []
     tweets = sorter.sort_by_rank(tweets)
-    tweets.take(100).each do |tweet|
-      webpages.concat(tweet.get_webpages)
-    end
-    webpages.uniq!
+    webpages = retrieve_webpages_by_tweets(tweets)
+    webpages = filter_webpages(webpages)
 
     search_object.set_webpages(webpages)
     search_object.set_search_successful

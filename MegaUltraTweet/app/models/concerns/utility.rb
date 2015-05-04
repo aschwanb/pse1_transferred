@@ -31,10 +31,39 @@ module Utility
     return tweets
   end
 
+  def retrieve_webpages_by_tweets(tweets)
+    webpages = Array.new
+    tweets.each do |tweet|
+      webpages.concat(tweet.get_webpages)
+    end
+    return webpages
+  end
+
   # filters an array of hashtags for the trending ones
   def filter_trending_hashtags(hashtags)
     return Array.new if hashtags.blank?
     return hashtags & Trending.first.get_popular_long
+  end
+
+  # filters out the webpage objects that link to the same article. These have matching title and description.
+  # Webpages with no title are considered valid. (Should this be changed?)
+  def filter_webpages(webpages)
+    return Array.new if webpages.blank?
+    webpages.uniq!
+    filtered_webpages = Array.new(webpages)
+    controll = Array.new
+    webpages.each do |page|
+      controll.include?(page) ? next : controll.append(page)
+      filtered_webpages = filter_for_page(page, filtered_webpages)
+    end
+
+    return filtered_webpages
+  end
+
+  def filter_for_page(page, pages)
+    pages.delete_if {|p| p.get_title.eql?(page.get_title)} unless page.get_title.blank?
+    pages.unshift(page)
+    return pages
   end
 
   # unused or not yet used methods:
