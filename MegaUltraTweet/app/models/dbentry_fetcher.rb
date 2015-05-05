@@ -15,4 +15,11 @@ class DbentryFetcher
     return Tweet.take(5)
   end
 
+  def fetch_trending_short
+    return Trending.get_popular_short
+  end
+
+  def fetch_trending_long
+    return Trending.get_popular_long
+  end
 end
