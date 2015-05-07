@@ -1,3 +1,5 @@
+
+# TODO: move this to index helper
 module ApplicationHelper
   def link_preview_content(page)
     page.get_title.blank? ? title = page.get_url : title = page.get_title
