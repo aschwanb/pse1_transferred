@@ -13,6 +13,7 @@ has_and_belongs_to_many :hashtags
     end
   end
 
+# TODO: Comment on time interval
   def get_popular_short
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
     return hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)

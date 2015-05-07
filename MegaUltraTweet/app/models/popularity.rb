@@ -11,10 +11,12 @@ class Popularity < ActiveRecord::Base
     self.save
   end
 
+  # TODO: comment on time interval
   def get_trend_short
     return self.get_trend(MegaUltraTweet::Application::POPULARITY_SHORT_INTERVAL)
   end
 
+  # TODO: comment on time interval
   def get_trend_long
     return self.get_trend(MegaUltraTweet::Application::POPULARITY_LONG_INTERVAL)
   end
