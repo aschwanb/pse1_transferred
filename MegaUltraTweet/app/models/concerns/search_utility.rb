@@ -1,4 +1,4 @@
-module Utility
+module SearchUtility
 
   def build_pair_hash(anchor, pairs)
     paired_hash = Hash.new

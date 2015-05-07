@@ -1,6 +1,6 @@
 require 'search_object'
 class DbSearch
-  include Utility
+  include SearchUtility
 
   @limit
 
