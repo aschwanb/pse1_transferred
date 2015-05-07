@@ -19,18 +19,22 @@ class HashtagHashtag < ActiveRecord::Base
     self.popularity.get_trend_long
   end
 
+  # TODO: Comment this!
   def get_new_short?
     self.new_short?
   end
 
+  # TODO: Comment this!
   def set_new_short(bool)
     self.update(new_short: bool)
   end
 
+  # TODO: Comment this!
   def get_new_long?
     self.new_long?
   end
 
+  # TODO: Comment this!
   def set_new_long(bool)
     self.update(new_long: bool)
   end
