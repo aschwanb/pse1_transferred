@@ -10,6 +10,7 @@ class TwitterClient
     end
   end
 
+  # TODO: rename this maybe(search_twitter)? we have a simple_search method in db_search. Could lead to confusion.
   def search_simple(query, query_size)
     return @client.search(query, since: MegaUltraTweet::Application::TWEETS_SINCE_STRING).take(query_size).to_a
   end
@@ -30,6 +31,7 @@ class TwitterClient
     return sort(@parser.parse_webpages_a(tweets))
   end
 
+  # TODO: could be moved to sorter
   def sort(input)
     output = input.each_with_object(Hash.new(0)){ |tag, counts| counts[tag] += 1 }
     output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
