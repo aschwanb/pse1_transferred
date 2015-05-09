@@ -17,16 +17,16 @@ class TwitterClient
   end
 
   def get_hashtags_to_h(tweets)
-    return @sorter.sort_by_occurrence(@parser.parse_hashtags_a(tweets))
+    return @sorter.sort_by_occurrence_h(@parser.parse_hashtags_a(tweets))
   end
 
   # TODO: Still used ?
   def get_twitterhandles_to_h(tweets)
-    return @sorter.sort_by_occurrence(@parser.parse_twitterhandles_a(tweets))
+    return @sorter.sort_by_occurrence_h(@parser.parse_twitterhandles_a(tweets))
   end
 
   def get_urls_to_h(tweets)
-    return @sorter.sort_by_occurrence(@parser.parse_webpages_a(tweets))
+    return @sorter.sort_by_occurrence_h(@parser.parse_webpages_a(tweets))
   end
 
   def save_tweet(tweet)

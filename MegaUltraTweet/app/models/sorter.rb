@@ -15,4 +15,11 @@ class Sorter
     return records
   end
 
+  #Returns unique hash in which records are sorted by "record" => "occurrence" (Descending)
+  def sort_by_occurrence_h(input)
+    output = input.each_with_object(Hash.new(0)){ |tag, counts| counts[tag] += 1 }
+    output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
+    return output
+  end
+
 end
