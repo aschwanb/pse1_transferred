@@ -25,7 +25,7 @@ class DBRollover
         )
     @trending_short.build_new_short
     @trending_long.build_new_long
-  rescue NoMethodError
+  rescue NoMethodError => e
     Rails.logger.debug "DEBUG: Error during rollover" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?

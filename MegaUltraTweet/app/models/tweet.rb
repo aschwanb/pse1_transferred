@@ -4,15 +4,11 @@ class Tweet < ActiveRecord::Base
   has_and_belongs_to_many :hashtags
 
   def set_hashtags(hashtags_array)
-    hashtags_array.each do |tag|
-      if Hashtag.where(text: tag).blank?
-        hashtag = Hashtag.create(text: tag)
-        hashtag.create_popularity(times_used: [0])
-      else
-        hashtag = Hashtag.find_by_text(tag)
+    Array(hashtags_array).each do |hashtag|
+      if !self.hashtags.include?(hashtag)
+        self.hashtags<<hashtag
+        hashtag.set_rank(hashtag.get_rank + 1)
       end
-      self.hashtags<<hashtag
-      hashtag.set_rank(hashtag.get_rank + 1)
     end
   end
 

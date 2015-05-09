@@ -7,8 +7,8 @@ class TweetParser
     return tmp
   end
 
-  # Returns twitterhandle strings (not objects) as array
   # TODO: Still used ?
+  # Returns twitterhandle strings (not objects) as array
   def parse_twitterhandles_a(tweets)
     tmp = []
     tweets.each { |t| tmp += parse_twitterhandles(t) }
@@ -22,7 +22,6 @@ class TweetParser
     return tmp
   end
 
-  # TODO: Create hashtag objects here
   def parse_hashtags(tweet)
     return tweet.text.downcase.scan(/#\w+/).flatten
   end
@@ -32,7 +31,6 @@ class TweetParser
     return tweet.text.downcase.scan(/@\w+/).flatten
   end
 
-  # TODO: Create webpage objects here
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
@@ -43,6 +41,28 @@ class TweetParser
     tmp.each { |url| tmp.delete(url) if url.length < 10 }
     return tmp
   end
+
+  # Returns hashtag objects as array
+  def get_hashtags(tweet)
+    hashtags_object_array = []
+    hashtags_string_array = parse_hashtags(tweet)
+    hashtags_string_array.each do |tag|
+      if Hashtag.where(text: tag).blank?
+        hashtag = Hashtag.create(text: tag)
+        hashtag.create_popularity(times_used: [0])
+      else
+        hashtag = Hashtag.find_by_text(tag)
+      end
+      hashtags_object_array.push(hashtag)
+    end
+    return hashtags_object_array
+  end
+
+  def get_webpages(tweet)
+    # TODO: Create webpage objects here
+    # Move logic from save tweet/tweet here
+  end
+
 
   def get_author(tweet)
     if Author.where(twitter_id: tweet.user.id).blank?

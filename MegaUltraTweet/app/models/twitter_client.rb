@@ -38,7 +38,7 @@ class TwitterClient
           twitter_id: tweet.id
       )
       t.set_webpages(@parser.parse_webpages(tweet))
-      t.set_hashtags(@parser.parse_hashtags(tweet)) unless @parser.parse_hashtags(tweet).nil?
+      t.set_hashtags(@parser.get_hashtags(tweet)) unless @parser.get_hashtags(tweet).nil?
       generate_hashtag_hashtag(t.get_hashtags)
       generate_author_hashtag(t.get_author, t.get_hashtags)
     end
