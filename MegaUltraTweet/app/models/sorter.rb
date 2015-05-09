@@ -15,5 +15,4 @@ class Sorter
     return records
   end
 
-
 end
