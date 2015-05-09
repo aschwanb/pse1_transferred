@@ -43,7 +43,7 @@ class TwitterScraper
       raise Exceptions::MaxSearchesError.new, "Maximum searches for this time window used."
     end
     @used_searches = @used_searches + 1
-    @client.search_simple(keyword, @query_size)
+    @client.search_twitter(keyword, @query_size)
   end
 
   # Returns the "detail" most relevant keywords - without the one present in the last query

@@ -10,8 +10,8 @@ class TwitterClient
     end
   end
 
-  # TODO: rename this maybe(search_twitter)? we have a simple_search method in db_search. Could lead to confusion.
-  def search_simple(query, query_size)
+  # Return tweets from twitter that are not older than chosen date
+  def search_twitter(query, query_size)
     return @client.search(query, since: MegaUltraTweet::Application::TWEETS_SINCE_STRING).take(query_size).to_a
   end
 

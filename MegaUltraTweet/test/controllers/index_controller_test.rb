@@ -17,7 +17,7 @@ class IndexControllerTest < ActionController::TestCase
   end
 
   test "should get search" do
-    get :search_simple
+    get :search_twitter
     assert_response :success
   end
 end
