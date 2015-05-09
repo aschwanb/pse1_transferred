@@ -16,20 +16,20 @@ class TwitterClient
   end
 
   def get_hashtags_to_h(tweets)
-    return sort(@parser.parse_hashtags_a(tweets))
+    return sort_by_occurrence_h(@parser.parse_hashtags_a(tweets))
   end
 
   # TODO: Still used ?
   def get_twitterhandles_to_h(tweets)
-    return sort(@parser.parse_twitterhandles_a(tweets))
+    return sort_by_occurrence_h(@parser.parse_twitterhandles_a(tweets))
   end
 
   def get_urls_to_h(tweets)
-    return sort(@parser.parse_webpages_a(tweets))
+    return sort_by_occurrence_h(@parser.parse_webpages_a(tweets))
   end
 
   # TODO: could be moved to sorter
-  def sort(input)
+  def sort_by_occurrence_h(input)
     output = input.each_with_object(Hash.new(0)){ |tag, counts| counts[tag] += 1 }
     output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
     return output
