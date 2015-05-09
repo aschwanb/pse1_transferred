@@ -20,6 +20,6 @@ class DbentryFetcher
   end
 
   def fetch_trending_long
-    return Trending.get_popular_long
+    return Trending.second.get_popular_long
   end
 end
