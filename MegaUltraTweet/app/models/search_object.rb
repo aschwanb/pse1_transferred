@@ -34,6 +34,7 @@ class SearchObject
     return @search_successful
   end
 
+  # TODO: Comment what is depication in this contect?
   def set_search_deprecated
     @search_deprecated = true
   end
@@ -66,6 +67,7 @@ class SearchObject
     return @search_criteria_authors
   end
 
+  # TODO: Could you comment on the anchor ?
   def set_paired_hashtags_popular(anchor, paired_hash)
     @paired_hashtags_popular.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
   end

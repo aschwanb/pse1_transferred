@@ -2,7 +2,6 @@ class Trending < ActiveRecord::Base
 has_and_belongs_to_many :hashtags
 
   # TODO: Find a better solution for trending hashtags long/short
-
   def set_hashtags(hashtags)
     Array(hashtags).each { |h| self.hashtags<<h }
   end

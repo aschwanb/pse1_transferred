@@ -1,31 +1,38 @@
 class TweetParser
 
+  # Returns hashtag strings (not objects) as array
   def parse_hashtags_a(tweets)
     tmp = []
     tweets.each { |t| tmp += parse_hashtags(t) }
     return tmp
   end
 
+  # Returns twitterhandle strings (not objects) as array
+  # TODO: Still used ?
   def parse_twitterhandles_a(tweets)
     tmp = []
     tweets.each { |t| tmp += parse_twitterhandles(t) }
     return tmp
   end
 
+  # Returns urls (not objects)as array
   def parse_webpages_a(tweets)
     tmp = []
     tweets.each { |t| tmp += parse_webpages(t) }
     return tmp
   end
 
+  # TODO: Create hashtag objects here
   def parse_hashtags(tweet)
     return tweet.text.downcase.scan(/#\w+/).flatten
   end
 
+  # TODO: Still used ?
   def parse_twitterhandles(tweet)
     return tweet.text.downcase.scan(/@\w+/).flatten
   end
 
+  # TODO: Create webpage objects here
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)

@@ -15,6 +15,7 @@ class TwitterClient
     return @client.search(query, since: MegaUltraTweet::Application::TWEETS_SINCE_STRING).take(query_size).to_a
   end
 
+  # TODO: Still used ? More than one search method necessary ?
   def search_since_id(query, query_size, min_id)
     return @client.search("#{query} AND since_id:#{min_id}", :result_type => "recent").take(query_size).to_a
   end
@@ -23,6 +24,7 @@ class TwitterClient
     return sort(@parser.parse_hashtags_a(tweets))
   end
 
+  # TODO: Still used ?
   def get_twitterhandles_to_h(tweets)
     return sort(@parser.parse_twitterhandles_a(tweets))
   end
