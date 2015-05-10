@@ -58,11 +58,40 @@ class TweetParser
     return hashtags_object_array
   end
 
+  # Returns webpage objects as array
   def get_webpages(tweet)
-    # TODO: Create webpage objects here
-    # Move logic from save tweet/tweet here
+    webpage_object_array = []
+    webpage_string_array = parse_webpages(tweet)
+    webpage_string_array.each do |url|
+      nailer = LinkThumbnailer.generate(url)
+      if Webpage.where(url: url).blank?
+        webpage = Webpage.create(
+            url: url,
+            title: nailer.title,
+            description: nailer.description
+        )
+      else
+        webpage = Webpage.find_by_url(url)
+      end
+      webpage_object_array.push(webpage)
+    end
+  rescue LinkThumbnailer::Exceptions => e
+    Rails.logger.debug "DEBUG: Error in LinkThumbnailer" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
+  rescue Net::HTTPExceptions => e
+    Rails.logger.debug "DEBUG: HTTP Error while thumbnailing" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
+  # TODO: Find the specific exception and rescue it. The current state is bad practice
+  rescue Exception => e
+    Rails.logger.debug "DEBUG: Unknown error while thumbnailing. Possibly ill formated url?" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
+    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
+  # Even after error: always return the webpages that have been created up to this point
+  ensure
+    return webpage_object_array
   end
-
 
   def get_author(tweet)
     if Author.where(twitter_id: tweet.user.id).blank?
