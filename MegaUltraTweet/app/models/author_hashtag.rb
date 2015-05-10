@@ -3,7 +3,9 @@ class AuthorHashtag < ActiveRecord::Base
   belongs_to :hashtag
   has_one :popularity, as: :popular
 
-  validates :id, :author_id, :hashtag_id, presence: true
+  # TODO: Validation fails if standard Object.create function is used.
+  # Fix validation to validate after creation before inserting into db?
+  # validates :id, :author_id, :hashtag_id, presence: true
 
   def get_rank
     self.popularity.get_times_used
