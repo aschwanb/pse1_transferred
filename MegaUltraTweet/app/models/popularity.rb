@@ -2,6 +2,8 @@ class Popularity < ActiveRecord::Base
   belongs_to :popular, polymorphic: true
   serialize :times_used, Array
 
+  validates :id, :popular_id, :popular_type, :times_used, :created_at, :updated_at, presence: true
+
   def get_times_used
     self.times_used[0]
   end
