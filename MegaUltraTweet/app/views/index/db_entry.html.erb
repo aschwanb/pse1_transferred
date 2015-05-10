@@ -19,6 +19,20 @@
     </div>
 
     <div class="flex-item list">
+      <h1><span id="highlight">Trending long</span> in the DB</h1>
+      <ul>
+
+        <% short = fetcher.fetch_trending_long %>
+        <% short.each do |entry| %>
+            <li>
+              <%= entry.get_text %>
+            </li>
+        <% end %>
+
+      </ul>
+    </div>
+
+    <div class="flex-item list">
       <h1><span id="highlight">Hashtags</span> in the DB</h1>
       <ul>
 
