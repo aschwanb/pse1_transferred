@@ -1,7 +1,6 @@
 class Trending < ActiveRecord::Base
 has_and_belongs_to_many :hashtags
 
-  # TODO: Find a better solution for trending hashtags long/short
   def set_hashtags(hashtags)
     Array(hashtags).each { |h| self.hashtags<<h }
   end
@@ -12,7 +11,10 @@ has_and_belongs_to_many :hashtags
     end
   end
 
-# TODO: Comment on time interval
+# Short and long intervals are defined in MegaUltraTweet::Application
+# The short/long functions are similar but take advantage of the different intervals
+# It is recommended to use two different objects for the two intervals (see seeds.rb)
+# TODO: This could be solved more elegantly
   def get_popular_short
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
     return hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
@@ -23,6 +25,7 @@ has_and_belongs_to_many :hashtags
     return hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
   end
 
+  # Clear hashtags for this object and at the ones that have been used the most/least in the given interval: short
   def build_new_short
     hashtags = Hashtag.all
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
@@ -43,6 +46,7 @@ has_and_belongs_to_many :hashtags
     return hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
   end
 
+# Clear hashtags for this object and at the ones that have been used the most/least in the given interval: long
   def build_new_long
     hashtags = Hashtag.all
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_trend_long }.reverse
