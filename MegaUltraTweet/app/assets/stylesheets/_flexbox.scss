@@ -76,7 +76,7 @@
   @include flexbox();
   @include flex-wrap(wrap);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   align-content: flex-start;
 }
 .flex-item-logo {
@@ -87,5 +87,5 @@
 .flex-item-trending {
   @include flex(1 1 400px);
   margin: $major_margin;
-  max-width: 400px;
+  overflow: hidden;
 }
