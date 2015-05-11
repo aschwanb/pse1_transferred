@@ -37,10 +37,10 @@ has_and_belongs_to_many :hashtags
   # Clear hashtags for this object and at the ones that have been used the most/least in the given interval: short
   # Hashtags are only added if they have tweets. (Relevant for small databases)
   def build_new_short
-    hashtags = Hashtag.all
+    hashtags = self.get_hashtags_with_tweets(Hashtag.all)
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
-    top = self.get_hashtags_with_tweets(hashtags).first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
-    bottom = self.get_hashtags_with_tweets(hashtags).last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
+    top = hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
+    bottom = hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
     reset_hashtags
     set_hashtags(top)
     set_hashtags(bottom)
@@ -59,10 +59,10 @@ has_and_belongs_to_many :hashtags
 # Clear hashtags for this object and at the ones that have been used the most/least in the given interval: long
 # Hashtags are only added if they have tweets. (Relevant for small databases)
   def build_new_long
-    hashtags = Hashtag.all
+    hashtags = self.get_hashtags_with_tweets(Hashtag.all)
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_trend_long }.reverse
-    top = self.get_hashtags_with_tweets(hashtags).first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
-    bottom = self.get_hashtags_with_tweets(hashtags).last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
+    top = hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
+    bottom = hashtags.last(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)
     reset_hashtags
     set_hashtags(top)
     set_hashtags(bottom)
