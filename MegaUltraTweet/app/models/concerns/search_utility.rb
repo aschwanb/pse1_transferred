@@ -39,10 +39,16 @@ module SearchUtility
     return webpages
   end
 
-  # filters an array of hashtags for the trending ones
-  def filter_trending_hashtags(hashtags)
+  # filters an array of hashtags for the trending long ones
+  def filter_trending_long_hashtags(hashtags)
     return Array.new if hashtags.blank?
     return hashtags & Trending.first.get_popular_long
+  end
+
+  # filters an array of hashtags for the trending short ones
+  def filter_trending_short_hashtags(hashtags)
+    return Array.new if hashtags.blank?
+    return hashtags & Trending.second.get_popular_short
   end
 
   # filters out the webpage objects that link to the same article. These have matching title and description.

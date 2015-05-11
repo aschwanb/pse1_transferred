@@ -16,3 +16,18 @@ $(document).on 'page:always', ->
   $('.se-pre-con').fadeOut 'fast'
 $(document).ready ->
   $('.se-pre-con').fadeOut 'slow'
+
+$(document).on 'page:done', ->
+  $('.switch-label').on 'click', ->
+    opt = $(this).attr 'data-opt'
+    target = $(this).attr 'data-target'
+    $('.'+target).fadeOut 'fast'
+    $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+
+$(document).ready ->
+  $('.switch-label').on 'click', ->
+    opt = $(this).attr 'data-opt'
+    target = $(this).attr 'data-target'
+    $('.'+target).fadeOut 'fast'
+    $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+

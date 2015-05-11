@@ -1,0 +1,63 @@
+/* Styling for the switch button */
+
+@import "common";
+
+input[type="radio"]:empty {
+  /*margin-left: -999px;*/
+  /*visibility: hidden;*/
+  display: none;
+}
+
+.switch-wrapper {
+//  position: relative;
+  width: 100%;
+  min-width: 100%;
+//  outline: 2px solid black;
+}
+.twofold label {
+  width: 50%;
+}
+.trifold label {
+  width: 33.333%;
+}
+
+
+.hide-radio + label {
+  float: left;
+  height: 60px;
+//  padding: 2px 0;
+  text-align: center;
+  background-color: $color2;
+  font-family: 'Oswald', sans-serif;
+  color: #fff;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  -moz-transition: background-color 0.3s ease-in-out;
+  -o-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+//  border: 3px solid white;
+//  border-right: none;
+//  border-left: none;
+}
+
+.hide-radio + label:first-of-type {
+//  border-left: 3px solid white;
+}
+.hide-radio + label:last-of-type {
+//  border-right: 3px solid white;
+}
+
+.hide-radio:checked + label {
+  background-color: $color1;
+}
+
+.label-text {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.label-text p {
+     display: table-cell;
+     vertical-align: middle;
+     text-align: center;
+}

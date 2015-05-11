@@ -6,6 +6,7 @@
 @import "fonts";
 @import "search";
 @import "flexbox";
+@import "switch";
 
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
@@ -163,6 +164,15 @@ a:hover li .link-preview-descr {
   text-overflow: ellipsis;
 }
 
+.item-switch-container {
+  position: relative;
+  height: 5em;
+  width: auto;
+}
+
+.opt2, .opt3 {
+  visibility: hidden;
+}
 
 /* Loader */
 

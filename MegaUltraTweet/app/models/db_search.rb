@@ -68,11 +68,12 @@ class DbSearch
       hashtags.each do |h|
         pairs = retrieve_hashtag_pairs(h)
         pairs = sorter.sort_by_rank(pairs)
+        # paired_hash contains all pairs, sorted by popularity
         paired_hash = build_pair_hash(h, pairs)
-        search_object.set_paired_hashtags_popular(h, paired_hash)
+        trending_long_partners = filter_trending_long_hashtags(paired_hash.keys)
+        trending_short_partners = filter_trending_short_hashtags(paired_hash.keys)
 
-        trending_partners = filter_trending_hashtags(paired_hash.keys)
-        search_object.set_paired_hashtags_trending(h, trending_partners)
+        search_object.set_paired_hashtags(h, paired_hash, trending_short_partners, trending_long_partners)
 
       end
 
