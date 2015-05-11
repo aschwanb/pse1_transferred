@@ -22,8 +22,8 @@
       <h1><span id="highlight">Trending long</span> in the DB</h1>
       <ul>
 
-        <% short = fetcher.fetch_trending_long %>
-        <% short.each do |entry| %>
+        <% long = fetcher.fetch_trending_long %>
+        <% long.each do |entry| %>
             <li>
               <%= entry.get_text %>
             </li>

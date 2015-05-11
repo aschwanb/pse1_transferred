@@ -69,3 +69,23 @@
   //  flex-shrink: 1;
   //  flex-grow: 3;
 }
+
+/* flexbox classes for the frontpage */
+.flex-container-front {
+  margin-top: 3em;
+  @include flexbox();
+  @include flex-wrap(wrap);
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+}
+.flex-item-logo {
+  @include flex(1 1 500px);
+  margin: $major_margin;
+  max-width: 500px;
+}
+.flex-item-trending {
+  @include flex(1 1 400px);
+  margin: $major_margin;
+  max-width: 400px;
+}

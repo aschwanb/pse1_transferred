@@ -1,10 +1,25 @@
+<% require_relative '../../../app/models/dbentry_fetcher' %>
+<% fetcher = DbentryFetcher.new %>
+
 <div class="wrapper" id="content">
 
-    <div class="center logo">
+  <div class="flex-container-front">
+    <div class="flex-item-logo">
 
       <%= image_tag("logo_bird.png", class: "logo") %>
 
     </div>
+    <div class="flex-item-trending list-front fade-in">
+      <h1>Trending in the last 48h</h1>
+      <ul>
+        <% trending = fetcher.fetch_trending_long %>
+        <% trending.take(7).each do |entry| %>
+              <%= link_to(content_tag(:li, entry.text), {action: "db_search", controller: "index", q: entry.text}, data: {push: true}) %>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
 
 </div>
 
