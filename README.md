@@ -45,3 +45,8 @@ Test ausführen:
 ```
 rspec spec
 ```
+
+# Rank/Popularity explained
+# Search explained
+# Starting points for search
+
