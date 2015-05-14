@@ -3,9 +3,7 @@ class HashtagHashtag < ActiveRecord::Base
   belongs_to :hashtag_second, class_name: :Hashtag, foreign_key: :hashtag_second_id
   has_one :popularity, as: :popular
 
-  # TODO: Validation fails if standard Object.create function is used.
-  # Fix validation to validate after creation before inserting into db?
-  # validates :id, :hashtag_first_id, :hashtag_second_id, :created_at, :updated_at, presence: true
+  validates :hashtag_first_id, :hashtag_second_id, presence: true
 
   def get_rank
     self.popularity.get_times_used
