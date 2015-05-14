@@ -7,10 +7,6 @@ describe Webpage do
     expect(FactoryGirl.create(:webpage)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:webpage, id: nil)).not_to be_valid
-  end
-
   it "is invalid without a url" do
     expect(FactoryGirl.build(:webpage, url: nil)).not_to be_valid
   end
@@ -21,14 +17,6 @@ describe Webpage do
 
   it "is invalid without a description" do
     expect(FactoryGirl.build(:webpage, description: nil)).not_to be_valid
-  end
-
-  it "is invalid without a created_at" do
-    expect(FactoryGirl.build(:webpage, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:webpage, updated_at: nil)).not_to be_valid
   end
 
   describe "#get_url" do
