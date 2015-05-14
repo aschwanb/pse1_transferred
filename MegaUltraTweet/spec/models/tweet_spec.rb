@@ -7,10 +7,6 @@ describe Tweet do
     expect(FactoryGirl.create(:tweet)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:tweet, id: nil)).not_to be_valid
-  end
-
   it "is invalid without a text" do
     expect(FactoryGirl.build(:tweet, text: nil)).not_to be_valid
   end
@@ -25,14 +21,6 @@ describe Tweet do
 
   it "is invalid without a author_id" do
     expect(FactoryGirl.build(:tweet, author_id: nil)).not_to be_valid
-  end
-
-  it "is invalid without a crated_at" do
-    expect(FactoryGirl.build(:tweet, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:tweet, updated_at: nil)).not_to be_valid
   end
 
   describe "#by_hashtags" do
