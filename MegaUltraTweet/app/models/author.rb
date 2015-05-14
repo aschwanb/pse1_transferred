@@ -2,10 +2,8 @@ class Author < ActiveRecord::Base
   has_many :tweets
   has_many :author_hashtags
 
-  # TODO: Validation fails if standard Object.create function is used.
-  # Fix validation to validate after creation before inserting into db?
-  # validates :id, :name, :screen_name, :twitter_id, :friends_count,
-  #          :followers_count, :created_at, :updated_at, presence: true
+   validates :name, :screen_name, :twitter_id, :friends_count,
+            :followers_count, presence: true
 
   scope :by_screen_name, -> (screen_name) { where screen_name: screen_name}
 
