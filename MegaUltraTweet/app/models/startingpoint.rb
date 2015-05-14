@@ -1,10 +1,6 @@
 class Startingpoint < ActiveRecord::Base
   has_and_belongs_to_many :hashtags
 
-  # TODO: Validation fails if standard Object.create function is used.
-  # Fix validation to validate after creation before inserting into db?
-  # validates :id, :created_at, :updated_at, presence: true
-
   # Search terms that are used for scraping twitter
   # Output as Array of Strings
   def get_start

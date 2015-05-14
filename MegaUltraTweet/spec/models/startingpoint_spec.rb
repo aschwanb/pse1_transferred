@@ -7,18 +7,6 @@ describe Startingpoint do
     expect(FactoryGirl.create(:startingpoint)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:startingpoint, id: nil)).not_to be_valid
-  end
-
-  it "is invalid without a created_at" do
-    expect(FactoryGirl.build(:startingpoint, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:startingpoint, updated_at: nil)).not_to be_valid
-  end
-
   describe "#get_start" do
     it "returns the start hashtags"
   end
