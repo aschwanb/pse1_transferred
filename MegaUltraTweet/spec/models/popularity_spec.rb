@@ -6,10 +6,6 @@ describe Popularity do
     expect(FactoryGirl.create(:popularity)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:popularity, id: nil)).not_to be_valid
-  end
-
   it "is invalid without a popular_id" do
     expect(FactoryGirl.build(:popularity, popular_id: nil)).not_to be_valid
   end
@@ -20,14 +16,6 @@ describe Popularity do
 
   it "is invalid without a times_used" do
     expect(FactoryGirl.build(:popularity, times_used: nil)).not_to be_valid
-  end
-
-  it "is invalid without a created_at" do
-    expect(FactoryGirl.build(:popularity, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:popularity, updated_at: nil)).not_to be_valid
   end
 
   describe "#get_times_used" do
