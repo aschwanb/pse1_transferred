@@ -7,18 +7,6 @@ describe Trending do
     expect(FactoryGirl.create(:trending)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:trending, id: nil)).not_to be_valid
-  end
-
-  it "is invalid without a created_at" do
-    expect(FactoryGirl.build(:trending, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:trending, updated_at: nil)).not_to be_valid
-  end
-
   describe "#get_popular" do
     it "returns the popular hashtags"
   end
