@@ -11,9 +11,7 @@ class Hashtag < ActiveRecord::Base
 
   scope :by_hashtag, -> (hashtag) { where text: hashtag}
 
-  # TODO: Validation fails if standard Object.create function is used.
-  # Fix validation to validate after creation before inserting into db?
-  # validates :id, :text, :created_at, :updated_at, presence: true
+ validates :text, presence: true
 
   def get_text
     return self.text.to_s

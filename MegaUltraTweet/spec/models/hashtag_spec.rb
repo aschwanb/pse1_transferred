@@ -7,20 +7,8 @@ describe Hashtag do
     expect(FactoryGirl.create(:hashtag)).to be_valid
   end
 
-  it "is invalid without a id" do
-    expect(FactoryGirl.build(:hashtag, id: nil)).not_to be_valid
-  end
-
   it "is invalid without a text" do
     expect(FactoryGirl.build(:hashtag, text: nil)).not_to be_valid
-  end
-
-  it "is invalid without a created_at" do
-    expect(FactoryGirl.build(:hashtag, created_at: nil)).not_to be_valid
-  end
-
-  it "is invalid without a updated_at" do
-    expect(FactoryGirl.build(:hashtag, updated_at: nil)).not_to be_valid
   end
 
   describe "#get_text" do
