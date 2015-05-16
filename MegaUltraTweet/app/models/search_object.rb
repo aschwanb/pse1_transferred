@@ -6,7 +6,6 @@ class SearchObject
   @search_criteria_hashtags
   @search_criteria_authors
   @paired_hashtags
-  @authors
   @webpages
 
   def initialize(query)
@@ -77,14 +76,6 @@ class SearchObject
 
   def get_paired_hashtags
     return @paired_hashtags
-  end
-
-  def set_authors(authors)
-    @authors = authors
-  end
-
-  def get_authors
-    return @authors
   end
 
   def set_webpages(webpages)
