@@ -17,6 +17,7 @@ $(document).on 'page:always', ->
 $(document).ready ->
   $('.se-pre-con').fadeOut 'slow'
 
+# switch radio button functionality
 $(document).on 'page:done', ->
   $('.switch-label').on 'click', ->
     opt = $(this).attr 'data-opt'
@@ -24,6 +25,7 @@ $(document).on 'page:done', ->
     $('.'+target).fadeOut 'fast'
     $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
 
+# this is needed so that the switch works after a page reload
 $(document).ready ->
   $('.switch-label').on 'click', ->
     opt = $(this).attr 'data-opt'
