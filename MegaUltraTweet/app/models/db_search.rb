@@ -5,7 +5,7 @@ class DbSearch
   @limit
 
   def initialize
-    @limit = nil
+    @limit = MegaUltraTweet::Application::DB_SEARCH_LIMIT
   end
 
   def parse_query(query)
