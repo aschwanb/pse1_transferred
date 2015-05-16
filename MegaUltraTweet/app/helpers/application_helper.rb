@@ -21,6 +21,7 @@ module ApplicationHelper
     return Tweet.take(5)
   end
 
+  # creates the content for the link preview
   def link_preview_content(page)
     page.get_title.blank? ? title = page.get_url : title = page.get_title
     descr = page.get_description
@@ -32,6 +33,7 @@ module ApplicationHelper
     return search_object.get_criteria_hashtags.size > 1 ? true : false
   end
 
+  # generates a trifold switch. The switch does not need to be wrapped in a form. Functionality is handled by javascript.
   def switch_trifold(anchor)
     symbol = create_symbol(anchor)
     id = create_id(anchor)
@@ -52,6 +54,7 @@ module ApplicationHelper
     return switch
   end
 
+  # parses and embedds an svg file
   def embedded_svg(filename, options = {})
     assets = Rails.application.assets
     file = assets.find_asset(filename).body.force_encoding("UTF-8")
@@ -60,7 +63,7 @@ module ApplicationHelper
     if options[:class].present?
       svg["class"] = options[:class]
     end
-    raw doc
+    return raw doc
   end
 
   private
