@@ -72,28 +72,4 @@ module SearchUtility
     return pages
   end
 
-  # unused or not yet used methods:
-
-  # # given an array of authors, returns the tweets they wrote
-  # def retrieve_tweets_by_authors(authors, limit)
-  #   return Array.new if authors.empty?
-  #   tweets = []
-  #   authors.each do |author|
-  #     tweets.concat(author.get_tweets(limit))
-  #   end
-  #   return tweets
-  # end
-
-  # # given two hashtags, returns their pair object or nil if no association exists
-  # def retrieve_hashtag_pair_by_pair(hashtags)
-  #   return nil if hashtags.blank?
-  #   h1 = hashtags.first
-  #   h2 = hashtags.second
-  #   pair = HashtagHashtag.where(hashtag_first_id: h1.id, hashtag_second_id: h2.id)
-  #   pair = HashtagHashtag.where(hashtag_first_id: h2.id, hashtag_second_id: h1.id) if pair.nil?
-  #   return pair
-  # end
-
-
-
 end

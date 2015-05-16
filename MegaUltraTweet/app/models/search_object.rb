@@ -5,8 +5,6 @@ class SearchObject
   @search_terms
   @search_criteria_hashtags
   @search_criteria_authors
-  # @paired_hashtags_popular
-  # @paired_hashtags_trending
   @paired_hashtags
   @authors
   @webpages
@@ -19,8 +17,6 @@ class SearchObject
     @search_criteria_authors = Array.new
     @search_criteria_hashtags = Array.new
     @webpages = Array.new
-    # @paired_hashtags_popular = Hash.new
-    # @paired_hashtags_trending = Hash.new
     @paired_hashtags = Hash.new
   end
 
@@ -68,24 +64,6 @@ class SearchObject
   def get_criteria_authors
     return @search_criteria_authors
   end
-
-  # TODO: Could you comment on the anchor ?
-  # def set_paired_hashtags_popular(anchor, paired_hash)
-  #   @paired_hashtags_popular.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
-  # end
-  #
-  # def get_paired_hashtags_popular
-  #   return @paired_hashtags_popular
-  # end
-  #
-  # def set_paired_hashtags_trending_long(anchor, paired_hash)
-  #   return if paired_hash.blank?
-  #   @paired_hashtags_trending.store(anchor, paired_hash) if @search_criteria_hashtags.include?(anchor)
-  # end
-  #
-  # def get_paired_hashtags_trending
-  #   return @paired_hashtags_trending
-  # end
 
   def set_paired_hashtags(anchor, paired_hash, trending_short_partners, trending_long_partners)
     sub_hash = { popular_partners: paired_hash, trending_short_partners: trending_short_partners,

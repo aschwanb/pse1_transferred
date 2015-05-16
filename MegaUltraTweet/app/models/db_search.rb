@@ -76,22 +76,6 @@ class DbSearch
         search_object.set_paired_hashtags(h, paired_hash, trending_short_partners, trending_long_partners)
 
       end
-
-    # only authors as search criteria, OR relation condition
-
-    # disabled author search for now
-
-    # else hashtags.empty?
-    #   tweets = retrieve_tweets_by_authors(authors, @limit)
-
-    # disabled combined search for now
-
-    # both hashtags and authors as search criteria, (AND{hashtags}) AND (OR{authors})
-    # else
-    #   tweets_by_hashtags = retrieve_tweets_by_hashtags(hashtags, @limit)
-    #   tweets_by_authors = retrieve_tweets_by_authors(authors, @limit)
-    #   # get common elements between the arrays (Intersection)
-    #   tweets = tweets_by_hashtags & tweets_by_authors
     end
 
     #Get relevant records and sort them by popularity (rank)
