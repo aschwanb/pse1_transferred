@@ -1,5 +1,3 @@
-<% require_relative '../../../app/models/dbentry_fetcher' %>
-<% fetcher = DbentryFetcher.new %>
 
 <div class="wrapper" id="content">
 
@@ -12,7 +10,7 @@
     <div class="flex-item-trending list-front front-animate">
       <h1>Trending in the last 48h</h1>
       <ul>
-        <% trending = fetcher.fetch_trending_long %>
+        <% trending = fetch_trending_long %>
         <% trending.take(7).each do |entry| %>
               <%= link_to(content_tag(:li, entry.text), {action: "db_search", controller: "index", q: entry.text}, data: {push: true}) %>
         <% end %>

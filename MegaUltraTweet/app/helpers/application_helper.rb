@@ -1,6 +1,26 @@
 
-# TODO: move this to index helper
 module ApplicationHelper
+
+  def fetch_trending_short
+    return Trending.first.get_popular_short
+  end
+
+  def fetch_trending_long
+    return Trending.second.get_popular_long
+  end
+
+  def fetch_hashtags
+    return Hashtag.take(20)
+  end
+
+  def fetch_authors
+    return Author.take(20)
+  end
+
+  def fetch_tweets
+    return Tweet.take(5)
+  end
+
   def link_preview_content(page)
     page.get_title.blank? ? title = page.get_url : title = page.get_title
     descr = page.get_description
@@ -32,15 +52,6 @@ module ApplicationHelper
     return switch
   end
 
-  def create_symbol(str)
-    return str.parameterize.underscore.to_sym
-  end
-
-  def create_id(str)
-    return "js-htg-"+str.slice(1, str.length)
-  end
-
-
   def embedded_svg(filename, options = {})
     assets = Rails.application.assets
     file = assets.find_asset(filename).body.force_encoding("UTF-8")
@@ -50,6 +61,16 @@ module ApplicationHelper
       svg["class"] = options[:class]
     end
     raw doc
+  end
+
+  private
+
+  def create_symbol(str)
+    return str.parameterize.underscore.to_sym
+  end
+
+  def create_id(str)
+    return "js-htg-"+str.slice(1, str.length)
   end
 
 end
