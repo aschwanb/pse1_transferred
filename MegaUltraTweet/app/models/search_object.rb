@@ -32,7 +32,10 @@ class SearchObject
     return @search_successful
   end
 
-  # TODO: Comment what is depication in this contect?
+  # The search is in the state deprecated if the following conditions are met:
+  # - Hashtag or Hashtag pair was found in the DB
+  # - There are no associated tweets in the DB (because they were deleted)
+  # This state indicates that the hashtag was once used but finds now little to no usage in tweets
   def set_search_deprecated
     @search_deprecated = true
   end
@@ -65,6 +68,7 @@ class SearchObject
     return @search_criteria_authors
   end
 
+  # The anchor is a hashtag the others are relative to
   def set_paired_hashtags(anchor, paired_hash, trending_short_partners, trending_long_partners)
     sub_hash = { popular_partners: paired_hash, trending_short_partners: trending_short_partners,
                 trending_long_partners: trending_long_partners }

@@ -46,7 +46,7 @@ module MegaUltraTweet
     GET_THIS_MANY = 400
     DELETE_OLDER_TWEETS = 3.days.ago
     PROVIDED_SEARCHES = 400 # Add some buffer for user input. Max searches is at 450
-    DB_SEARCH_LIMIT = 3000
+    DB_SEARCH_LIMIT = 3000 # This is the limit as how many tweets in the DB are to be considered. Set to nil to disable.
 
   end
 end

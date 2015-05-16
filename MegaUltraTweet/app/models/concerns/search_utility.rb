@@ -1,5 +1,6 @@
 module SearchUtility
 
+  # builds a hash with the partners from the anchor hashtag as keys and their rank as value.
   def build_pair_hash(anchor, pairs)
     paired_hash = Hash.new
     pairs.each do |pair|
