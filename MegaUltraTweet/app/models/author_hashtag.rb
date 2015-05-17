@@ -6,7 +6,7 @@ class AuthorHashtag < ActiveRecord::Base
  validates :author_id, :hashtag_id, presence: true
 
   def get_rank
-    self.popularity.get_times_used
+    return self.popularity.get_times_used
   end
 
   def set_rank(number)
@@ -14,18 +14,18 @@ class AuthorHashtag < ActiveRecord::Base
   end
 
   def get_trend_short
-    self.popularity.get_trend_short
+    return self.popularity.get_trend_short
   end
 
   def get_trend_long
-    self.popularity.get_trend_long
+    return self.popularity.get_trend_long
   end
 
   # Is this author/hashtag pair new (short term as defined in MegaUltraTweet::Application::INTERVAL_SHORT_TIME )?
   # One of the project requirements was to determine,
   # if a combination of hashtags was new or already present.
   def get_new_short?
-    self.new_short?
+    return self.new_short?
   end
 
   def set_new_short(bool)
@@ -36,7 +36,7 @@ class AuthorHashtag < ActiveRecord::Base
   # One of the project requirements was to determine,
   # if a combination of hashtags was new or already present.
   def get_new_long?
-    self.new_long?
+    return self.new_long?
   end
 
   def set_new_long(bool)
