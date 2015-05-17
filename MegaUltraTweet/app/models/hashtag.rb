@@ -11,7 +11,7 @@ class Hashtag < ActiveRecord::Base
 
   scope :by_hashtag, -> (hashtag) { where text: hashtag}
 
- validates :text, presence: true
+  validates :text, presence: true
 
   def get_text
     return self.text.to_s

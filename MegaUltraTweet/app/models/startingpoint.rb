@@ -9,6 +9,10 @@ class Startingpoint < ActiveRecord::Base
     return out
   end
 
+  def get_hashtags
+    return self.hashtags
+  end
+
   def add_popular_hashtags(number)
     hashtags = Hashtag.all
     hashtags = hashtags.sort_by{ |hashtag| hashtag.get_rank }.reverse

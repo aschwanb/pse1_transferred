@@ -19,4 +19,3 @@ end
 
 trending_short_intervall.build_new_short
 trending_long_intervall.build_new_long
-
