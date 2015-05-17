@@ -18,7 +18,7 @@ class Hashtag < ActiveRecord::Base
   end
 
   def get_rank
-    self.popularity.get_times_used
+    return self.popularity.get_times_used
   end
 
   def set_rank(number)
@@ -26,11 +26,11 @@ class Hashtag < ActiveRecord::Base
   end
 
   def get_trend_short
-    self.popularity.get_trend_short
+    return self.popularity.get_trend_short
   end
 
   def get_trend_long
-    self.popularity.get_trend_long
+    return self.popularity.get_trend_long
   end
 
   # TODO: Refactor ? (This is the recommended way to "overload" functions)
