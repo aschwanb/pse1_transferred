@@ -69,12 +69,12 @@
   align-content: flex-start;
 }
 .flex-item-logo {
-  @include flex(1 1 500px);
+  @include flex(1 1 400px);
   margin: $major_margin;
-  max-width: 500px;
+  max-width: 400px;
 }
 .flex-item-trending {
-  @include flex(1 1 400px);
+  @include flex(1 1 30%);
   margin: $major_margin;
   overflow: hidden;
 }
