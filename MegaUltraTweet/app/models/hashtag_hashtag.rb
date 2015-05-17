@@ -20,6 +20,7 @@ class HashtagHashtag < ActiveRecord::Base
   def get_trend_long
     self.popularity.get_trend_long
   end
+
   # Is this hashtag/hashtag pair new (short term as defined in MegaUltraTweet::Application::INTERVAL_SHORT_TIME )?
   # One of the project requirements was to determine,
   # if a combination of hashtags was new or already present.

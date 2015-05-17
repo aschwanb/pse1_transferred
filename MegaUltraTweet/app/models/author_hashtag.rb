@@ -21,6 +21,9 @@ class AuthorHashtag < ActiveRecord::Base
     self.popularity.get_trend_long
   end
 
+  # Is this author/hashtag pair new (short term as defined in MegaUltraTweet::Application::INTERVAL_SHORT_TIME )?
+  # One of the project requirements was to determine,
+  # if a combination of hashtags was new or already present.
   def get_new_short?
     self.new_short?
   end
@@ -29,6 +32,9 @@ class AuthorHashtag < ActiveRecord::Base
     self.update(new_short: bool)
   end
 
+  # Is this author/hashtag pair new (short term as defined in MegaUltraTweet::Application::INTERVAL_LONG_TIME )?
+  # One of the project requirements was to determine,
+  # if a combination of hashtags was new or already present.
   def get_new_long?
     self.new_long?
   end

@@ -29,6 +29,7 @@ class TwitterClient
     return @sorter.sort_by_occurrence_h(@parser.parse_webpages_a(tweets))
   end
 
+  # TODO: Only save tweets with popularity > 1
   def save_tweet(tweet)
     author = @parser.get_author(tweet)
     if Tweet.where(twitter_id: tweet.id).blank?
