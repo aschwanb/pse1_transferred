@@ -1,6 +1,6 @@
 <div class="wrapper" id="content">
 
-  <% if !@sobj.nil? %>
+  <% unless @sobj.nil? %>
       <% terms = "" %>
       <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
       <% terms = terms.slice(0, terms.length-2) %>
