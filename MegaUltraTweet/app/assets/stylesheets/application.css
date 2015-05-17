@@ -12,6 +12,5 @@
  *
  *= require index
  *= require errors
- *= require dev
  *= require_self
  */

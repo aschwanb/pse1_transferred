@@ -7,16 +7,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<div class="dev">
-  <div>DEV MENU</div>
-  <nav>
-    <ul>
-      <li><%= link_to("Landing", root_path) %></li>
-      <li><%= link_to("About", index_about_path) %></li>
-      <li><%= link_to("DB Entries", index_db_entry_path) %></li>
-    </ul>
-  </nav>
-</div>
+
 <div class="wrapper">
   <div id="search-wrapper">
     <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
