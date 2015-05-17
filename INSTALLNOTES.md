@@ -12,9 +12,11 @@ This document describes installation and deployment of the application on Ubuntu
 1.  Deploy application
   1.  Apache Host file
   1.  Passenger restart configuration
-  1.  Secrets
   1.  Permissions
 1.  Application configuration
+  1. Secrets
+  2. Database connection
+  3. Cron job
 1.  Server Debugging
 1.  Notes and Links
 
@@ -70,3 +72,49 @@ Check if Apache loads Passenger
 Verify that Passenger is running
 
     passenger-memory-stats
+
+## 2.i  Configure Apache
+Deploy the application to /var/www/webapp or another directory. You need to create an Host file for Apache. Browse to /etc/apache2/sites-available
+
+Create a new file ror.conf containing the lines
+  
+    <VirtualHost *:80>
+      ServerName pse1.iam.unibe.ch
+      DocumentRoot /var/www/webapp/public
+      Alias /phpmyadmin /var/www/phpmyadmin
+      <Directory /var/www/webapp/public>
+        Allow from all
+        Options -MultiViews
+        PassengerAppEnv development
+        # Uncomment this if you're on Apache >= 2.4:
+        #Require all granted
+      </Directory>
+    </VirtualHost>
+The variable PassengerAppEnv defines the ruby Environment. For more information see https://www.phusionpassenger.com/documentation/Users%20guide%20Apache.html#PassengerAppEnv
+
+## 2.ii Passenger restart coniguration
+Passenger needs a file called restart.txtto be able to automatically restart (e.g if you use continouse integration).
+Browse to the applicatipon directory /var/www/webapp and create a tmp directory and a restart file:
+
+    mkdir tmp
+    touch tmp/restart.txt
+The file doesn't need to have any content.
+
+## 2.iii Permissions
+The Spring gem needs to write to /tmp. You need to change the directory permissions if the spring gem is denied access:
+
+    sudo chmod 1777 -R /tmp
+(not 777 nor tmp/)
+
+## 3.i Secrets File
+## 3.ii Database connection
+## 3.iii Cron Job
+If you have configured the application you can invoke the cron job. Browse to the application directory /var/www/webapp and run in the terminal
+
+    whenever --update-crontab MegaUltraTweet
+You can check the cron jobs with
+
+    crontab -l
+and edit them directly with
+
+    crontab -e
