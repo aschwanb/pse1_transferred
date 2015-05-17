@@ -42,10 +42,10 @@ module MegaUltraTweet
     INTERVAL_SHORT_TIME = 15.minutes
     # Long rollover is performed every n days
     INTERVAL_LONG_TIME = 2.days
-    # Popularity class returns usage of an object for this many short rollover entries
+    # Popularity class returns times of usage of an object for this many short rollover entries
     # Time interval should be consistent with INTERVAL_SHORT_TIME
     POPULARITY_SHORT_INTERVAL = 1
-    # Popularity class returns usage of an object for this many short rollover entries
+    # Popularity class returns times of usage of an object for this many short rollover entries
     # Time interval should be consistent with INTERVAL_LONG_TIME
     POPULARITY_LONG_INTERVAL = 192
     # This many hashtags are included in the top/bottom statistic
