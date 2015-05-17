@@ -20,23 +20,24 @@ class HashtagHashtag < ActiveRecord::Base
   def get_trend_long
     self.popularity.get_trend_long
   end
-
-  # TODO: Comment this!
+  # Is this hashtag/hashtag pair new (short term as defined in MegaUltraTweet::Application::INTERVAL_SHORT_TIME )?
+  # One of the project requirements was to determine,
+  # if a combination of hashtags was new or already present.
   def get_new_short?
     self.new_short?
   end
 
-  # TODO: Comment this!
   def set_new_short(bool)
     self.update(new_short: bool)
   end
 
-  # TODO: Comment this!
+  # Is this hashtag/hashtag pair new (long term as defined in MegaUltraTweet::Application::INTERVAL_LONG_TIME )?
+  # One of the project requirements was to determine,
+  # if a combination of hashtags was new or already present.
   def get_new_long?
     self.new_long?
   end
 
-  # TODO: Comment this!
   def set_new_long(bool)
     self.update(new_long: bool)
   end
