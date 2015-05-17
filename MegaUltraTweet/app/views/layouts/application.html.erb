@@ -8,6 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 
+<noscript>
+    <div class="no-js">This site requires javascript.</div>
+  <style>.se-pre-con{display: none}</style>
+</noscript>
+
 <div class="wrapper">
   <div id="search-wrapper">
     <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
@@ -19,6 +24,7 @@
     <% end %>
   </div>
 </div>
+
 <body>
 <div id="loader" class="se-pre-con"></div>
 <%= yield %>

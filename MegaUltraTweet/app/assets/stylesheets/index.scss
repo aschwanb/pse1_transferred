@@ -92,6 +92,16 @@ a:active li, a:focus li{
   @include margin_side();
 }
 
+/* Noscript notification */
+.no-js {
+  width: 100%;
+  background: $color4;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
 
 /* Landing page / front page */
 
@@ -214,8 +224,6 @@ a:hover li .link-preview-descr {
 
 /* Loader */
 
-.no-js #loader { display: none;  }
-.js #loader { display: block; position: absolute; left: 100px; top: 0; }
 .se-pre-con {
   position: fixed;
   left: 0px;
