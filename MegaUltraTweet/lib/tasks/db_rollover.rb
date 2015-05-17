@@ -38,7 +38,8 @@ class DBRollover
 
   def reset_startingpoint
     @startingpoint.add_popular_hashtags(MegaUltraTweet::Application::HASHTAG_TO_START_NUMBER)
-    @startingpoint.remove_unpopular_hashtags(MegaUltraTweet::Application::HASHTAG_TO_START_NUMBER)
+    if @startingpoint.get_number_of_hashtags > MegaUltraTweet::Application::HASHTAG_TO_START_MAX
+      @startingpoint.remove_unpopular_hashtags(@startingpoint.get_number_of_hashtags - MegaUltraTweet::Application::HASHTAG_TO_START_MAX)
     @startingpoint.repair_defaults
   end
 

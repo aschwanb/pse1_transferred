@@ -9,8 +9,8 @@ class Startingpoint < ActiveRecord::Base
     return out
   end
 
-  def get_hashtags
-    return self.hashtags
+  def get_number_of_hashtags
+    return self.hashtags.to_a.size
   end
 
   def add_popular_hashtags(number)
