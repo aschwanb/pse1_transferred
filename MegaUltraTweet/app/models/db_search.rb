@@ -54,6 +54,8 @@ class DbSearch
     authors = search_object.get_criteria_authors
     hashtags = search_object.get_criteria_hashtags
     return search_object if authors.blank? && hashtags.blank?
+    # check if all criteria are matched
+    return search_object unless hashtags.size == search_object.get_search_terms.size
 
     tweets = []
     sorter = Sorter.new
