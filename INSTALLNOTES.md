@@ -1,6 +1,6 @@
 # Installation and Deployment
 
-This document describes installation and deployment of the application on Ubuntu Server. Tested on  Ubuntu 14.04 LTE.
+This document describes installation and deployment of the application on Ubuntu Server. Tested on  Ubuntu Server 14.04 LTE.
 
 ## Table of content
 
@@ -8,7 +8,7 @@ This document describes installation and deployment of the application on Ubuntu
 1.  Install Requirements
   1.  Ruby
   1.  MySQL Server
-  1.  Passenger for Apache2
+  1.  Phusion Passenger for Apache2
 1.  Deploy application
   1.  Apache Host file
   1.  Passenger restart configuration
@@ -51,3 +51,22 @@ Install MySQL Server and thedatabase  development files
 You can reset the root password with
 
     sudo dpkg-reconfigure mysql-server-5.5
+
+## 1.iii Phusion Passenger for Apache2
+The Apache2 Webserver is most likely pre-installed, if not you can install Apache2 with
+
+    sudo apt-get install apache2 apache2-doc
+Full installation documentation for Phusion Passenger can be found here: https://www.phusionpassenger.com/documentation/Users%20guide%20Apache.html#installation
+
+You can install Passenger via APT Repository or Gem:
+
+    gem install passenger
+The gem only contains source files. You need to run the installer:
+
+    passenger-install-apache2-module
+Check if Apache loads Passenger
+
+    sudo a2enmod passenger
+Verify that Passenger is running
+
+    passenger-memory-stats
