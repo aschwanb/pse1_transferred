@@ -4,7 +4,6 @@ class SearchObject
   @search_deprecated
   @search_terms
   @search_criteria_hashtags
-  @search_criteria_authors
   @paired_hashtags
   @webpages
 
@@ -13,7 +12,6 @@ class SearchObject
     @search_terms.empty? ? @search_valid = false : @search_valid = true
     @search_successful = false
     @search_deprecated = false
-    @search_criteria_authors = Array.new
     @search_criteria_hashtags = Array.new
     @webpages = Array.new
     @paired_hashtags = Hash.new
@@ -57,14 +55,6 @@ class SearchObject
 
   def get_criteria_hashtags
     return @search_criteria_hashtags
-  end
-
-  def add_criterion_author(author)
-    @search_criteria_authors.append(author)
-  end
-
-  def get_criteria_authors
-    return @search_criteria_authors
   end
 
   # The anchor is a hashtag the others are relative to

@@ -51,33 +51,28 @@ class DbSearch
 
   def evaluate(search_object)
     return search_object unless search_object.is_valid?
-    authors = search_object.get_criteria_authors
     hashtags = search_object.get_criteria_hashtags
-    return search_object if authors.blank? && hashtags.blank?
+    return search_object if hashtags.blank?
     # check if all criteria are matched
     return search_object unless hashtags.size == search_object.get_search_terms.size
 
-    tweets = []
     sorter = Sorter.new
 
-    # only hashtags as search criteria, AND relation condition between hashtags
-    if authors.empty?
-      tweets = retrieve_tweets_by_hashtags(hashtags, @limit)
-      # hashtags have been found but are not actively used
-      return search_object.set_search_deprecated if tweets.blank? && !hashtags.blank?
-      return search_object if tweets.blank?
+    tweets = retrieve_tweets_by_hashtags(hashtags, @limit)
+    # hashtags have been found but are not actively used
+    return search_object.set_search_deprecated if tweets.blank? && !hashtags.blank?
+    return search_object if tweets.blank?
 
-      hashtags.each do |h|
-        pairs = retrieve_hashtag_pairs(h)
-        pairs = sorter.sort_by_rank(pairs)
-        # paired_hash contains all pairs, sorted by popularity
-        paired_hash = build_pair_hash(h, pairs)
-        trending_long_partners = filter_trending_long_hashtags(paired_hash.keys)
-        trending_short_partners = filter_trending_short_hashtags(paired_hash.keys)
+    hashtags.each do |h|
+      pairs = retrieve_hashtag_pairs(h)
+      pairs = sorter.sort_by_rank(pairs)
+      # paired_hash contains all pairs, sorted by popularity
+      paired_hash = build_pair_hash(h, pairs)
+      trending_long_partners = filter_trending_long_hashtags(paired_hash.keys)
+      trending_short_partners = filter_trending_short_hashtags(paired_hash.keys)
 
-        search_object.set_paired_hashtags(h, paired_hash, trending_short_partners, trending_long_partners)
+      search_object.set_paired_hashtags(h, paired_hash, trending_short_partners, trending_long_partners)
 
-      end
     end
 
     #Get relevant records and sort them by popularity (rank)
