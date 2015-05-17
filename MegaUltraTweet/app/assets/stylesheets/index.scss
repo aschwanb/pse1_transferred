@@ -119,24 +119,16 @@ a:active li, a:focus li{
 @-moz-keyframes grow { from { max-width:0; } to { max-width:400px; } }
 @keyframes grow { from { max-width:0; } to { max-width:400px; } }
 
-@-webkit-keyframes marginGrow { from { margin:0; } to { margin: $major_margin; } }
-@-moz-keyframes marginGrow { from { margin:0; } to { margin: $major_margin; } }
-@keyframes marginGrow { from { margin:0; } to { margin: $major_margin; } }
-
 .front-animate {
   opacity: 0;
   max-width: 0;
-  margin: 0;
   $initial-delay: 0.6s;
   $fade-delay: $initial-delay+0.8s;
   -webkit-animation:  grow 1s ease-in $initial-delay 1 forwards,
-                      marginGrow 1s ease-in $initial-delay 1 forwards,
                       fadeIn 1s ease-in $fade-delay 1 forwards;
   -moz-animation: grow 1s ease-in $initial-delay 1 forwards,
-                  marginGrow 1s ease-in $initial-delay 1 forwards,
                   fadeIn 1s ease-in $fade-delay 1 forwards;
   animation:  grow 1s ease-in $initial-delay 1 forwards,
-              marginGrow 1s ease-in $initial-delay 1 forwards,
               fadeIn 1s ease-in $fade-delay 1 forwards;
 }
 
@@ -256,12 +248,10 @@ a:hover li .link-preview-descr {
   }
   .front-animate {
     max-width: 400px;
-    margin: $major_margin;
-    $initial-delay: 0.6s;
-    $fade-delay: $initial-delay+0.8s;
-    -webkit-animation: fadeIn 1s ease-in $fade-delay 1 forwards;
-    -moz-animation: fadeIn 1s ease-in $fade-delay 1 forwards;
-    animation: fadeIn 1s ease-in $fade-delay 1 forwards;
+    opacity: 1;
+    -webkit-animation: none;
+    -moz-animation: none;
+    animation: none;
   }
 }
 
