@@ -41,10 +41,6 @@ class SearchObject
     return @search_deprecated
   end
 
-  def add_search_terms(terms)
-    @search_terms += terms
-  end
-
   def get_search_terms
     return @search_terms
   end

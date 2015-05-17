@@ -53,8 +53,9 @@ class DbSearch
     return search_object unless search_object.is_valid?
     hashtags = search_object.get_criteria_hashtags
     return search_object if hashtags.blank?
+    search_terms = search_object.get_search_terms
     # check if all criteria are matched
-    return search_object unless hashtags.size == search_object.get_search_terms.size
+    return search_object unless hashtags.size == search_terms.size
 
     sorter = Sorter.new
 
