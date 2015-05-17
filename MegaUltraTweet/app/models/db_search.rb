@@ -53,15 +53,17 @@ class DbSearch
     return search_object unless search_object.is_valid?
     hashtags = search_object.get_criteria_hashtags
     return search_object if hashtags.blank?
-    search_terms = search_object.get_search_terms
     # check if all criteria are matched
-    return search_object unless hashtags.size == search_terms.size
+    return search_object unless hashtags.size == search_object.get_search_terms.size
 
     sorter = Sorter.new
 
     tweets = retrieve_tweets_by_hashtags(hashtags, @limit)
     # hashtags have been found but are not actively used
-    return search_object.set_search_deprecated if tweets.blank? && !hashtags.blank?
+    if tweets.blank? && !hashtags.blank?
+      search_object.set_search_deprecated
+      return search_object
+    end
     return search_object if tweets.blank?
 
     hashtags.each do |h|
