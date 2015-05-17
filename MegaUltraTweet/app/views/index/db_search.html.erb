@@ -158,17 +158,15 @@
 
           </div>
       <% else %>
-          <% if !@sobj.is_valid? %>
-              <h1>Invalid search</h1>
-          <% elsif !@sobj.is_deprecated? %>
-              <div class="content">
+          <div class="content">
+            <% if !@sobj.is_valid? %>
+                <h1>Invalid search</h1>
+            <% elsif !@sobj.is_deprecated? %>
                 <h1>No historical data about <span class="highlight"><%= terms %></span> available</h1>
-              </div>
-          <% else %>
-              <div class="content">
+            <% else %>
                 <h1><span class="highlight"><%= terms %></span> are not actively used anymore in this combination!</h1>
-              </div>
-          <% end %>
+            <% end %>
+          </div>
       <% end %>
   <% end %>
 
