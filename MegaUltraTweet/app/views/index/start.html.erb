@@ -8,11 +8,22 @@
 
     </div>
     <div class="flex-item-trending list-front front-animate">
-      <h1 class="h1-front">Trending in the last 48h</h1>
-      <ul>
+      <div class="switch-container-front">
+        <%= switch_twofold("js-front") %>
+      </div>
+      <h1 class="h1-front opt1 js-front">Trending in the last 48h</h1>
+      <h1 class="h1-front opt2 js-front">Trending in the last 15'</h1>
+      <ul class="opt1 js-front">
         <% trending = fetch_trending_long %>
         <% trending.take(7).each do |entry| %>
               <%= link_to(content_tag(:li, entry.text), {action: "db_search", controller: "index", q: entry.text}, data: {push: true}) %>
+        <% end %>
+      </ul>
+
+      <ul class="opt2 js-front">
+        <% trending = fetch_trending_short %>
+        <% trending.take(7).each do |entry| %>
+            <%= link_to(content_tag(:li, entry.text), {action: "db_search", controller: "index", q: entry.text}, data: {push: true}) %>
         <% end %>
       </ul>
 

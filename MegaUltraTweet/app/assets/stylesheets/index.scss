@@ -141,7 +141,13 @@ a:active li, a:focus li{
 }
 
 .h1-front {
+//  position: absolute;
   padding: 0 0 1em;
+}
+
+.switch-container-front {
+  height: auto;
+  margin-bottom: 4em;
 }
 
 
@@ -220,6 +226,7 @@ a:hover li .link-preview-descr {
 
 .opt2, .opt3 {
   visibility: hidden;
+  display: none;
 }
 
 /* Loader */
@@ -239,6 +246,10 @@ a:hover li .link-preview-descr {
 @media only screen and (max-width: 900px) {
   .flex-container-front {
     margin: 0;
+  }
+  .switch-container-front {
+    margin-top: 3em;
+    margin-bottom: 5em;
   }
   .h1-front {
     padding: 1em 0 1em 0;

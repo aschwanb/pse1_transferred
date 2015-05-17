@@ -54,6 +54,23 @@ module ApplicationHelper
     return switch
   end
 
+  def switch_twofold(anchor)
+    symbol = create_symbol(anchor)
+    id = anchor
+    switch = content_tag(:div, class: ["switch-wrapper", "twofold"]) do
+      radio_button(symbol, "switch", "opt1", {class: "hide-radio", checked: true})
+          .concat label_tag(create_symbol(anchor+"-switch-opt1"),
+                            content_tag(:span, content_tag(:p, "48h"), class: "label-text"),
+                            {class: "switch-label", data: {opt: "opt1", target: id}})
+          .concat radio_button(symbol, "switch", "opt2", {class: "hide-radio"})
+          .concat label_tag(create_symbol(anchor+"-switch-opt2"),
+                            content_tag(:span, content_tag(:p, "15min"), class: "label-text"),
+                            {class: "switch-label", data: {opt: "opt2", target: id}})
+
+    end
+    return switch
+  end
+
   # parses and embedds an svg file
   def embedded_svg(filename, options = {})
     assets = Rails.application.assets

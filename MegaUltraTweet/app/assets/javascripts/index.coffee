@@ -23,7 +23,10 @@ $(document).on 'page:done', ->
     opt = $(this).attr 'data-opt'
     target = $(this).attr 'data-target'
     $('.'+target).fadeOut 'fast'
-    $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+    setTimeout ( ->
+      $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+    ), 300
+
 
 # this is needed so that the switch works after a page reload
 $(document).ready ->
@@ -31,5 +34,7 @@ $(document).ready ->
     opt = $(this).attr 'data-opt'
     target = $(this).attr 'data-target'
     $('.'+target).fadeOut 'fast'
-    $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+    setTimeout ( ->
+      $('.'+opt+'.'+target).css('visibility', 'visible').hide().fadeIn 'slow'
+    ), 300
 

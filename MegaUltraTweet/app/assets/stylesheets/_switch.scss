@@ -1,4 +1,4 @@
-/* Styling for the switch button */
+/* Styling for the switch buttons */
 
 @import "common";
 
@@ -14,26 +14,45 @@ input[type="radio"]:empty {
 }
 .twofold label {
   width: 50%;
+  height: 3em;
+  color: $color2;
+  border: 1px solid $color2;
+  border-right: none;
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 2px 0 0 2px;
+  -moz-border-radius: 2px 0 0 2px;
+  border-radius: 2px 0 0 2px;
+}
+.twofold label:last-of-type {
+  border-left: none;
+  border-right: 1px solid $color2;
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 0 2px 2px 0;
+  -moz-border-radius: 0 2px 2px 0;
+  border-radius: 0 2px 2px 0;
 }
 .trifold label {
   width: 33.333%;
+  height: 60px;
+  background-color: $color2;
+  color: #fff;
 }
-
 
 .hide-radio + label {
   float: left;
-  height: 60px;
   text-align: center;
-  background-color: $color2;
-  font-family: 'Oswald', sans-serif;
-  color: #fff;
   -webkit-transition: background-color 0.3s ease-in-out;
   -moz-transition: background-color 0.3s ease-in-out;
   -o-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
 }
 
-.hide-radio:checked + label {
+.twofold .hide-radio:checked + label {
+  background-color: $color2;
+  color: #ffffff;
+}
+
+.trifold .hide-radio:checked + label {
   background-color: $color1;
 }
 
