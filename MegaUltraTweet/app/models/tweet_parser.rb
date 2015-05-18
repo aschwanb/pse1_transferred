@@ -36,8 +36,21 @@ class TweetParser
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-    if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
-      tmp.pop
+    if !(tmp.nil? or tmp.empty?)
+      tmp.map! { |url|
+        if !(url.nil? or url.empty?) and !url.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
+          url[0...-1]
+        else
+          url
+        end
+      }
+    end
+
+    # Eliminates the ... Urls
+    tmp.delete_if do |url|
+      if !url.last.match(/[[:alnum:]]$/)# regex: last char is alphabetic or numeric}
+        true
+      end
     end
 
     def valid_url?(url)
@@ -48,11 +61,19 @@ class TweetParser
       false
     end
 
-    # Eliminate urls that are to short
-    tmp.each { |url| tmp.delete(url) if url.length < 10 }
-
     # Eliminate invalid urls
-    tmp.each { |url| tmp.delete(url) if !valid_url?(url)}
+    tmp.delete_if do |url|
+      if !valid_url?(url)
+        true
+      end
+    end
+
+    # Eliminate urls that are to short
+    tmp.delete_if do |url|
+      if url.length < 10
+        true
+      end
+    end
 
     return tmp
   end
