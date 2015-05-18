@@ -36,26 +36,14 @@ class TweetParser
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
-
-    #Deletes last point (End of sentence)
-    if !(tmp.nil? or tmp.empty?)
-     tmp.map! { |url|
-        if !(url.nil? or url.empty?) and !url.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
-          url[0...-1]
-        else
-          url
-        end
-      }
-    end
-
-
+    tmp = delete_endpoint(tmp)
     # Eliminates cut off URLs
     tmp.delete_if {|url| !url.last.match(/[[:alnum:]]$/)}# regex: last char is alphabetic or numeric
-
-
     # Eliminate invalid urls
     tmp.delete_if {|url| !valid_url?(url)}
-
+    # Eliminate ursl that are to short
+    tmp.delete_if {|url| url.length < 12}
+    Rails.logger.debug "PARSER: Returning valide urls #{tmp}" if Rails.logger.debug?
     return tmp
   end
 
@@ -67,6 +55,19 @@ class TweetParser
     false
   end
 
+  #Deletes last point (End of sentence)
+  def delete_endpoint(tmp)
+    if !(tmp.nil? or tmp.empty?)
+      tmp.map! { |url|
+        if !(url.nil? or url.empty?) and !url.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
+          url[0...-1]
+        else
+          url
+        end
+      }
+      return tmp
+    end
+  end
   # Returns hashtag objects as array
   def get_hashtags(tweet)
     hashtags_object_array = []
