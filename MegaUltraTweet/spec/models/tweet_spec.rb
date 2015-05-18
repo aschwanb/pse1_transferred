@@ -23,23 +23,6 @@ describe Tweet do
     expect(FactoryGirl.build(:tweet, author_id: nil)).not_to be_valid
   end
 
-  describe "#by_hashtags" do
-    #TODO write better description
-    it "does something"
-  end
-
-  describe "#set_hashtags" do
-    it "sets the hashtags of the tweet"
-  end
-
-  describe "#set_webpages" do
-    it "sets the webpages of the tweet"
-  end
-
-  describe "#get_webpages" do
-    it "returns the webpages of the tweet"
-  end
-
   describe "#get_text" do
     it "returns the text of the tweet" do
       tweet = FactoryGirl.create(:tweet, text: "test")
@@ -47,9 +30,6 @@ describe Tweet do
     end
   end
 
-  describe "#get_hashtags" do
-    it "returns the hashtags of the tweet"
-  end
 
   describe "#get_retweets_count" do
     it "returns the retweets count of the tweet" do
@@ -58,12 +38,5 @@ describe Tweet do
     end
   end
 
-  describe "#get_author" do
-    it "returns the author of the tweet"
-  end
-
-  describe "#get_rank" do
-    it "returns the rank of the tweet"
-  end
 
 end

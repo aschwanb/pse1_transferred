@@ -18,24 +18,5 @@ describe Hashtag do
     end
   end
 
-  describe "#get_rank" do
-    it "returns the rank of the hashtag"
-  end
-
-  describe "#set_rank" do
-    it "set the rank of the hashtag"
-  end
-
-  describe "#get_trend_short" do
-    it "returns the trend_short of the hashtag"
-  end
-
-  describe "#get_trend_long" do
-    it "returns the trend_long of the hashtag"
-  end
-
-  describe "#get_tweets" do
-    it "returns the tweets of the hashtag"
-  end
 
 end

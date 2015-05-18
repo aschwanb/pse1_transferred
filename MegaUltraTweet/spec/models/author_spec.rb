@@ -50,10 +50,6 @@ describe Author do
     end
   end
 
-  describe "#get_tweets" do
-    it "returns the tweets of the author"
-  end
-
   describe "#get_rank" do
     it "returns the rank of the author" do
       author = FactoryGirl.create(:author, followers_count: 10)

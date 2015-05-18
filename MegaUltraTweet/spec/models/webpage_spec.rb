@@ -26,10 +26,6 @@ describe Webpage do
     end
   end
 
-  describe "#get_tweets" do
-    it "returns the tweets of the webpage"
-  end
-
   describe "#get_title" do
     it "returns the title of the webpage" do
       webpage = FactoryGirl.create(:webpage, title: "test")
