@@ -20,11 +20,6 @@ class TwitterClient
     return @sorter.sort_by_occurrence_h(@parser.parse_hashtags_a(tweets))
   end
 
-  # TODO: Still used ?
-  def get_twitterhandles_to_h(tweets)
-    return @sorter.sort_by_occurrence_h(@parser.parse_twitterhandles_a(tweets))
-  end
-
   def get_urls_to_h(tweets)
     return @sorter.sort_by_occurrence_h(@parser.parse_webpages_a(tweets))
   end
@@ -78,7 +73,7 @@ class TwitterClient
     Tweet.destroy_all(['created_at < ?', MegaUltraTweet::Application::DELETE_OLDER_TWEETS])
   end
 
-  # TODO: This function is not currently used
+  # This function is not currently used
   # If you intend on using it, make sure your app
   # has write access to your twitter account
   def post_message_on_twitter(message)

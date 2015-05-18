@@ -23,7 +23,6 @@ has_and_belongs_to_many :hashtags
 # Short and long intervals are defined in MegaUltraTweet::Application
 # The short/long functions are similar but take advantage of the different intervals
 # It is recommended to use two different objects for the two intervals (see seeds.rb)
-# TODO: This could be solved more elegantly
   def get_popular_short
     hashtags = self.hashtags.sort_by{ |hashtag| hashtag.get_trend_short }.reverse
     return hashtags.first(MegaUltraTweet::Application::TRENDING_HASHTAGS_NUMBER)

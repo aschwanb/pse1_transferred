@@ -5,11 +5,6 @@ class Tweet < ActiveRecord::Base
 
   validates :text, :retweets, :twitter_id, :author_id, presence: true
 
-  # TODO: Still used ?
-  def by_hashtags(hashtags)
-    where(:hashtags => hashtags.map(:text))
-  end
-
   def set_hashtags(hashtags_array)
     Array(hashtags_array).each do |hashtag|
       if !self.hashtags.include?(hashtag)

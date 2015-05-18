@@ -9,14 +9,6 @@ class TweetParser
     return tmp
   end
 
-  # TODO: Still used ?
-  # Returns twitterhandle strings (not objects) as array
-  def parse_twitterhandles_a(tweets)
-    tmp = []
-    tweets.each { |t| tmp += parse_twitterhandles(t) }
-    return tmp
-  end
-
   # Returns urls (not objects)as array
   def parse_webpages_a(tweets)
     tmp = []
@@ -26,11 +18,6 @@ class TweetParser
 
   def parse_hashtags(tweet)
     return tweet.text.downcase.scan(/#\w+/).flatten
-  end
-
-  # TODO: Still used ?
-  def parse_twitterhandles(tweet)
-    return tweet.text.downcase.scan(/@\w+/).flatten
   end
 
   def parse_webpages(tweet)
@@ -107,11 +94,6 @@ class TweetParser
     Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   rescue Net::HTTPExceptions => e
     Rails.logger.debug "DEBUG: HTTP Error while thumbnailing" if Rails.logger.debug?
-    Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
-    Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
-  # TODO: Find the specific exception and rescue it. The current state is bad practice
-  rescue Exception => e
-    Rails.logger.debug "DEBUG: Unknown error while thumbnailing. Possibly ill formated url?" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{self.inspect} #{caller(0).first}" if Rails.logger.debug?
     Rails.logger.debug "DEBUG: #{e.message}" if Rails.logger.debug?
   # Even after error: always return the webpages that have been created up to this point
