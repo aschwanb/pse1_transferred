@@ -59,8 +59,8 @@ Hashtag/Hashtag Pair = Times Uses (im letzten Intervall)
 - Pro Rollover wird erfasst, wie oft ein Hashtag verwendet wird.
 - Um den Trend zu berechnen, wird am Ende jedes Rollovers der Unterschied zwischen dem jetzigen und dem vorherigen Intervall erfasst.
 - Die Art des Trends definiert die Länge des Intervalls.
-Beispiel:
 ```ruby
+# Beispiel
 # Short Term Trend: 15 min
 interval = 1
 usage = [ 15 20 10 4 ]
@@ -68,7 +68,7 @@ current = self.times_used[0, interval]
 # => [15]
 old = self.times_used[0+interval, interval]
 # => [20]
-return current.inject(:+) - old.inject(:+)
+trend =  current.inject(:+) - old.inject(:+)
 # => 15-20 = -5
 ```
 # Starting points for search
@@ -79,4 +79,25 @@ return current.inject(:+) - old.inject(:+)
 - Ein Maximum sorgt dafür, dass nicht zu viele Hashtags als Startwerte genommen werden
 - Die gensammte Konfiguration ist abgelegt in ../config/application.rb
 # Search explained
-
+Die eigentliche Suche findet im TwitterClient objekt statt. Ausgelöst wird sie aber in TwitterScraper. Hier wird der Vorgang erklärt:
+```ruby
+def get_tweets(query, depth)
+  Array(query).each { |keyword| scrape(keyword, depth) }
+end
+# Für jeden Wert in Startingpoint.get_start wird folgenes ausgeführt 
+def scrape(keyword, depth)
+  # Der Twitter Client führt eine Suche nach dem Keyword aus und erhält Tweets zurück
+  tweets = run_query(keyword)
+  # Die Tweets werden gespeichert
+  tweets.each { |t| @client.save_tweet(t) }
+  # Die in den Tweets enthaltenen Hashtags werden nach ihrer Popularität geordnet
+  # Die Populärsten n werden genommen und in new_query geschrieben
+  new_query = self.get_new_query(keyword, tweets)
+  # Eine neue Suche mit den neuen Begriffen wird ausgelöst
+  depth -= 1
+  if depth > 0
+    puts "Finished with #{keyword}. Start new branch with #{new_query}"
+    get_tweets(new_query, depth)
+  end
+end
+```
