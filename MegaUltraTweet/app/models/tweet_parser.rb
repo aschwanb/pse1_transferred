@@ -1,3 +1,5 @@
+require 'addressable/uri'
+
 class TweetParser
 
   # Returns hashtag strings (not objects) as array
@@ -37,8 +39,21 @@ class TweetParser
     if !(tmp.nil? or tmp.empty?) and !tmp.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
       tmp.pop
     end
+
+    def valid_url?(url)
+      schemes = %w(http https)
+      parsed = Addressable::URI.parse(url) or return false
+      schemes.include?(parsed.scheme)
+    rescue Addressable::URI::InvalidURIError
+      false
+    end
+
     # Eliminate urls that are to short
     tmp.each { |url| tmp.delete(url) if url.length < 10 }
+
+    # Eliminate invalid urls
+    tmp.each { |url| tmp.delete(url) if !valid_url?(url)}
+
     return tmp
   end
 
