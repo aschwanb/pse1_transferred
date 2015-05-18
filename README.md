@@ -102,3 +102,4 @@ def scrape(keyword, depth)
   end
 end
 ```
+Der Vorgang wird so lange wiederholt, bis die gewünschte Tiefe (depth) erreicht ist oder bis die erlaubte Menge an Twitter-Anfragen aufgebraucht ist.
