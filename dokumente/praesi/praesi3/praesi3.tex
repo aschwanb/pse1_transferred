@@ -41,7 +41,8 @@ language=Ruby}
     \item 400 Anfragen an Twitter \pause
     \item 400 Tweets pro Anfrage \pause
     \item 39 Startbegriffe \pause
-    \item 20 häufigste Begriffe kommen dazu    
+    \item 20 häufigste Begriffe kommen dazu \pause
+    \item 80 Starbegriffe als Obergrenze
   \end{itemize}
 \end{frame}
 
@@ -50,7 +51,7 @@ language=Ruby}
   \frametitle{Information Ranking} \pause
   \begin{itemize}
     \item Author \pause \textcolor{red}{Follower Count} \pause
-    \item Tweet \pause \textcolor{red}{Retweet Cound + Rank Author} \pause
+    \item Tweet \pause \textcolor{red}{Retweet Count + Rank Author} \pause
     \item Hashtag \pause \textcolor{red}{Times Used} \pause
     \item Author/Hashtag \textcolor{red}{Times Used}
     \item Hashtag/Hashtag \textcolor{red}{Times Used}
@@ -61,7 +62,7 @@ language=Ruby}
 \begin{frame}
   \frametitle{Trending: Definition} \pause
   \begin{block}{Trend}
-    Der Unterschied in der Verwendung (eines Begriffs) von einem Intervall zum nächsten. \\ \pause
+    Der Unterschied in der \textbf{Menge an Verwendungen} (eines Begriffs) von einem Intervall zum nächsten. \\ \pause
     Die Art des Trends definiert die Länge des Intervalls. \pause
     \begin{itemize}
       \item Short Term: 15 min \pause
@@ -82,18 +83,18 @@ language=Ruby}
   \frametitle{Trending: Berechnung II} \pause
   Beispiel:
   \begin{itemize}
-    \item Short Term: 15 min \pause
+    \item Short Term: 15 min \pause \textcolor{red}{=> Interval = 1} \pause
     \item Array a = [15 20 10 4] \pause
   \end{itemize}
   
   \begin{lstlisting}
     current = self.times_used[0, interval]
   \end{lstlisting}\pause
-  \textcolor{red}{=> 15}\pause
+  \textcolor{red}{=> [15]}\pause
   \begin{lstlisting}
     old = self.times_used[0+interval, interval]
   \end{lstlisting}\pause
-  \textcolor{red}{=> 20}\pause
+  \textcolor{red}{=> [20]}\pause
   \begin{lstlisting}
     return current.inject(:+) - old.inject(:+)
   \end{lstlisting}\pause
@@ -102,9 +103,10 @@ language=Ruby}
 
 \section{Livedemo}
 \begin{frame}
-  \frametitle{This is it} \pause
+  \frametitle{This is it}
   \begin{center}
-    \href{http://pse1.iam.unibe.ch/}{\beamergotobutton{Live Demo MegaUltraTweet}} \\
+    % \href{http://pse1.iam.unibe.ch/}{\beamergotobutton{Live Demo MegaUltraTweet}} \\
+    \href{http://localhost:3000/}{\beamergotobutton{Live Demo MegaUltraTweet}} \\
     \includegraphics[height=.4\textheight]{logo_bird}
   \end{center}
 \end{frame}
