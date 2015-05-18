@@ -78,6 +78,7 @@ trend =  current.inject(:+) - old.inject(:+)
 - Pro Rollover werden die populärsten Hashtags zum Startinpoint hinzugefügt
 - Ein Maximum sorgt dafür, dass nicht zu viele Hashtags als Startwerte genommen werden
 - Die gensammte Konfiguration ist abgelegt in ../config/application.rb
+
 # Search explained
 Die eigentliche Suche findet im TwitterClient objekt statt. Ausgelöst wird sie aber in TwitterScraper. Hier wird der Vorgang erklärt:
 ```ruby
