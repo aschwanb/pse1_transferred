@@ -36,8 +36,10 @@ class TweetParser
   def parse_webpages(tweet)
     tmp = []
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
+
+    #Deletes last point (End of sentence)
     if !(tmp.nil? or tmp.empty?)
-      tmp.map! { |url|
+     tmp.map! { |url|
         if !(url.nil? or url.empty?) and !url.last.match(/[[:alnum:]]$/) # regex: last char is alphabetic or numeric
           url[0...-1]
         else
@@ -46,36 +48,23 @@ class TweetParser
       }
     end
 
-    # Eliminates the ... Urls
-    tmp.delete_if do |url|
-      if !url.last.match(/[[:alnum:]]$/)# regex: last char is alphabetic or numeric}
-        true
-      end
-    end
 
-    def valid_url?(url)
-      schemes = %w(http https)
-      parsed = Addressable::URI.parse(url) or return false
-      schemes.include?(parsed.scheme)
-    rescue Addressable::URI::InvalidURIError
-      false
-    end
+    # Eliminates cut off URLs
+    tmp.delete_if {|url| !url.last.match(/[[:alnum:]]$/)}# regex: last char is alphabetic or numeric
+
 
     # Eliminate invalid urls
-    tmp.delete_if do |url|
-      if !valid_url?(url)
-        true
-      end
-    end
-
-    # Eliminate urls that are to short
-    tmp.delete_if do |url|
-      if url.length < 10
-        true
-      end
-    end
+    tmp.delete_if {|url| !valid_url?(url)}
 
     return tmp
+  end
+
+  def valid_url?(url)
+    schemes = %w(http https)
+    parsed = Addressable::URI.parse(url) or return false
+    schemes.include?(parsed.scheme)
+  rescue Addressable::URI::InvalidURIError
+    false
   end
 
   # Returns hashtag objects as array
