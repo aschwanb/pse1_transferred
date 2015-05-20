@@ -25,12 +25,12 @@ class TweetParser
     tmp = tmp + URI.extract("#{tweet.text}", /http|https/)
     tmp = delete_endpoint(tmp)
     # Eliminates cut off URLs
-    tmp.delete_if {|url| !url.last.match(/[[:alnum:]]$/)}# regex: last char is alphabetic or numeric
+    tmp.delete_if {|url| !url.last.match(/[[:alnum:]]$/)} # regex: last char is alphabetic or numeric
     # Eliminate invalid urls
     tmp.delete_if {|url| !valid_url?(url)}
     # Eliminate ursl that are to short
     tmp.delete_if {|url| url.length < 12}
-    Rails.logger.debug "PARSER: Returning valide urls #{tmp}" if Rails.logger.debug?
+    Rails.logger.debug "PARSER: Returning valid urls #{tmp}" if Rails.logger.debug?
     return tmp
   end
 
