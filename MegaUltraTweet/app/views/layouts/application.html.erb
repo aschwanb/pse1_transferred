@@ -17,7 +17,7 @@
   <div id="search-wrapper">
     <%= link_to embedded_svg('home_icon.svg', class: "home-icon"), root_path %>
     <%= form_tag({controller: "index", action: "db_search"}, method: "get", class: "search", data: {push: true}) do %>
-        <%= search_field_tag(:q, nil, class: "search-field") %>
+        <%= search_field_tag(:q, nil, placeholder: "Search for Tech trends by hashtags...", class: "search-field") %>
         <%= button_tag(type: "submit", class: "search-button") do %>
             <%= embedded_svg('submit_arrow.svg', class: "submit-arrow") %>
         <% end %>
