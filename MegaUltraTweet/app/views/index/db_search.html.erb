@@ -148,7 +148,7 @@
                   </div>
                   <ul>
                     <% pages.take(10).each do |page| %>
-                        <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url %>
+                        <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url, target: "_blank" %>
                     <% end %>
 
                   </ul>
