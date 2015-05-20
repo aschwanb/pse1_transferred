@@ -68,6 +68,8 @@ module MegaUltraTweet
     PROVIDED_SEARCHES = 400
     # This is the limit as how many tweets in the DB are to be considered. Set to nil to disable.
     DB_SEARCH_LIMIT = 3000
+    # Save and analyse tweet only if rank is higher than this value
+    TWEET_RELEVANCE_MINIMUM = 1
 
   end
 end

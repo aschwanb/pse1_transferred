@@ -24,19 +24,30 @@ class TwitterClient
     return @sorter.sort_by_occurrence_h(@parser.parse_webpages_a(tweets))
   end
 
-  # TODO: Only save tweets with popularity > 1
+  # Decide if tweet is saved depending on rank threshold
+  # Rank = retweet_count + Followers author
+  def save_tweet?(tweet)
+    if (tweet.user.followers_count + tweet.retweet_count) > MegaUltraTweet::Application::TWEET_RELEVANCE_MINIMUM
+      return true
+    end
+    return false
+  end
+
+  # Only saves tweets with rank > MegaUltraTweet::Application::TWEET_RELEVANCE_MINIMUM
   def save_tweet(tweet)
-    author = @parser.get_author(tweet)
-    if Tweet.where(twitter_id: tweet.id).blank?
-      t = author.tweets.create(
-          text: tweet.text,
-          retweets: tweet.retweet_count,
-          twitter_id: tweet.id
-      )
-      t.set_webpages(@parser.get_webpages(tweet)) unless @parser.get_webpages(tweet).nil?
-      t.set_hashtags(@parser.get_hashtags(tweet)) unless @parser.get_hashtags(tweet).nil?
-      generate_hashtag_hashtag(t.get_hashtags)
-      generate_author_hashtag(t.get_author, t.get_hashtags)
+    if self.save_tweet?(tweet)
+      author = @parser.get_author(tweet)
+      if Tweet.where(twitter_id: tweet.id).blank?
+        t = author.tweets.create(
+            text: tweet.text,
+            retweets: tweet.retweet_count,
+            twitter_id: tweet.id
+        )
+        t.set_webpages(@parser.get_webpages(tweet)) unless @parser.get_webpages(tweet).nil?
+        t.set_hashtags(@parser.get_hashtags(tweet)) unless @parser.get_hashtags(tweet).nil?
+        generate_hashtag_hashtag(t.get_hashtags)
+        generate_author_hashtag(t.get_author, t.get_hashtags)
+      end
     end
   end
 
