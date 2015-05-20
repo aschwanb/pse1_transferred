@@ -6,9 +6,7 @@ has_and_belongs_to_many :hashtags
   end
 
   def reset_hashtags
-    if !self.hashtags.nil?
-      self.hashtags.clear
-    end
+    self.hashtags.clear unless self.hashtags.nil?
   end
 
   def get_hashtags_with_tweets(hashtag_array)
