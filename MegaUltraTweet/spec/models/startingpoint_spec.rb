@@ -1,5 +1,10 @@
 require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Startingpoint, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+describe Startingpoint do
+
+  it "has a valid factory" do
+    expect(FactoryGirl.create(:startingpoint)).to be_valid
+  end
+
+ end

@@ -3,13 +3,19 @@
 
 # define environment
 root = File.expand_path(File.dirname(File.dirname(__FILE__)))
+require_relative '../config/application'
 set :environment, "development"
-set :output, "%s/tmp/cron.log" % [ root ]
-
+set :output, "%s/log/cron.log" % [ root ]
 
 # Define cron jobs
-every 15.minutes do
-  command '/usr/bin/date'
-  command '/usr/bin/echo "Running cron job for TwitterScraper"'
-  runner "require '%s/lib/tasks/twitter_scraper.rb'; require '%s/app/models/startingpoint.rb'; startingpoint = Startingpoint.first; twitterScraper = TwitterScraper.new(200, 10); twitterScraper.start( startingpoint.get_start, 3)" % [ root, root ]
+every MegaUltraTweet::Application::INTERVAL_SHORT_TIME do
+  command '/bin/date'
+  command '/bin/echo "Cron job for TwitterScraper: Short Rollover"'
+  runner 's = Startingpoint.first; r = DBRollover.new; r.short_rollover'
+end
+
+every MegaUltraTweet::Application::INTERVAL_LONG_TIME do
+  command '/bin/date'
+  command '/bin/echo "Cron job for TwitterScraper: Long Rollover"'
+  runner 's = Startingpoint.first; r = DBRollover.new; r.long_rollover'
 end

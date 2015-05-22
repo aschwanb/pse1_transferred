@@ -1,0 +1,61 @@
+// Place all the styles related to the Errors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "common";
+
+.error {
+  width: 100%;
+  text-align: center;
+}
+
+.error .ohno {
+  font-size: 3em;
+}
+.error .explode {
+  font-size: 3em;
+  color: $color3;
+}
+
+.error h1 {
+  font-size: 6em;
+  padding: 0;
+  padding-top: 0.5em;
+}
+
+.error h2 {
+  padding-bottom: 0.5em;
+  color: $color3;
+}
+
+.error button {
+  margin-top: 2em;
+  width: 10em;
+  height: 10em;
+  padding: 3em;
+  font-size: 1.5em;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: none;
+  background: $color2;
+  color: #ffffff;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  @include transition(background, 0.3s);
+}
+.error button h2 {
+  color: #ffffff;
+}
+
+.error button:hover {
+  background: $color3;
+  @include transition(background, 0.3s);
+}
+
+@media only screen and (max-width: 800px) {
+  .error .ohno, .error .explode {
+    font-size: 1.5em;
+  }
+}

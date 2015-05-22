@@ -1,23 +1,20 @@
-
-# TODO: refactor this!
 class SearchObject
   @search_successful
   @search_valid
+  @search_deprecated
   @search_terms
   @search_criteria_hashtags
-  @search_criteria_authors
-  @tweets
-  @authors
+  @paired_hashtags
   @webpages
-  @pairs
 
   def initialize(query)
     @search_terms = query
     @search_terms.empty? ? @search_valid = false : @search_valid = true
     @search_successful = false
-    @search_criteria_authors = Array.new
+    @search_deprecated = false
     @search_criteria_hashtags = Array.new
     @webpages = Array.new
+    @paired_hashtags = Hash.new
   end
 
   def is_valid?
@@ -32,8 +29,16 @@ class SearchObject
     return @search_successful
   end
 
-  def add_search_terms(terms)
-    @search_terms += terms
+  # The search is in the state deprecated if the following conditions are met:
+  # - Hashtag or Hashtag pair was found in the DB
+  # - There are no associated tweets in the DB (because they were deleted)
+  # This state indicates that the hashtag was once used but finds now little to no usage in tweets
+  def set_search_deprecated
+    @search_deprecated = true
+  end
+
+  def is_deprecated?
+    return @search_deprecated
   end
 
   def get_search_terms
@@ -48,37 +53,15 @@ class SearchObject
     return @search_criteria_hashtags
   end
 
-  def add_criterion_author(author)
-    @search_criteria_authors.append(author)
+  # The anchor is a hashtag the others are relative to
+  def set_paired_hashtags(anchor, paired_hash, trending_short_partners, trending_long_partners)
+    sub_hash = { popular_partners: paired_hash, trending_short_partners: trending_short_partners,
+                trending_long_partners: trending_long_partners }
+    @paired_hashtags.store(anchor, sub_hash)
   end
 
-  def get_criteria_authors
-    return @search_criteria_authors
-  end
-
-  def set_tweets(tweets)
-    set_search_successful unless tweets.empty?
-    @tweets = tweets
-  end
-
-  def get_tweets
-    return @tweets
-  end
-
-  def set_hashtags(hashtags)
-    @hashtags = hashtags
-  end
-
-  def get_hashtags
-    return @hashtags
-  end
-
-  def set_authors(authors)
-    @authors = authors
-  end
-
-  def get_authors
-    return @authors
+  def get_paired_hashtags
+    return @paired_hashtags
   end
 
   def set_webpages(webpages)
@@ -87,13 +70,5 @@ class SearchObject
 
   def get_webpages
     return @webpages
-  end
-
-  def set_pairs(pairs)
-    @pairs = pairs
-  end
-
-  def get_pairs
-    return @pairs
   end
 end

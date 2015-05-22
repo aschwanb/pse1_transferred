@@ -2,14 +2,31 @@
 
 @import "common";
 
-.search {
+$search_height: 2.5em;
+
+/* override browser specific search and input field styling */
+input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+#search-wrapper {
+  margin-top: 2em;
+  height: $search_height;
   @include margin_side();
-  margin-top: 1em;
-  width: auto;
-  padding: 0;
-  height: 1.25em;
-  font-size: 2em;
-  border-radius: 10px;
+}
+
+.search {
+  overflow: hidden;
+  height: $search_height;
 }
 
 .search-field {
@@ -19,85 +36,110 @@
 
   border: 1px solid $color2;
   border-right: none;
-  -webkit-border-top-left-radius: 2px;
-  -webkit-border-bottom-left-radius: 2px;
-  -moz-border-radius-topleft: 2px;
-  -moz-border-radius-bottomleft: 2px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 2px 0 0 2px;
+  -moz-border-radius: 2px 0 0 2px;
+  border-radius: 2px 0 0 2px;
 
   padding-left: 2em;
   background: #fff;
+  color: $color2;
+
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
 }
 
 .search-button {
-  position: relative;
   float: left;
   width: 10%;
-  height: 100%;
+  font-size: 2em;
+  height: $search_height/2;
 
+  background: #fff;
+  color: $color2;
   border: 1px solid $color2;
   border-left: none;
-  -webkit-border-top-right-radius: 2px;
-  -webkit-border-bottom-right-radius: 2px;
-  -moz-border-radius-topright: 2px;
-  -moz-border-radius-bottomright: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
 
-  outline: none;
-  background: #fff;
-  color: $color2;
+  // border-radius: [top-left] [top-right] [bottom-right] [bottom-left]
+  -webkit-border-radius: 0 2px 2px 0;
+  -moz-border-radius: 0 2px 2px 0;
+  border-radius: 0 2px 2px 0;
+
   cursor: pointer;
-  font-size: 1em;
- // font-size-adjust: 0.4;
   text-align: right;
   padding-right: 0.5em;
-}
-.search-button:hover {
-  color: $color1;
-}
 
-.search-button:active, .search-button:focus {
-  text-align: right;
-  color: $color3;
-  transition: color 0.1s linear;
+  @include transition(background, 0.3s);
+  @include transition(color, 0.3s);
 }
 
-.search-field:focus, .search-field:active {
-  background: $color2;
-  color: #ffffff;
+.search-button {
+  &:hover polygon, &:focus polygon {
+    fill: $color1;
+    @include transition(fill, 0.3s);
+  }
+  &:active polygon {
+    fill: $color3;
+    @include transition(fill, 0.3s);
+  }
 }
 
-.search-field:focus + .search-button, .search-field:active + .search-button {
-  background: $color2;
-  color: #ffffff;
+.search-field {
+  &:focus, &:active {
+    background: $color2;
+    color: #ffffff;
+    @include transition(background, 0.3s);
+    @include transition(color, 0.3s);
+
+    + .search-button {
+      background: $color2;
+      color: #ffffff;
+      @include transition(background, 0.3s);
+      @include transition(color, 0.3s);
+
+      polygon {
+        fill: #fff;
+        @include transition(fill, 0.3s);
+      }
+
+      &:hover polygon {
+        fill: $color1;
+        @include transition(fill, 0.3s);
+      }
+    }
+  }
 }
 
-.continue-button {
-  margin-top: 1em;
-  width: 100%;
-  height: auto;
-  padding: 1em;
+.submit-arrow {
+  width: 1.25em;
+  height: 0.65em;
+  margin-top: 0.2em;
 
-  border: 1px solid $color2;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  outline: none;
-  background: #fff;
-  color: $color2;
-  cursor: pointer;
-  font-size: 1em;
-  text-align: center;
+  polygon {
+    fill: $color2;
+    @include transition(fill, 0.3s);
+  }
 }
 
-.continue-button:hover {
-  background: $color2;
-  color: #ffffff;
-}
+.home-icon {
+  float: left;
+  height: $search_height - 0.1em;
+  width: 2em;
+  margin-right: 1%;
+  margin-top: 0.05em;
 
-.continue-button:focus, .continue-button:active {
-  border-color: $color1;
-  color: $color1;
+  #home-icon-inner {
+    fill: rgba(0,0,0,0);
+    @include transition(fill, 0.5s);
+  }
+  #home-icon-outer path {
+    fill: $color2;
+  }
+  &:hover, &:active, &:focus {
+    #home-icon-inner {
+      fill: $color2;
+      @include transition(fill, 0.5s);
+    }
+  }
 }

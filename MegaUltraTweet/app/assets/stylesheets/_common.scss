@@ -1,26 +1,6 @@
 /* This file contains the global variables, mixins, etc. */
 
-
 /* Colors */
-
-/*
- * Color scheme old:
- * background: F7F7F7
- * basic text: 2E2F30
- * links: E37F71
- * accent color: 730E15 (ruby red)
- * accent color: D31901
-*/
-
-/*
- * Color scheme new:
- * background: FFF
- * basic text: 2E2F30
- * links: E37F71
- * accent color: 730E15 (ruby red)
- * accent color: 1A92CF
- * accent color: 3F3F3F
-*/
 
 // Dark grey, Text color
 $color1: #3F3F3F;
@@ -40,6 +20,13 @@ $major_margin: 5%;
 @mixin margin_side() {
   margin-right: $minor_margin;
   margin-left: $minor_margin;
+}
+
+@mixin transition($property: all, $duration: 1s, $timing_function: ease, $delay: 0s) {
+  -webkit-transition: $property, $duration, $timing_function, $delay;
+  -moz-transition: $property, $duration, $timing_function, $delay;
+  -o-transition: $property, $duration, $timing_function, $delay;
+  transition: $property, $duration, $timing_function, $delay;
 }
 
 @mixin font-face($style-name, $file, $family, $category:"") {

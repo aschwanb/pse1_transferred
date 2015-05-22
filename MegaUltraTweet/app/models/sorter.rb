@@ -1,6 +1,6 @@
 class Sorter
 
-  #Returns array in which records are sorted by popularity (Descending)
+  #Returns array in which records are sorted by their ranking function (Descending)
   def sort_by_rank(records)
     records = records.uniq.sort_by! {|record| record.get_rank}
     return records.reverse!
@@ -14,10 +14,11 @@ class Sorter
     return records
   end
 
-  def sort_by_popularity(records)
-    records = records.uniq.sort_by! {|record| record.get_popularity_now}
-    return records.reverse
+  #Returns unique hash in which records are sorted by "record" => "occurrence" (Descending)
+  def sort_by_occurrence_h(input)
+    output = input.each_with_object(Hash.new(0)){ |tag, counts| counts[tag] += 1 }
+    output = Hash[output.sort_by{ |tags, counts| counts}.reverse]
+    return output
   end
-
 
 end

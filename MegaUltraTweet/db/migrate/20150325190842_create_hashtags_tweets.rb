@@ -1,11 +1,8 @@
 class CreateHashtagsTweets < ActiveRecord::Migration
   def change
-    create_table :hashtags_tweets, :id => false do |t|
-      t.integer :hashtag_id
-      t.integer :tweet_id
+    create_table :hashtags_tweets, id: false do |t|
+      t.belongs_to :hashtag, index: true
+      t.belongs_to :tweet, index: true
     end
-
-    add_index :hashtags_tweets, :hashtag_id
-    add_index :hashtags_tweets, :tweet_id
   end
 end

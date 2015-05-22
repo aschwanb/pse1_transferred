@@ -1,14 +1,40 @@
-<% require_relative '../../../app/models/dbentry_fetcher'
-   fetcher = DbentryFetcher.new %>
-<div class="wrapper">
+<div class="wrapper" id="content">
 
   <div class="flex-container">
+
+    <div class="flex-item list">
+      <h1><span id="highlight">Trending short</span> in the DB</h1>
+      <ul>
+
+        <% short = fetch_trending_short %>
+        <% short.each do |entry| %>
+            <li>
+              <%= entry.get_text %>
+            </li>
+        <% end %>
+
+      </ul>
+    </div>
+
+    <div class="flex-item list">
+      <h1><span id="highlight">Trending long</span> in the DB</h1>
+      <ul>
+
+        <% long = fetch_trending_long %>
+        <% long.each do |entry| %>
+            <li>
+              <%= entry.get_text %>
+            </li>
+        <% end %>
+
+      </ul>
+    </div>
 
     <div class="flex-item list">
       <h1><span id="highlight">Hashtags</span> in the DB</h1>
       <ul>
 
-        <% hashtags = fetcher.fetch_hashtags %>
+        <% hashtags = fetch_hashtags %>
         <% hashtags.each do |entry| %>
             <li>
               <%= entry.get_text %>
@@ -22,7 +48,7 @@
       <h1><span id="highlight">Authors</span> in the DB</h1>
       <ul>
 
-        <% authors = fetcher.fetch_authors %>
+        <% authors = fetch_authors %>
         <% authors.each do |entry| %>
             <li>
               <%= entry.get_name %>
@@ -36,7 +62,7 @@
       <h1><span id="highlight">Tweets</span> in the DB</h1>
       <ul>
 
-        <% tweets = fetcher.fetch_tweets %>
+        <% tweets = fetch_tweets %>
         <% tweets.each do |entry| %>
             <li>
               <%= entry.get_text %></li>
@@ -51,7 +77,7 @@
     <div class="col-1-3">
       <h1>Hashtags in the DB</h1>
       <ul>
-        <% hashtags = fetcher.fetch_hashtags %>
+        <% hashtags = fetch_hashtags %>
         <% hashtags.each do |entry| %>
             <li>
               <%= entry.get_text %>
@@ -63,7 +89,7 @@
       <h1>Authors in the DB</h1>
       <ul>
 
-        <% authors = fetcher.fetch_authors %>
+        <% authors = fetch_authors %>
         <% authors.each do |entry| %>
             <li>
               <%= entry.get_name %>
@@ -76,7 +102,7 @@
       <h1>Tweets in the DB</h1>
       <ul>
 
-        <% tweets = fetcher.fetch_tweets %>
+        <% tweets = fetch_tweets %>
         <% tweets.each do |entry| %>
             <li>
               <%= entry.get_text %></li>
@@ -93,7 +119,7 @@
       <h1>Hashtags in the DB</h1>
       <ul>
 
-        <% hashtags = fetcher.fetch_hashtags %>
+        <% hashtags = fetch_hashtags %>
         <% hashtags.each do |entry| %>
             <li>
               <%= entry.get_text %>
@@ -107,7 +133,7 @@
       <h1>Authors in the DB</h1>
       <ul>
 
-        <% authors = fetcher.fetch_authors %>
+        <% authors = fetch_authors %>
         <% authors.each do |entry| %>
             <li>
               <%= entry.get_name %>
@@ -121,7 +147,7 @@
       <h1>Tweets in the DB</h1>
       <ul>
 
-        <% tweets = fetcher.fetch_tweets %>
+        <% tweets = fetch_tweets %>
         <% tweets.each do |entry| %>
             <li>
               <%= entry.get_text %></li>

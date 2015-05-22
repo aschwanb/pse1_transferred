@@ -11,6 +11,6 @@
  * file per style scope.
  *
  *= require index
- *= require dev
+ *= require errors
  *= require_self
  */

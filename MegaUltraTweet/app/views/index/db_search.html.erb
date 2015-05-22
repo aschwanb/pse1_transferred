@@ -1,108 +1,173 @@
-<div class="wrapper">
-  <% if !@sobj.nil? %>
+<div class="wrapper" id="content">
+
+  <% unless @sobj.nil? %>
+      <% terms = "" %>
+      <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
+      <% terms = terms.slice(0, terms.length-2) %>
       <% if @sobj.is_successful? %>
-          <% tweets = @sobj.get_tweets %>
-          <% authors = @sobj.get_authors %>
-          <% hashtags = @sobj.get_hashtags %>
-          <% terms = "" %>
-          <% @sobj.get_search_terms.each { |term| terms += term + ", " } %>
-          <% terms = terms.slice(0, terms.length-2) %>
+          <% paired_hashtags = @sobj.get_paired_hashtags %>
           <% crit_hashtags = "" %>
           <% @sobj.get_criteria_hashtags.each { |crit| crit_hashtags += crit.text + ", " } %>
           <% crit_hashtags = crit_hashtags.slice(0, crit_hashtags.length-2) %>
-          <% crit_authors = "" %>
-          <% @sobj.get_criteria_authors.each { |crit| crit_authors += crit.screen_name + ", " } %>
-          <% crit_authors = crit_authors.slice(0, crit_authors.length-2) %>
           <% pages = @sobj.get_webpages %>
+          <% multi_search = is_multi_search?(@sobj) %>
+
+          <h1 class="main-headline highlight"><%= crit_hashtags %></h1>
+
           <div class="flex-container">
-            <div class="" style="display: none">
-              <h1>You searched for <%= terms %></h1>
+            <% if multi_search %>
+                <% paired_hashtags.each_pair do |anchor, sub_hash| %>
+                    <% id = create_id(anchor.text) %>
+                    <div class="flex-item list">
 
-              <h2>Hashtags found:  <%= crit_hashtags.blank? ? "none" : crit_hashtags %></h2>
+                      <div class="item-headline-container">
+                        <h1 class="item-headline opt1 <%= id %>">
+                          <%= "Popular Hashtags cooccurring with " %>
+                          <span class="highlight">
+                    <%= anchor.text %></span>
+                        </h1>
 
-              <h2>Authors found: <%= crit_authors.blank? ? "none" : crit_authors %></h2>
+                        <h1 class="item-headline opt2 <%= id %>">
+                          <%= "15min trending Hashtags cooccurring with " %>
+                          <span class="highlight">
+                    <%= anchor.text %></span>
+                        </h1>
 
-            </div>
-            <div class="flex-item flex-item-tweet list" style="display: none">
+                        <h1 class="item-headline opt3 <%= id %>">
+                          <%= "48h trending Hashtags cooccurring with " %>
+                          <span class="highlight">
+                    <%= anchor.text %></span>
+                        </h1>
 
-              <div class="item-headline-container">
-                <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Tweets by " : "Tweets containing " %><span id="highlight">
-                    <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-                </h1>
-              </div>
+                      </div>
 
-              <ul>
-                <% tweets.take(10).each do |tweet| %>
-                    <li><%= tweet.get_text %></li>
+                      <% if multi_search %>
+                          <div class="item-switch-container">
+
+                            <%= switch_trifold(anchor.text) %>
+                          </div>
+                      <% end %>
+
+
+                      <ul id="<%= id %>" class="opt1 <%= id %>">
+                        <% sub_hash[:popular_partners].take(10).each do |hashtag, rank| %>
+                            <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                        <% end %>
+                      </ul>
+
+                      <ul id="<%= id %>" class="opt2 <%= id %>">
+                        <% sub_hash[:trending_short_partners].take(10).each do |hashtag| %>
+                            <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                        <% end %>
+                      </ul>
+
+                      <ul id="<%= id %>" class="opt3 <%= id %>">
+                        <% sub_hash[:trending_long_partners].take(10).each do |hashtag| %>
+                            <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                        <% end %>
+                      </ul>
+
+
+                    </div>
                 <% end %>
-              </ul>
-            </div>
+            <% end %>
 
-            <div class="flex-item list">
+            <% unless multi_search %>
+                <% paired_hashtags.each_pair do |anchor, sub_hash| %>
 
-              <div class="item-headline-container">
-                <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Hashtags used by " : "Hashtags cooccurring with " %><span class="highlight">
-                  <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-                </h1>
-              </div>
+                    <div class="flex-item list">
 
-              <ul>
-                <% hashtags.take(10).each do |hashtag| %>
-                    <%= link_to content_tag(:li, hashtag.text), action: "db_search", controller: "index", q: hashtag.text %>
+                      <div class="item-headline-container">
+                        <h1 class="item-headline">
+                          <%= "Popular Hashtags cooccurring with " %>
+                          <span class="highlight">
+                            <%= anchor.text %></span>
+                        </h1>
+                      </div>
+
+                      <ul>
+                        <% sub_hash[:popular_partners].take(10).each do |hashtag, rank| %>
+                            <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                        <% end %>
+
+                      </ul>
+                    </div>
+
+                    <% unless sub_hash[:trending_short_partners].blank? %>
+                        <div class="flex-item list">
+
+                          <div class="item-headline-container">
+                            <h1 class="item-headline">
+                              <%= "15min trending Hashtags cooccurring with " %>
+                              <span class="highlight">
+                            <%= anchor.text %></span>
+                            </h1>
+                          </div>
+
+                          <ul>
+                            <% sub_hash[:trending_short_partners].take(10).each do |hashtag| %>
+                                <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                            <% end %>
+
+                          </ul>
+                        </div>
+                    <% end %>
+
+                    <% unless sub_hash[:trending_long_partners].blank? %>
+                        <div class="flex-item list">
+
+                          <div class="item-headline-container">
+                            <h1 class="item-headline">
+                              <%= "48h trending Hashtags cooccurring with " %>
+                              <span class="highlight">
+                            <%= anchor.text %></span>
+                            </h1>
+                          </div>
+
+                          <ul>
+                            <% sub_hash[:trending_long_partners].take(10).each do |hashtag| %>
+                                <%= link_to(content_tag(:li, hashtag.text), {action: "db_search", controller: "index", q: anchor.text+" "+hashtag.text}, data: {push: true}) %>
+                            <% end %>
+
+                          </ul>
+                        </div>
+                    <% end %>
                 <% end %>
+            <% end %>
 
-                <% hts = "" %>
-                <% hashtags.take(10).each { |h| hts += " "+h.text } %>
-              </ul>
-            </div>
+            <% unless pages.blank? %>
+                <div class="flex-item flex-item-link list">
 
-            <% unless crit_hashtags.blank? %>
-                <div class="flex-item list">
                   <div class="item-headline-container">
-                    <h1 class="item-headline">Authors associated with
-                      <span class="highlight"><%= crit_hashtags %></span></h1>
+                    <h1 class="item-headline">
+                      <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %>
+                      <span class="highlight">
+                    <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
+                    </h1>
+
                   </div>
                   <ul>
-                    <% authors.take(20).each do |author| %>
-                        <%= link_to content_tag(:li, "@"+author.screen_name), action: "db_search", controller: "index", q: "@"+author.screen_name %>
+                    <% pages.take(10).each do |page| %>
+                        <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview"), page.get_url, target: "_blank" %>
                     <% end %>
+
                   </ul>
+
                 </div>
             <% end %>
 
-            <div class="flex-item flex-item-link list">
-
-              <div class="item-headline-container">
-                <h1 class="item-headline">
-                  <%= crit_hashtags.blank? ? "Links posted by " : "Links associated with " %><span class="highlight">
-                <%= crit_hashtags.blank? ? crit_authors : crit_hashtags %></span>
-                </h1>
-
-              </div>
-              <ul>
-                <% pages.take(10).each do |page| %>
-                  <%= link_to content_tag(:li, link_preview_content(page), class: "link-preview" ), page.get_url %>
-                <% end %>
-
-              </ul>
-
-            </div>
-
           </div>
       <% else %>
-          <% if !@sobj.is_valid? %>
-              <h1>Invalid search</h1>
-          <% else %>
-              <div class="content">
-                <h1>No historical data about <%= @sobj.get_search_terms.first %> available</h1>
-
-                <h1><%= link_to "Search on Twitter instead?", action: "find", controller: "index", query: @sobj.get_search_terms.at(0).to_s %></h1>
-              </div>
-          <% end %>
+          <div class="content">
+            <% if !@sobj.is_valid? %>
+                <h1>Invalid search</h1>
+            <% elsif !@sobj.is_deprecated? %>
+                <h1>No historical data about <span class="highlight"><%= terms %></span> available</h1>
+            <% else %>
+                <h1><span class="highlight"><%= terms %></span> are not actively used anymore in this combination!</h1>
+            <% end %>
+          </div>
       <% end %>
   <% end %>
-
 
 </div>
